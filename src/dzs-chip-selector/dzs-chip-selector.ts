@@ -49,7 +49,6 @@ export class DzsChipSelector {
   }
 
   initClass() {
-    console.log(this.$elem_);
     (this.$elem_ as any).isDzsChipsInited = true;
 
     this.$elem_.classList.add(DZS_CHIP_SELECTOR_CLASS_NAME + '--is-inited');
@@ -63,7 +62,6 @@ export class DzsChipSelector {
     selfInstance.$autoCompleteList = this.$elem_.querySelector('.dzs-chip-selector--autocompletelist');
     selfInstance.$form = this.$elem_.querySelector('.dzs-chip-selector--form');
 
-    console.log(this.$inputNewElement_);
 
     this.$inputNewElement_.addEventListener('focus', handleInputFocus);
     this.$inputNewElement_.addEventListener('blur', handleInputFocus);
@@ -164,7 +162,7 @@ export class DzsChipSelector {
     const selfInstance = this;
 
     const $form = this.$elem_.querySelector('.dzs-chip-selector--form');
-    console.log($form);
+    console.log('$form - ', $form);
     $form.childNodes.forEach(($label: HTMLElement) => {
       if ($label.nodeName.toLowerCase() === 'LABEL'.toLowerCase()) {
 
