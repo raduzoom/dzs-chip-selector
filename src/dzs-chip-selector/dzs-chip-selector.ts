@@ -73,7 +73,6 @@ export class DzsChipSelector {
     function handleChipsClick(e: Event) {
 
       if (e.type === 'click') {
-
         let t = e.target as HTMLElement;
         const target = matchSelector(t, '.' + DZS_CHIP_SELECTOR_CHIPS_CLOSE);
 
