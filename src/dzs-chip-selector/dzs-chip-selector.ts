@@ -41,7 +41,6 @@ export class DzsChipSelector {
   constructor($elem: HTMLElement) {
 
     this.$elem_ = $elem;
-    // this.$elem = $es($elem);
     if (($elem as any).isDzsChipsInited) {
       return;
     }
