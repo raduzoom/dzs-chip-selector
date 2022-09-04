@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+//    "strict": true,
+//    "sourceMap": true,
+    "declaration": true,
+//    "outDir": "./dist",
+    "declarationDir": "./dist/",
+//    "esModuleInterop": true,
+//    "skipLibCheck": true,
+//    "forceConsistentCasingInFileNames": true,
+//    "outFile": "./dist/dzs-chip-selector.js",
+    "rootDir": ".",
+    "noImplicitAny": true,
+    "module": "amd",
+    "target": "es6",
+    "typeRoots": [
+      "./types"
+    ],
+    "allowJs": true,
+    "moduleResolution": "node",
+    "lib": ["es5", "es6", "dom"]
+  },
+  "include": [
+    "src/**/*"
+  ],
+//  "files": [
+//    "./src/dzs-chip-selector/dzs-chip-selector.ts"
+//  ],
+  "exclude": ["node_modules", "**/*.spec.ts", "./build"],
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Recommended"
+}
+//{"files":["./src/dzs-chip-selector/dzs-chip-selector.ts"]}
