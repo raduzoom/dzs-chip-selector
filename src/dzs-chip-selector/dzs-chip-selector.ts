@@ -1,6 +1,6 @@
 import {
   DZS_CHIP_SELECTOR_AUTOCOMPLETE_CLASS_NAME_ITEMS, DZS_CHIP_SELECTOR_CHIPS_CLOSE,
-  DZS_CHIP_SELECTOR_CLASS_NAME
+  DZS_CHIP_SELECTOR_CLASS_NAME, DZS_CHIP_SELECTOR_CHIPS_SELECTED
 } from "./config/dzs-chip-selector.config";
 import {domRemoveChildren, matchSelector} from "./js_common/dzs_helpers";
 // import {$es} from '../../deps/esjquery/js/_esjquery';
@@ -106,14 +106,14 @@ export class DzsChipSelector {
         console.log('target - ', target);
         const dataValue = target.getAttribute('data-value');
         const targetOption = selfInstance.getOptionFromValue(dataValue);
-        if (target.classList.contains('is-selected')) {
+        if (target.classList.contains(DZS_CHIP_SELECTOR_CHIPS_SELECTED)) {
 
-          target.classList.remove('is-selected');
+          target.classList.remove(DZS_CHIP_SELECTOR_CHIPS_SELECTED);
           console.log('targetOption - ', targetOption);
           targetOption.currentStatus = 'unchecked';
         } else {
 
-          target.classList.add('is-selected');
+          target.classList.add(DZS_CHIP_SELECTOR_CHIPS_SELECTED);
           targetOption.currentStatus = 'checked';
         }
         console.log(selfInstance.currentItems);
@@ -195,6 +195,9 @@ export class DzsChipSelector {
     })
   }
 
+  /**
+   * update the list
+   */
   updateChipsFromOptions() {
     const selfInstance = this;
 
@@ -216,6 +219,9 @@ export class DzsChipSelector {
     })
   }
 
+  /**
+   * create the list from currentItems
+   */
   createListFromOptions() {
 
     // todo: wrong, find suggestedItems
@@ -225,7 +231,7 @@ export class DzsChipSelector {
     console.log(this.currentItems);
     this.currentItems.forEach(item => {
       console.log(item);
-      $ulItems.insertAdjacentHTML('beforeend', `<li class="dzs-chip-selector--autocompletelist--items--item ${item.currentStatus === 'checked' ? 'is-selected' : ''}" data-value="${item.value}">${item.htmlContent}</li>`);
+      $ulItems.insertAdjacentHTML('beforeend', `<li class="dzs-chip-selector--autocompletelist--items--item ${item.currentStatus === 'checked' ? DZS_CHIP_SELECTOR_CHIPS_SELECTED : ''}" data-value="${item.value}">${item.htmlContent}</li>`);
     })
   }
 

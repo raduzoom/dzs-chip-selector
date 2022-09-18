@@ -53,13 +53,14 @@
 
         echo '<h4>hmm</h4>';
         foreach ($_POST['subject'] as $subj) {
-          echo 'subj - ';
+          echo 'subj[] - ';
           print_r($subj);
           foreach ($subjects as $lab => $subject) {
             if ($subject['value'] == $subj) {
               $subjects[$lab]['currentStatus'] = 'checked';
             }
           }
+          echo '<br>';
         }
         echo '</pre>';
       }
