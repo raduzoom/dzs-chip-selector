@@ -1,0 +1,23 @@
+.dzs-chip-selector.dzs-chip-selector--skin-default .dzs-chip-selector--autocompletelist:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid #dadada;
+  top: 3px;
+  left: 10px;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-default .dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--items {
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #dadada;
+  top: 11px;
+  position: relative;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-default .dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item.is-selected {
+  background-color: #2a6496;
+}
+
+/*# sourceMappingURL=skin-default.css.map */

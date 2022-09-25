@@ -1,0 +1,40 @@
+
+
+$colorBg: #dadada;
+$arrowSize: 8px;
+$offsetForList: 3px;
+.dzs-chip-selector.dzs-chip-selector--skin-default{
+
+  .dzs-chip-selector--autocompletelist {
+
+
+    &:before{
+      content:'';
+      position: absolute;
+
+
+      width: 0;
+      height: 0;
+      border-left: $arrowSize solid transparent;
+      border-right: $arrowSize solid transparent;
+      border-bottom: $arrowSize solid $colorBg;
+      top: $offsetForList;
+      left: 10px;
+    }
+
+    .dzs-chip-selector--autocompletelist--items{
+      border-radius: 5px;
+
+      padding: 10px;
+      background-color: $colorBg;
+
+      top: $arrowSize + $offsetForList;
+      position: relative;
+      .dzs-chip-selector--autocompletelist--items--item{
+        &.is-selected{
+          background-color: #2a6496;
+        }
+      }
+    }
+  }
+}
