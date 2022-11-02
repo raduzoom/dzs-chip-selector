@@ -1,0 +1,28 @@
+
+.dzs-chip-selector {
+  position: relative;
+
+  .dzs-chip-selector--container {
+    display: inline-flex;
+    align-items: baseline;
+    box-sizing: border-box;
+    width: 100%;
+
+    background-color: #0000000a;
+
+    border-radius: 5px;
+    padding: 10px;
+
+    .dzs-chip-selector--form-field {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+
+
+      @import "./chipList";
+
+    }
+  }
+
+}

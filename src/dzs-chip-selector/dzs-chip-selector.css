@@ -45,12 +45,7 @@
   background-color: #e0e0e0;
   color: #000000de;
 }
-.dzs-chip-selector.dzs-chip-selector--is-new-element-focused .dzs-chip-selector--autocompletelist {
-  opacity: 1;
-  visibility: visible;
-}
-
-.dzs-chip-selector--item--remove {
+.dzs-chip-selector .dzs-chip-selector--container .dzs-chip-selector--form-field .dzs-chip-selector--item--remove {
   order: none;
   appearance: none;
   border: 0;
@@ -66,16 +61,11 @@
   cursor: pointer;
   position: relative;
 }
-.dzs-chip-selector--item--remove > figure {
+.dzs-chip-selector .dzs-chip-selector--container .dzs-chip-selector--form-field .dzs-chip-selector--item--remove > figure {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate3d(-50%, -50%, 0);
-}
-
-.dzs-chip-selector--input-new-element--label {
-  margin-left: 4px;
-  margin-bottom: 0;
 }
 
 .dzs-chip-selector--input-new-element {
@@ -95,6 +85,16 @@
   flex: 1 0 150px;
 }
 
+.dzs-chip-selector--input-new-element--label {
+  margin-left: 4px;
+  margin-bottom: 0;
+}
+
+.dzs-chip-selector.dzs-chip-selector--is-new-element-focused .dzs-chip-selector--autocompletelist {
+  opacity: 1;
+  visibility: visible;
+}
+
 .dzs-chip-selector--autocompletelist {
   position: absolute;
   pointer-events: auto;
@@ -105,10 +105,28 @@
   max-height: 100%;
   opacity: 0;
   visibility: hidden;
-  opacity: 1;
-  visibility: visible;
+  transition-property: visibility, opacity;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-out;
 }
-.dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--items {
+.dzs-chip-selector--autocompletelist--inner {
+  padding: 5px;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #dadada;
+  top: 11px;
+  position: relative;
+}
+.dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--placeholder {
+  display: none;
+}
+.dzs-chip-selector--autocompletelist.dzs-chip-selector--autocompletelist--is-placeholder-visible .dzs-chip-selector--autocompletelist--placeholder {
+  display: block;
+}
+.dzs-chip-selector--autocompletelist.dzs-chip-selector--autocompletelist--is-placeholder-visible ul.dzs-chip-selector--autocompletelist--items {
+  display: none;
+}
+.dzs-chip-selector--autocompletelist ul.dzs-chip-selector--autocompletelist--items {
   margin: 0;
   padding: 0;
   min-width: 112px;
@@ -121,11 +139,10 @@
   width: 100%;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
-  padding: 5px;
   list-style: none;
   list-style: none;
 }
-.dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item {
+.dzs-chip-selector--autocompletelist ul.dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item {
   width: 100%;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   cursor: pointer;
@@ -135,17 +152,28 @@
   transition-duration: 0.3s;
   transition-timing-function: ease-out;
 }
-.dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item.is-hidden {
+.dzs-chip-selector--autocompletelist ul.dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item.is-hidden {
   display: none;
 }
-.dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item:hover {
+.dzs-chip-selector--autocompletelist ul.dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item:hover {
   background-color: #eea236;
 }
-.dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item.is-selected {
+.dzs-chip-selector--autocompletelist ul.dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item.is-selected {
   background-color: #b46a75;
 }
-.dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item:last-child {
+.dzs-chip-selector--autocompletelist ul.dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item:last-child {
   border-bottom: 0;
+}
+
+.dzs-chip-selector .dzs-chip-selector--autocompletelist--inner {
+  opacity: 1;
+  transition-property: opacity;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-out;
+}
+.dzs-chip-selector.dzs-chip-selector--is-autocomplete-list-loading .dzs-chip-selector--autocompletelist--inner {
+  opacity: 0.7;
+  visibility: visible;
 }
 
 /*# sourceMappingURL=dzs-chip-selector.css.map */

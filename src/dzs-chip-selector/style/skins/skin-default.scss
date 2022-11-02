@@ -23,13 +23,8 @@ $offsetForList: 3px;
     }
 
     .dzs-chip-selector--autocompletelist--items{
-      border-radius: 5px;
 
-      padding: 10px;
-      background-color: $colorBg;
 
-      top: $arrowSize + $offsetForList;
-      position: relative;
       .dzs-chip-selector--autocompletelist--items--item{
         &.is-selected{
           background-color: #2a6496;

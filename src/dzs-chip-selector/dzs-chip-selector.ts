@@ -47,8 +47,9 @@ export class DzsChipSelector {
       middlewareFilterResults: null,
     }, options);
 
-    console.log('this.options - ' ,this.options);
+    console.log('this.options - ', this.options);
     this.$elem_ = $elem;
+    ($elem as any).selfInstance = this;
     this.placeholderNoItemsFound = this.options.placeholderNoItemsFound;
     if (($elem as any).isDzsChipsInited) {
       return;
@@ -90,8 +91,8 @@ export class DzsChipSelector {
           currentStatus: $input.checked ? 'checked' : 'unchecked'
         };
 
-        this.persistentOptions.push(newItem)
-        this.autoCompleteOptions.push(newItem)
+        this.persistentOptions.push(newItem);
+        this.autoCompleteOptions.push(newItem);
       }
     })
     this.createListFromOptions();
@@ -100,7 +101,7 @@ export class DzsChipSelector {
 
 
   /**
-    init--
+   init--
    initAfterStructure--
    reinit--
    */
@@ -132,8 +133,8 @@ export class DzsChipSelector {
           console.log($chip);
           const dataValue = ($chip as HTMLElement).getAttribute('data-value');
 
-          const targetOption = selfInstance.getAutocompleteOptionFromValue(dataValue);
-          const persistentOption = selfInstance.getAutocompleteOptionFromValue(dataValue);
+          const targetOption = DzsChipSelector.getOptionFromValue(selfInstance.autoCompleteOptions, dataValue);
+          const persistentOption = DzsChipSelector.getOptionFromValue(selfInstance.persistentOptions, dataValue);
           targetOption.currentStatus = 'unchecked';
           persistentOption.currentStatus = 'unchecked';
 
@@ -158,14 +159,26 @@ export class DzsChipSelector {
 
         const sel = '';
         let t = e.target as HTMLElement;
-        const target = matchSelector(t, '.' + DZS_CHIP_SELECTOR_AUTOCOMPLETE_CLASS_NAME_ITEMS);
-        console.log('target - ', target);
-        const dataValue = target.getAttribute('data-value');
-        const targetOption = selfInstance.getAutocompleteOptionFromValue(dataValue);
-        const persistentOption = selfInstance.getAutocompleteOptionFromValue(dataValue);
+        const $target = matchSelector(t, '.' + DZS_CHIP_SELECTOR_AUTOCOMPLETE_CLASS_NAME_ITEMS);
+        console.log('target - ', $target);
+        const dataValue = $target.getAttribute('data-value');
+        const targetOption = DzsChipSelector.getOptionFromValue(selfInstance.autoCompleteOptions, dataValue);
+        let persistentOption = DzsChipSelector.getOptionFromValue(selfInstance.persistentOptions, dataValue);
 
+        if (persistentOption === undefined) {
+          console.log('undefined');
+          console.log('target - ', $target);
 
-        if (target.classList.contains(DZS_CHIP_SELECTOR_CHIPS_SELECTED)) {
+          persistentOption = {
+            "htmlContent": $target.innerHTML,
+            "value": $target.getAttribute('data-value'),
+            "currentStatus": "unchecked"
+          }
+
+          selfInstance.persistentOptions.push(persistentOption);
+        }
+
+        if ($target.classList.contains(DZS_CHIP_SELECTOR_CHIPS_SELECTED)) {
           targetOption.currentStatus = 'unchecked';
           persistentOption.currentStatus = 'unchecked';
         } else {
@@ -197,11 +210,11 @@ export class DzsChipSelector {
         selfInstance.autoCompleteFilterResults(selfInstance.$inputNewElement_.value);
       }
       if (e.type === 'focus') {
-        selfInstance.$elem_.classList.add(DZS_CHIP_SELECTOR_CLASS_NAME + '--is-new-element-focused');
+        selfInstance.onInputAreaFocus();
       }
       if (e.type === 'blur') {
 
-        selfInstance.$elem_.classList.remove(DZS_CHIP_SELECTOR_CLASS_NAME + '--is-new-element-focused');
+        selfInstance.onInputAreaFocus(false);
       }
     }
 
@@ -209,24 +222,28 @@ export class DzsChipSelector {
     this.reinit();
   }
 
-  /**
-   * find the current item from value
-   */
-  getAutocompleteOptionFromValue(dataValue: string) {
-    const foundItems = this.autoCompleteOptions.filter((item) => item.value === dataValue);
+  onInputAreaFocus(isFocus = true) {
+    console.log('this.$inputNewElement_ - ', this.$inputNewElement_, this.$elem_);
+
+    const autocompleteListX = this.$inputNewElement_.getBoundingClientRect().x - this.$elem_.getBoundingClientRect().x;
+
+    console.log({autocompleteListX}, this.$elem_.getBoundingClientRect(), this.$inputNewElement_.getBoundingClientRect().x, this.$elem_.getBoundingClientRect().x);
+    if (isFocus) {
+      this.$autoCompleteList.style.left = autocompleteListX + 'px';
+      this.$elem_.classList.add(DZS_CHIP_SELECTOR_CLASS_NAME + '--is-new-element-focused');
+    } else {
+      this.$elem_.classList.remove(DZS_CHIP_SELECTOR_CLASS_NAME + '--is-new-element-focused');
+    }
+  }
+
+
+  static getOptionFromValue(options: any[], dataValue: string) {
+
+    const foundItems = options.filter((item) => item.value === dataValue);
 
     return foundItems[0];
   }
 
-
-  /**
-   * find the current item from value
-   */
-  getPersistentOptionFromValue(dataValue: string) {
-    const foundItems = this.persistentOptions.filter((item) => item.value === dataValue);
-
-    return foundItems[0];
-  }
 
   /**
    * updates from single source of truth this.$autoCompleteList -- .dzs-chip-selector--autocompletelist--items
@@ -241,16 +258,19 @@ export class DzsChipSelector {
       console.log(child);
 
       const dataValue = (child as HTMLElement).getAttribute('data-value');
-      const persistentOption = this.getAutocompleteOptionFromValue(dataValue);
+      const persistentOption = DzsChipSelector.getOptionFromValue(this.persistentOptions, dataValue);
 
       console.log('updateListFromOptions--', {persistentOption});
 
-      if (persistentOption.currentStatus === 'unchecked') {
-        (child as HTMLElement).classList.remove(DZS_CHIP_SELECTOR_CHIPS_SELECTED);
+      if (persistentOption !== undefined) {
+        if (persistentOption.currentStatus === 'unchecked') {
+          (child as HTMLElement).classList.remove(DZS_CHIP_SELECTOR_CHIPS_SELECTED);
+        }
+        if (persistentOption.currentStatus === 'checked') {
+          (child as HTMLElement).classList.add(DZS_CHIP_SELECTOR_CHIPS_SELECTED);
+        }
       }
-      if (persistentOption.currentStatus === 'checked') {
-        (child as HTMLElement).classList.add(DZS_CHIP_SELECTOR_CHIPS_SELECTED);
-      }
+
 
     })
 
@@ -297,6 +317,7 @@ export class DzsChipSelector {
    * create the list from currentItems
    */
   createListFromOptions() {
+    console.log('createListFromOptions-- ', ' this - ', this);
 
     // todo: wrong, find suggestedItems
     const $ulItems = this.$autoCompleteList.querySelector('.dzs-chip-selector--autocompletelist--items');
@@ -307,31 +328,66 @@ export class DzsChipSelector {
     })
   }
 
+  getAutocompleteItemDomFromValue(arg: string) {
+    const $items = this.$autoCompleteList.querySelectorAll('.' + DZS_CHIP_SELECTOR_AUTOCOMPLETE_CLASS_NAME_ITEMS);
+    $items.forEach(($item) => {
+      if ($item.getAttribute('data-value') === arg) {
+        return $item;
+      }
+    })
+  }
+
   /**
    * filter on each letter
    */
   autoCompleteFilterResults(arg: string) {
 
-    if(this.options.middlewareFilterResults){
-      this.options.middlewareFilterResults(arg);
+    if (this.options.middlewareFilterResults) {
+      (this.options.middlewareFilterResults(this, arg) as Promise<any>).then(() => {
+
+        readyToFilter(this);
+      }).catch((err) => {
+        console.log('error - ');
+        console.log(err)
+      });
+    } else {
+      readyToFilter(this);
     }
 
-    const $items = this.$autoCompleteList.querySelectorAll('.' + DZS_CHIP_SELECTOR_AUTOCOMPLETE_CLASS_NAME_ITEMS);
-    arg = arg.toLowerCase();
 
-    $items.forEach(($item) => {
-      if (($item.textContent).toLowerCase().indexOf(arg) > -1) {
-        $item.classList.remove('is-hidden');
+    function readyToFilter(selfInstance: DzsChipSelector) {
+
+      selfInstance.autoCompleteOptions.forEach((autocompleteOption) => {
+        console.log(autocompleteOption);
+      })
+
+      const $items = selfInstance.$autoCompleteList.querySelectorAll('.' + DZS_CHIP_SELECTOR_AUTOCOMPLETE_CLASS_NAME_ITEMS);
+      arg = arg.toLowerCase();
+
+      let nrResultsFound = 0;
+      $items.forEach(($item) => {
+        if (($item.textContent).toLowerCase().indexOf(arg) > -1) {
+          $item.classList.remove('is-hidden');
+          nrResultsFound++;
+        } else {
+          $item.classList.add('is-hidden');
+        }
+      })
+
+      if (nrResultsFound === 0) {
+        selfInstance.$autoCompleteList.classList.add('dzs-chip-selector--autocompletelist--is-placeholder-visible');
       } else {
-        $item.classList.add('is-hidden');
+        selfInstance.$autoCompleteList.classList.remove('dzs-chip-selector--autocompletelist--is-placeholder-visible');
       }
-    })
+    }
+
+
   }
 
 
 }
 
-window.dzs_initDzsChipSelector = function ($argChip_: HTMLElement, options?:ChipSelectorOptions) {
+window.dzs_initDzsChipSelector = function ($argChip_: HTMLElement, options?: ChipSelectorOptions) {
   new DzsChipSelector($argChip_, options);
 }
 
