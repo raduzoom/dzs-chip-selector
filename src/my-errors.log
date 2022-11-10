@@ -1,38 +1,4 @@
-[01-Oct-2022 11:18:19 UTC] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /Users/raduh/Dropbox/hosts/devsite/dzs-general-assets/projects/chip-selector/chip-selector/src/index.php:85
+[06-Nov-2022 20:36:27 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function xdebug_break() in /Users/raduh/Dropbox/hosts/devsite/dzs-general-assets/projects/chip-selector/chip-selector/src/api-search.php:29
 Stack trace:
 #0 {main}
-  thrown in /Users/raduh/Dropbox/hosts/devsite/dzs-general-assets/projects/chip-selector/chip-selector/src/index.php on line 85
-[01-Oct-2022 11:18:39 UTC] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /Users/raduh/Dropbox/hosts/devsite/dzs-general-assets/projects/chip-selector/chip-selector/src/index.php:85
-Stack trace:
-#0 {main}
-  thrown in /Users/raduh/Dropbox/hosts/devsite/dzs-general-assets/projects/chip-selector/chip-selector/src/index.php on line 85
-[01-Oct-2022 11:19:00 UTC] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /Users/raduh/Dropbox/hosts/devsite/dzs-general-assets/projects/chip-selector/chip-selector/src/index.php:86
-Stack trace:
-#0 {main}
-  thrown in /Users/raduh/Dropbox/hosts/devsite/dzs-general-assets/projects/chip-selector/chip-selector/src/index.php on line 86
-[01-Oct-2022 11:19:22 UTC] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /Users/raduh/Dropbox/hosts/devsite/dzs-general-assets/projects/chip-selector/chip-selector/src/index.php:88
-Stack trace:
-#0 {main}
-  thrown in /Users/raduh/Dropbox/hosts/devsite/dzs-general-assets/projects/chip-selector/chip-selector/src/index.php on line 88
-[01-Oct-2022 11:19:29 UTC] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /Users/raduh/Dropbox/hosts/devsite/dzs-general-assets/projects/chip-selector/chip-selector/src/index.php:89
-Stack trace:
-#0 {main}
-  thrown in /Users/raduh/Dropbox/hosts/devsite/dzs-general-assets/projects/chip-selector/chip-selector/src/index.php on line 89
-[01-Oct-2022 11:20:03 UTC] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /Users/raduh/Dropbox/hosts/devsite/dzs-general-assets/projects/chip-selector/chip-selector/src/index.php:89
-Stack trace:
-#0 {main}
-  thrown in /Users/raduh/Dropbox/hosts/devsite/dzs-general-assets/projects/chip-selector/chip-selector/src/index.php on line 89
-[01-Oct-2022 11:25:12 UTC] PHP Warning:  Undefined array key "value" in /Users/raduh/Dropbox/hosts/devsite/dzs-general-assets/projects/chip-selector/chip-selector/src/index.php on line 111
-[01-Oct-2022 11:25:12 UTC] PHP Warning:  Undefined array key "htmlContent" in /Users/raduh/Dropbox/hosts/devsite/dzs-general-assets/projects/chip-selector/chip-selector/src/index.php on line 111
-[01-Oct-2022 17:16:11 UTC] PHP Fatal error:  Uncaught TypeError: array_push(): Argument #1 ($array) must be of type array, null given in /Users/raduh/Dropbox/hosts/devsite/dzs-general-assets/projects/chip-selector/chip-selector/src/index.php:56
-Stack trace:
-#0 /Users/raduh/Dropbox/hosts/devsite/dzs-general-assets/projects/chip-selector/chip-selector/src/index.php(56): array_push(NULL, Array)
-#1 /Users/raduh/Dropbox/hosts/devsite/dzs-general-assets/projects/chip-selector/chip-selector/src/index.php(67): checkInAllValues()
-#2 {main}
-  thrown in /Users/raduh/Dropbox/hosts/devsite/dzs-general-assets/projects/chip-selector/chip-selector/src/index.php on line 56
-[01-Oct-2022 17:16:12 UTC] PHP Fatal error:  Uncaught TypeError: array_push(): Argument #1 ($array) must be of type array, null given in /Users/raduh/Dropbox/hosts/devsite/dzs-general-assets/projects/chip-selector/chip-selector/src/index.php:56
-Stack trace:
-#0 /Users/raduh/Dropbox/hosts/devsite/dzs-general-assets/projects/chip-selector/chip-selector/src/index.php(56): array_push(NULL, Array)
-#1 /Users/raduh/Dropbox/hosts/devsite/dzs-general-assets/projects/chip-selector/chip-selector/src/index.php(67): checkInAllValues()
-#2 {main}
-  thrown in /Users/raduh/Dropbox/hosts/devsite/dzs-general-assets/projects/chip-selector/chip-selector/src/index.php on line 56
+  thrown in /Users/raduh/Dropbox/hosts/devsite/dzs-general-assets/projects/chip-selector/chip-selector/src/api-search.php on line 29

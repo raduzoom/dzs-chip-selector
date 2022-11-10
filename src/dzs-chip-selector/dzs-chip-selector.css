@@ -165,6 +165,9 @@
   border-bottom: 0;
 }
 
+.dzs-chip-selector {
+  opacity: 1;
+}
 .dzs-chip-selector .dzs-chip-selector--autocompletelist--inner {
   opacity: 1;
   transition-property: opacity;

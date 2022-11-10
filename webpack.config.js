@@ -3,7 +3,6 @@ const {resolve} = require('path')
 
 module.exports = (env,mod) => {
 
-  console.log(env, mod);
 
 
   let webpackConfig = {
@@ -49,6 +48,7 @@ module.exports = (env,mod) => {
   if(mod.mode=='production'){
     webpackConfig.devtool = 'source-map';
   }
+  console.log('env - ', env, 'mod - ', mod);
 
   return webpackConfig;
 };

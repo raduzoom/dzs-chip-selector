@@ -39,6 +39,8 @@ export class DzsChipSelector {
   placeholderNoItemsFound: string;
   options: ChipSelectorOptions;
 
+  inputForm_currentQueryString = '';
+
 
   constructor($elem: HTMLElement, options: ChipSelectorOptions) {
 
@@ -112,9 +114,9 @@ export class DzsChipSelector {
     selfInstance.$form = this.$elem_.querySelector('.dzs-chip-selector--form');
 
 
-    this.$inputNewElement_.addEventListener('focus', handleInputFocus);
-    this.$inputNewElement_.addEventListener('blur', handleInputFocus);
-    this.$inputNewElement_.addEventListener('keyup', handleInputFocus);
+    this.$inputNewElement_.addEventListener('focus', handleInputEvent);
+    this.$inputNewElement_.addEventListener('blur', handleInputEvent);
+    this.$inputNewElement_.addEventListener('keyup', handleInputEvent);
     this.$autoCompleteList.addEventListener('click', handleAutoCompleteList);
     this.$elem_.querySelector('.dzs-chip-selector--chip-list-wrapper').addEventListener('click', handleChipsClick);
 
@@ -198,16 +200,21 @@ export class DzsChipSelector {
 
     // selfInstance.$inputNewElement.addEventListener()
 
-    function handleInputFocus(e: Event) {
-      console.log({selfInstance});
-      console.log('this - ', this);
-
-
-      console.log('event - ', this, e.type);
+    function handleInputEvent(e: Event) {
+      // console.log({selfInstance});
+      // console.log('this - ', this);
+      //
+      //
+      // console.log('event - ', this, e.type);
       const $t = selfInstance.$inputNewElement_;
       if (e.type === 'keyup') {
-        console.log('keeeyup', selfInstance.$inputNewElement_.value);
-        selfInstance.autoCompleteFilterResults(selfInstance.$inputNewElement_.value);
+        console.log('selfInstance.inputForm_currentQueryString - ', selfInstance.inputForm_currentQueryString, 'value - ', $t.value);
+        if(selfInstance.inputForm_currentQueryString===$t.value){
+          return;
+        }
+        selfInstance.inputForm_currentQueryString = $t.value;
+        console.log('keeeyup', selfInstance.inputForm_currentQueryString);
+        selfInstance.autoCompleteFilterResults(selfInstance.inputForm_currentQueryString);
       }
       if (e.type === 'focus') {
         selfInstance.onInputAreaFocus();
@@ -340,37 +347,43 @@ export class DzsChipSelector {
   /**
    * filter on each letter
    */
-  autoCompleteFilterResults(arg: string) {
+  autoCompleteFilterResults(stringSequence: string) {
+
+
+    console.log('stringSequence - ', stringSequence, 'this.inputForm_currentQueryString -' , this.inputForm_currentQueryString)
+    if(stringSequence != this.inputForm_currentQueryString){
+      return;
+    }
 
     if (this.options.middlewareFilterResults) {
-      (this.options.middlewareFilterResults(this, arg) as Promise<any>).then(() => {
+      (this.options.middlewareFilterResults(this, stringSequence) as Promise<any>).then(() => {
 
-        readyToFilter(this);
+        filterResultsFrontend(this);
       }).catch((err) => {
         console.log('error - ');
         console.log(err)
       });
     } else {
-      readyToFilter(this);
+      filterResultsFrontend(this);
     }
 
 
-    function readyToFilter(selfInstance: DzsChipSelector) {
+    function filterResultsFrontend(selfInstance: DzsChipSelector) {
 
       selfInstance.autoCompleteOptions.forEach((autocompleteOption) => {
-        console.log(autocompleteOption);
+        // console.log('autocompleteOption - ' , autocompleteOption);
       })
 
-      const $items = selfInstance.$autoCompleteList.querySelectorAll('.' + DZS_CHIP_SELECTOR_AUTOCOMPLETE_CLASS_NAME_ITEMS);
-      arg = arg.toLowerCase();
+      const $autoCompleteListItems = selfInstance.$autoCompleteList.querySelectorAll('.' + DZS_CHIP_SELECTOR_AUTOCOMPLETE_CLASS_NAME_ITEMS);
+      stringSequence = stringSequence.toLowerCase();
 
       let nrResultsFound = 0;
-      $items.forEach(($item) => {
-        if (($item.textContent).toLowerCase().indexOf(arg) > -1) {
-          $item.classList.remove('is-hidden');
+      $autoCompleteListItems.forEach(($autoCompleteListItem) => {
+        if (selfInstance.inputForm_currentQueryString === '' || ($autoCompleteListItem.textContent).toLowerCase().indexOf(stringSequence) > -1) {
+          $autoCompleteListItem.classList.remove('is-hidden');
           nrResultsFound++;
         } else {
-          $item.classList.add('is-hidden');
+          $autoCompleteListItem.classList.add('is-hidden');
         }
       })
 
