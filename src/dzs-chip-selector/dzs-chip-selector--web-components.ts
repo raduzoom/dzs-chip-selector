@@ -41,7 +41,8 @@ class DzsChipSelectorWrapper extends HTMLElement {
   connectedCallback() {
     console.log('connectedCallback()');
 
-    const $chipSelector = this.wrapper.querySelector('.dzs-chip-selector')
+    const $chipSelector = this.wrapper.querySelector('.dzs-chip-selector');
+    ($chipSelector as any).webComponent = this;
 
 
     if($chipSelector){
