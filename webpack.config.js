@@ -1,6 +1,7 @@
-import * as path from "path";
+const path = require('path');
+const {resolve} = require('path')
 
-export default (env, mod) => {
+module.exports = (env, mod) => {
 
 
   let webpackConfig = {
@@ -46,10 +47,10 @@ export default (env, mod) => {
       devMiddleware: {
         writeToDisk: true
       },
-      // static: {
-      //   directory: path.join(__dirname, 'src'),
-      //   watch: false,
-      // },
+      static: {
+        directory: path.join(__dirname, 'src'),
+        watch: false,
+      },
     },
     resolve: {
       extensions: ['.tsx', '.ts', '.js', '.scss'],

@@ -17,7 +17,6 @@
     "type": "git",
     "url": "git+https://github.com/raduzoom/dzs-chip-selector"
   },
-  "type": "module",
   "author": "",
   "license": "ISC",
   "devDependencies": {
