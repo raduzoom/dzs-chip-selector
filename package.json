@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev-server": "tsc-watch --noClear -p ./tsconfig.json",
     "build-ts": "tsc --out final.js --module commonjs ./src/dzs-chip-selector/dzs-chip-selector.ts",
+    "rollup": "rollup -c",
     "dev": "webpack --watch --config webpack.config.js --mode development",
     "dev-webserver": "webpack-dev-server --config webpack.config.js --mode development",
     "pub": "npm version patch && npm run build && npm publish",
@@ -16,6 +17,7 @@
     "type": "git",
     "url": "git+https://github.com/raduzoom/dzs-chip-selector"
   },
+  "type": "module",
   "author": "",
   "license": "ISC",
   "devDependencies": {
