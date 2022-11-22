@@ -37,9 +37,12 @@ class DzsChipSelectorWrapper extends HTMLElement {
     this.shadow.appendChild(styleChip);
 
 
+    this.renderComponent();
   }
-  connectedCallback() {
-    console.log('connectedCallback()');
+
+  renderComponent(){
+    console.log('rendered component');
+
 
     const $chipSelector = this.wrapper.querySelector('.dzs-chip-selector');
     ($chipSelector as any).webComponent = this;
@@ -59,6 +62,9 @@ class DzsChipSelectorWrapper extends HTMLElement {
 
       new DzsChipSelector(this.wrapper.querySelector('.dzs-chip-selector'), chipSelectorOptions);
     }
+  }
+  connectedCallback() {
+    console.log('connectedCallback()');
 
   }
 
