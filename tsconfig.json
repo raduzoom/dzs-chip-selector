@@ -1,14 +1,18 @@
 {
   "compilerOptions": {
-//    "strict": true,
-//    "sourceMap": true,
+    //    "strict": true,
+    //    "sourceMap": true,
     "declaration": true,
-//    "outDir": "./dist",
+//    "paths": [
+//      "src/**/*"
+//    ],
+    //    "outDir": "./dist",
     "declarationDir": "./dist/",
-//    "esModuleInterop": true,
-//    "skipLibCheck": true,
-//    "forceConsistentCasingInFileNames": true,
-//    "outFile": "./dist/dzs-chip-selector.js",
+    //    "esModuleInterop": true,
+    //    "skipLibCheck": true,
+    //    "forceConsistentCasingInFileNames": true,
+    //    "outFile": "./dist/dzs-chip-selector.js",
+    "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "rootDir": ".",
     "noImplicitAny": true,
     "module": "amd",
@@ -18,15 +22,23 @@
     ],
     "allowJs": true,
     "moduleResolution": "node",
-    "lib": ["es5", "es6", "dom"]
+    "lib": [
+      "es5",
+      "es6",
+      "dom"
+    ]
   },
   "include": [
-    "src/**/*"
+    "src/**/*", "declarations.d.ts"
   ],
-//  "files": [
-//    "./src/dzs-chip-selector/dzs-chip-selector.ts"
-//  ],
-  "exclude": ["node_modules", "**/*.spec.ts", "./build"],
+  //  "files": [
+  //    "./src/dzs-chip-selector/dzs-chip-selector.ts"
+  //  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts",
+    "./build"
+  ],
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Recommended"
 }

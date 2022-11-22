@@ -1,0 +1,80 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>A Basic HTML5 Template</title>
+  <meta name="description" content="A simple HTML5 Template for new projects.">
+  <meta name="author" content="SitePoint">
+
+  <meta property="og:title" content="Chip selector">
+  <meta property="og:type" content="website">
+  <meta property="og:description" content="Web components -> Chip selector">
+  <meta property="og:image" content="image.png">
+
+  <!--  <link rel="icon" href="/favicon.ico">-->
+  <!--  <link rel="icon" href="/favicon.svg" type="image/svg+xml">-->
+  <!--  <link rel="apple-touch-icon" href="/apple-touch-icon.png">-->
+
+  <!--  <link rel="stylesheet" href="css/styles.css?v=1.0">-->
+
+</head>
+
+<body>
+<!-- your content here... -->
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+
+
+
+
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <dzs-chip-selector
+        data-persistentOptions='[{"htmlContent":"Apple ","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange ","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span> ","value":"apricot","currentStatus":"unchecked"}]'
+        ></dzs-chip-selector>
+
+      <script>
+        const $cs_ = document.body.querySelector('dzs-chip-selector');
+        console.log('hier - ', document.body.querySelector('dzs-chip-selector'));
+        $cs_.ceva = 'ceva';
+
+      </script>
+    </div>
+  </div>
+</div>
+
+
+<script>var exports = {}
+var require = () => {
+}</script>
+<!--<script src="../build/dzs-chip-selector/dzs-chip-selector.js" type="module"  ></script>-->
+<script src="../dist/dzsChipSelectorWebComponents.js"></script>
+<!--<script src="../final.js"  ></script>-->
+
+<link rel="stylesheet" href="style/bootstrap.min.css"/>
+
+<script>
+
+  // -- helper functions end
+</script>
+<script>
+
+  // import {DzsChipSelector} from '../dist/bundle.js';
+
+
+
+</script>
+</body>
+</html>

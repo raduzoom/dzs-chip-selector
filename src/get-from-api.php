@@ -1,4 +1,8 @@
 <?php
+/**
+ * get options from API
+ */
+
 $log_file = "./my-errors.log";
 ini_set("log_errors", TRUE);
 ini_set("error_log", $log_file);
@@ -83,9 +87,9 @@ if ($selectedSubjects) {
   <meta name="description" content="A simple HTML5 Template for new projects.">
   <meta name="author" content="SitePoint">
 
-  <meta property="og:title" content="A Basic HTML5 Template">
+  <meta property="og:title" content="Chip selector">
   <meta property="og:type" content="website">
-  <meta property="og:description" content="A simple HTML5 Template for new projects.">
+  <meta property="og:description" content="Web components -> Chip selector">
   <meta property="og:image" content="image.png">
 
   <!--  <link rel="icon" href="/favicon.ico">-->
@@ -202,11 +206,9 @@ if ($selectedSubjects) {
 <link rel="stylesheet" href="dzs-chip-selector/dzs-chip-selector.css"/>
 <link rel="stylesheet" href="dzs-chip-selector/style/skins/skin-default.css"/>
 
-
 <script>
 
-  // import {DzsChipSelector} from '../dist/bundle.js';
-
+  // -- helper functions
   function getOptionFromValue (options, dataValue) {
     const foundItems = options.filter((item) => item.value === dataValue)
 
@@ -230,6 +232,12 @@ if ($selectedSubjects) {
       callback(err)
     })
   }
+  // -- helper functions end
+</script>
+<script>
+
+  // import {DzsChipSelector} from '../dist/bundle.js';
+
 
   documentReady(() => {
 

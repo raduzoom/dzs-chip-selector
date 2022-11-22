@@ -4,15 +4,19 @@ import {
   DZS_CHIP_SELECTOR_CHIPS_SELECTED,
   DZS_CHIP_SELECTOR_CLASS_NAME
 } from "./config/dzs-chip-selector.config";
-import {domRemoveChildren, matchSelector} from "./js_common/dzs_helpers";
-import {ChipSelectorItem, ChipSelectorOptions} from "./dzs-chip-selector.type";
+import {domRemoveChildren, insertHtml, matchSelector} from "./js_common/dzs_helpers";
+import {
+  ChipSelectorItem,
+  ChipSelectorOptions
+} from "./dzs-chip-selector.type";
+import {DZS_CHIP_SELECTOR__CLASS_NAME__IS_PLACEHOLDER_VISIBLE} from "./dzs-chip-selector.config";
 // import {$es} from '../../deps/esjquery/js/_esjquery';
 
 console.log('ceva2 2 3 4  33 4');
 
 declare global {
   interface Window {
-    dzs_initDzsChipSelector: any;
+    dzs_initDzsChipSelector: ($argChip_: HTMLElement, options?: ChipSelectorOptions) => void;
   }
 }
 
@@ -25,6 +29,7 @@ declare global {
 // };
 
 export class DzsChipSelector {
+  /** DOM - main element wrapper */
   $elem_: HTMLElement;
   $inputNewElement_: HTMLInputElement;
   $autoCompleteList: HTMLElement;
@@ -32,27 +37,34 @@ export class DzsChipSelector {
   // $elem: esJquery;
   // $inputNewElement: esJquery;
 
+  feedSource = 'form';
 
-  /** single source of truth */
+  /** single source of truth -- filtered by keyboard */
   autoCompleteOptions: ChipSelectorItem[] = [];
+  /** single source of truth */
   persistentOptions: ChipSelectorItem[] = [];
   placeholderNoItemsFound: string;
-  options: ChipSelectorOptions;
+  /** config options */
+  chipSelectorOptions: ChipSelectorOptions;
 
   inputForm_currentQueryString = '';
 
 
-  constructor($elem: HTMLElement, options: ChipSelectorOptions) {
+  constructor($elem: HTMLElement, chipSelectorOptions: ChipSelectorOptions) {
 
-    this.options = Object.assign({
+    if(!$elem){
+      return;
+    }
+
+    this.chipSelectorOptions = Object.assign({
       placeholderNoItemsFound: "No items found",
       middlewareFilterResults: null,
-    }, options);
+    }, chipSelectorOptions);
 
-    console.log('this.options - ', this.options);
+    console.log('this.chipSelectorOptions - ', this.chipSelectorOptions);
     this.$elem_ = $elem;
     ($elem as any).selfInstance = this;
-    this.placeholderNoItemsFound = this.options.placeholderNoItemsFound;
+    this.placeholderNoItemsFound = this.chipSelectorOptions.placeholderNoItemsFound;
     if (($elem as any).isDzsChipsInited) {
       return;
     }
@@ -65,15 +77,76 @@ export class DzsChipSelector {
 
     this.$elem_.classList.add(DZS_CHIP_SELECTOR_CLASS_NAME + '--is-inited');
 
+    this.initStructure();
     this.initAfterStructure();
   }
 
+  initStructure() {
+    console.log('initStructure');
+
+    if (!this.$elem_.querySelector('.dzs-chip-selector--container')) {
+
+      insertHtml(this.$elem_, `<div class="dzs-chip-selector--container">
+          <div class="dzs-chip-selector--form-field">
+            <div class="dzs-chip-selector--chip-list">
+              <ul class="dzs-chip-selector--chip-list-wrapper">
+
+              </ul>
+            </div>
+            <label class="dzs-chip-selector--input-new-element--label">
+              <input placeholder="New fruit..." class="dzs-chip-selector--input-new-element"
+                     autocomplete="off"
+                     role="combobox" aria-autocomplete="list" aria-expanded="false"
+                     aria-haspopup="listbox"
+                     aria-owns="mat-autocomplete-1">
+            </label>
+          </div>
+        </div>`)
+
+    }
+
+    if (!this.$elem_.querySelector('.dzs-chip-selector--autocompletelist')) {
+
+      insertHtml(this.$elem_, `<div class="dzs-chip-selector--autocompletelist">
+          <div class="dzs-chip-selector--autocompletelist--inner">
+            <div class="dzs-chip-selector--autocompletelist--placeholder">No items found</div>
+            <ul class="dzs-chip-selector--autocompletelist--items">
+            </ul>
+          </div>
+        </div>`)
+
+    }
+  }
 
   reinit() {
     const selfInstance = this;
 
-    const $form = this.$elem_.querySelector('.dzs-chip-selector--form');
-    console.log('$form - ', $form);
+    const $form = this.$elem_.querySelector('.dzs-chip-selector--form') as HTMLElement;
+
+    if ($form) {
+      this.feedSource = 'form';
+      this.chipSelectorOptions.persistentOptions = null;
+      this.getOptionsFromForm($form);
+    } else {
+      if (this.$elem_.getAttribute('data-persistentOptions')) {
+        this.readAttrForPersistentOptions();
+      }
+    }
+    if (this.chipSelectorOptions.persistentOptions) {
+      this.feedSource = 'options';
+      this.persistentOptions = this.chipSelectorOptions.persistentOptions;
+      this.autoCompleteOptions = this.chipSelectorOptions.persistentOptions;
+    }
+    this.createListFromOptions();
+    selfInstance.updateChipsFromOptions();
+  }
+
+  readAttrForPersistentOptions() {
+    const dataPersistentOptions = this.$elem_.getAttribute('data-persistentOptions');
+    this.chipSelectorOptions.persistentOptions = JSON.parse(dataPersistentOptions);
+  }
+
+  getOptionsFromForm($form: HTMLElement) {
 
     // -- parse main form
     $form.childNodes.forEach(($label: HTMLElement) => {
@@ -97,8 +170,6 @@ export class DzsChipSelector {
         this.autoCompleteOptions.push(newItem);
       }
     })
-    this.createListFromOptions();
-    selfInstance.updateChipsFromOptions();
   }
 
 
@@ -209,7 +280,7 @@ export class DzsChipSelector {
       const $t = selfInstance.$inputNewElement_;
       if (e.type === 'keyup') {
         console.log('selfInstance.inputForm_currentQueryString - ', selfInstance.inputForm_currentQueryString, 'value - ', $t.value);
-        if(selfInstance.inputForm_currentQueryString===$t.value){
+        if (selfInstance.inputForm_currentQueryString === $t.value) {
           return;
         }
         selfInstance.inputForm_currentQueryString = $t.value;
@@ -289,12 +360,20 @@ export class DzsChipSelector {
   updateFormFromOptions() {
     const selfInstance = this;
 
-    domRemoveChildren(selfInstance.$form);
+    if (this.feedSource === 'form') {
+
+      domRemoveChildren(selfInstance.$form);
+    }
+    if (this.chipSelectorOptions.onUpdateFunction) {
+      this.chipSelectorOptions.onUpdateFunction(this.persistentOptions);
+    }
 
 
-    this.persistentOptions.forEach(item => {
-      selfInstance.$form.insertAdjacentHTML('beforeend', `<label><input type="checkbox" ${item.currentStatus === 'checked' ? 'checked' : ''} name="subject[]" value="${item.value}">${item.htmlContent}</label>`);
-    })
+    if (this.feedSource === 'form') {
+      this.persistentOptions.forEach(item => {
+        insertHtml(selfInstance.$form, `<label><input type="checkbox" ${item.currentStatus === 'checked' ? 'checked' : ''} name="subject[]" value="${item.value}">${item.htmlContent}</label>`)
+      })
+    }
   }
 
   /**
@@ -309,12 +388,12 @@ export class DzsChipSelector {
 
     this.persistentOptions.forEach(item => {
       if (item.currentStatus === 'checked') {
-        $chipsList.insertAdjacentHTML('beforeend', `<li data-value="${item.value}" class="dzs-chip-selector--item">
+        insertHtml($chipsList as HTMLElement, `<li data-value="${item.value}" class="dzs-chip-selector--item">
 <div class="dzs-chip-selector--item--content">${item.htmlContent}</div>
 <button _ngcontent-mua-c151="" matchipremove="" class="dzs-chip-selector--item--remove"  type="button">
   <figure>x</figure>
 </button>
-</li>`);
+</li>`)
 
       }
     })
@@ -331,7 +410,7 @@ export class DzsChipSelector {
 
     domRemoveChildren($ulItems as HTMLElement);
     this.autoCompleteOptions.forEach(item => {
-      $ulItems.insertAdjacentHTML('beforeend', `<li class="dzs-chip-selector--autocompletelist--items--item ${item.currentStatus === 'checked' ? DZS_CHIP_SELECTOR_CHIPS_SELECTED : ''}" data-value="${item.value}">${item.htmlContent}</li>`);
+      insertHtml($ulItems as HTMLElement, `<li class="dzs-chip-selector--autocompletelist--items--item ${item.currentStatus === 'checked' ? DZS_CHIP_SELECTOR_CHIPS_SELECTED : ''}" data-value="${item.value}">${item.htmlContent}</li>`);
     })
   }
 
@@ -350,13 +429,13 @@ export class DzsChipSelector {
   autoCompleteFilterResults(stringSequence: string) {
 
 
-    console.log('stringSequence - ', stringSequence, 'this.inputForm_currentQueryString -' , this.inputForm_currentQueryString)
-    if(stringSequence != this.inputForm_currentQueryString){
+    console.log('stringSequence - ', stringSequence, 'this.inputForm_currentQueryString -', this.inputForm_currentQueryString)
+    if (stringSequence != this.inputForm_currentQueryString) {
       return;
     }
 
-    if (this.options.middlewareFilterResults) {
-      (this.options.middlewareFilterResults(this, stringSequence) as Promise<any>).then(() => {
+    if (this.chipSelectorOptions.middlewareFilterResults) {
+      (this.chipSelectorOptions.middlewareFilterResults(this, stringSequence) as Promise<any>).then(() => {
 
         filterResultsFrontend(this);
       }).catch((err) => {
@@ -388,22 +467,17 @@ export class DzsChipSelector {
       })
 
       if (nrResultsFound === 0) {
-        selfInstance.$autoCompleteList.classList.add('dzs-chip-selector--autocompletelist--is-placeholder-visible');
+        selfInstance.$autoCompleteList.classList.add(DZS_CHIP_SELECTOR__CLASS_NAME__IS_PLACEHOLDER_VISIBLE);
       } else {
-        selfInstance.$autoCompleteList.classList.remove('dzs-chip-selector--autocompletelist--is-placeholder-visible');
+        selfInstance.$autoCompleteList.classList.remove(DZS_CHIP_SELECTOR__CLASS_NAME__IS_PLACEHOLDER_VISIBLE);
       }
     }
-
-
   }
-
-
 }
 
 window.dzs_initDzsChipSelector = function ($argChip_: HTMLElement, options?: ChipSelectorOptions) {
   new DzsChipSelector($argChip_, options);
 }
-
 
 /**
  * returns the sum
