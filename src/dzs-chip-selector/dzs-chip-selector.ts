@@ -18,6 +18,9 @@ declare global {
   interface Window {
     dzs_initDzsChipSelector: ($argChip_: HTMLElement, options?: ChipSelectorOptions) => void;
   }
+  interface HTMLElement {
+    webComponent?: any;
+  }
 }
 
 
@@ -363,6 +366,10 @@ export class DzsChipSelector {
     if (this.feedSource === 'form') {
 
       domRemoveChildren(selfInstance.$form);
+    }
+
+    if(this.$elem_.webComponent && this.$elem_.webComponent.onUpdate){
+      this.chipSelectorOptions.onUpdateFunction = this.$elem_.webComponent.onUpdate;
     }
     if (this.chipSelectorOptions.onUpdateFunction) {
       this.chipSelectorOptions.onUpdateFunction(this.persistentOptions);
