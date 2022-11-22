@@ -37,7 +37,6 @@ class DzsChipSelectorWrapper extends HTMLElement {
     this.shadow.appendChild(styleChip);
 
 
-    this.renderComponent();
   }
 
   renderComponent(){
@@ -65,6 +64,7 @@ class DzsChipSelectorWrapper extends HTMLElement {
   }
   connectedCallback() {
     console.log('connectedCallback()');
+    this.renderComponent();
 
   }
 
