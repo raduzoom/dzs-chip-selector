@@ -481,8 +481,10 @@ export class DzsChipSelector {
     }
   }
 }
-
-window.dzs_initDzsChipSelector = function ($argChip_: HTMLElement, options?: ChipSelectorOptions) {
+function getWindow(){
+  return window || globalThis as any;
+}
+getWindow().dzs_initDzsChipSelector = function ($argChip_: HTMLElement, options?: ChipSelectorOptions) {
   new DzsChipSelector($argChip_, options);
 }
 
