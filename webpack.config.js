@@ -1,17 +1,29 @@
 const path = require('path');
 const {resolve} = require('path')
 
-module.exports = (env,mod) => {
-
+module.exports = (env, mod) => {
 
 
   let webpackConfig = {
     entry: {
       dzsChipSelector: './src/dzs-chip-selector/dzs-chip-selector.ts',
+      dzsChipSelectorWebComponents: './src/dzs-chip-selector/dzs-chip-selector--web-components.ts',
     },
     devtool: 'eval-source-map',
     module: {
       rules: [
+        {
+          test: /\.scss$/,
+          use: [
+            'raw-loader',
+            {
+              loader: 'sass-loader',
+              options: {
+                sassOptions: {}
+              }
+            }
+          ]
+        },
         {
           test: /\.(ts|js)?$/,
           exclude: /node_modules/,
@@ -41,14 +53,26 @@ module.exports = (env,mod) => {
       },
     },
     resolve: {
-      extensions: ['.tsx', '.ts', '.js'],
+      extensions: ['.tsx', '.ts', '.js', '.scss'],
     },
   };
 
-  if(mod.mode=='production'){
+  if (mod.mode == 'production') {
     webpackConfig.devtool = 'source-map';
+    webpackConfig.optimization = {
+      splitChunks: {
+        chunks: 'all',
+        cacheGroups: {
+          vendors: {
+            test: /[\\/]node_modules[\\/]/,
+            priority: -10
+          },
+        }
+      }
+    }
   }
   console.log('env - ', env, 'mod - ', mod);
+  console.log('webpackConfig - ', webpackConfig);
 
   return webpackConfig;
 };
