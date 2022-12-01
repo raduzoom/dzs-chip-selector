@@ -13,3 +13,7 @@ export type ChipSelectorItem = {
   currentStatus: string
 };
 
+export enum currentStatusType {
+  CHECKED = 'checked',
+  UNCHECKED = 'unchecked',
+}

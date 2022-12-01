@@ -6,7 +6,7 @@ import styleChipTextContent from './dzs-chip-selector.scss';
 
 
 
-class DzsChipSelectorWrapper extends HTMLElement {
+export class DzsChipSelectorWrapper extends HTMLElement {
   shadow: ShadowRoot;
   wrapper: HTMLElement;
   constructor() {
@@ -76,7 +76,7 @@ customElements.define('dzs-chip-selector', DzsChipSelectorWrapper);
 /**
  * returns the sum
  */
-function ceva(arg: number): number {
+export function ceva(arg: number): number {
 
   return arg;
 }

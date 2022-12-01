@@ -23,11 +23,18 @@ $offsetForList: 3px;
     }
 
     .dzs-chip-selector--autocompletelist--items{
-
-
       .dzs-chip-selector--autocompletelist--items--item{
+        background-color: #ffff00;
         &.is-selected{
           background-color: #2a6496;
+        }
+        &:hover {
+          background-color: #eea236;
+        }
+
+        &.is-selected {
+
+          background-color: #b46a75;
         }
       }
     }

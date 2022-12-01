@@ -9,8 +9,17 @@
   top: 3px;
   left: 10px;
 }
+.dzs-chip-selector.dzs-chip-selector--skin-default .dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item {
+  background-color: #ffff00;
+}
 .dzs-chip-selector.dzs-chip-selector--skin-default .dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item.is-selected {
   background-color: #2a6496;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-default .dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item:hover {
+  background-color: #eea236;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-default .dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item.is-selected {
+  background-color: #b46a75;
 }
 
 /*# sourceMappingURL=skin-default.css.map */

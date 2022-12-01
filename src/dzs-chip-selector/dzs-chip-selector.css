@@ -147,7 +147,6 @@
   width: 100%;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  background-color: #ffff00;
   padding: 5px;
   transition-property: background-color;
   transition-duration: 0.3s;
@@ -155,12 +154,6 @@
 }
 .dzs-chip-selector--autocompletelist ul.dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item.is-hidden {
   display: none;
-}
-.dzs-chip-selector--autocompletelist ul.dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item:hover {
-  background-color: #eea236;
-}
-.dzs-chip-selector--autocompletelist ul.dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item.is-selected {
-  background-color: #b46a75;
 }
 .dzs-chip-selector--autocompletelist ul.dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item:last-child {
   border-bottom: 0;

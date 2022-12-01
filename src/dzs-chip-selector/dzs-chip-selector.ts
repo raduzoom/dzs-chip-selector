@@ -7,17 +7,17 @@ import {
 import {domRemoveChildren, insertHtml, matchSelector} from "./js_common/dzs_helpers";
 import {
   ChipSelectorItem,
-  ChipSelectorOptions
+  ChipSelectorOptions, currentStatusType
 } from "./dzs-chip-selector.type";
 import {DZS_CHIP_SELECTOR__CLASS_NAME__IS_PLACEHOLDER_VISIBLE} from "./dzs-chip-selector.config";
 // import {$es} from '../../deps/esjquery/js/_esjquery';
 
-console.log('ceva2 2 3 4  33 4');
 
 declare global {
   interface Window {
     dzs_initDzsChipSelector: ($argChip_: HTMLElement, options?: ChipSelectorOptions) => void;
   }
+
   interface HTMLElement {
     webComponent?: any;
   }
@@ -55,7 +55,7 @@ export class DzsChipSelector {
 
   constructor($elem: HTMLElement, chipSelectorOptions: ChipSelectorOptions) {
 
-    if(!$elem){
+    if (!$elem) {
       return;
     }
 
@@ -64,7 +64,6 @@ export class DzsChipSelector {
       middlewareFilterResults: null,
     }, chipSelectorOptions);
 
-    console.log('this.chipSelectorOptions - ', this.chipSelectorOptions);
     this.$elem_ = $elem;
     ($elem as any).selfInstance = this;
     this.placeholderNoItemsFound = this.chipSelectorOptions.placeholderNoItemsFound;
@@ -85,7 +84,6 @@ export class DzsChipSelector {
   }
 
   initStructure() {
-    console.log('initStructure');
 
     if (!this.$elem_.querySelector('.dzs-chip-selector--container')) {
 
@@ -155,18 +153,16 @@ export class DzsChipSelector {
     $form.childNodes.forEach(($label: HTMLElement) => {
       if ($label.nodeName.toLowerCase() === 'LABEL'.toLowerCase()) {
 
-        console.log($label, $label.innerHTML);
 
         const $input = $label.querySelector('input');
         const labelHtml = $label.innerHTML;
         const labelHtmlCurated = labelHtml.replace(/<input.*?>/g, '');
 
-        console.log($input, labelHtmlCurated);
 
         const newItem = {
           htmlContent: labelHtmlCurated,
           value: $input.value,
-          currentStatus: $input.checked ? 'checked' : 'unchecked'
+          currentStatus: $input.checked ? currentStatusType.CHECKED : currentStatusType.UNCHECKED
         };
 
         this.persistentOptions.push(newItem);
@@ -206,13 +202,12 @@ export class DzsChipSelector {
 
         if (target) {
           const $chip = target.parentNode;
-          console.log($chip);
           const dataValue = ($chip as HTMLElement).getAttribute('data-value');
 
           const targetOption = DzsChipSelector.getOptionFromValue(selfInstance.autoCompleteOptions, dataValue);
           const persistentOption = DzsChipSelector.getOptionFromValue(selfInstance.persistentOptions, dataValue);
-          targetOption.currentStatus = 'unchecked';
-          persistentOption.currentStatus = 'unchecked';
+          targetOption.currentStatus = currentStatusType.UNCHECKED;
+          persistentOption.currentStatus = currentStatusType.UNCHECKED;
 
           selfInstance.updateListFromOptions();
           selfInstance.updateChipsFromOptions();
@@ -230,38 +225,40 @@ export class DzsChipSelector {
     function handleAutoCompleteList(e: Event) {
 
       if (e.type === 'click') {
-        console.log('click e.target', e.target);
 
 
         const sel = '';
         let t = e.target as HTMLElement;
         const $target = matchSelector(t, '.' + DZS_CHIP_SELECTOR_AUTOCOMPLETE_CLASS_NAME_ITEMS);
-        console.log('target - ', $target);
+        let persistentOptionIndex: number = null;
         const dataValue = $target.getAttribute('data-value');
         const targetOption = DzsChipSelector.getOptionFromValue(selfInstance.autoCompleteOptions, dataValue);
         let persistentOption = DzsChipSelector.getOptionFromValue(selfInstance.persistentOptions, dataValue);
 
         if (persistentOption === undefined) {
-          console.log('undefined');
-          console.log('target - ', $target);
 
           persistentOption = {
             "htmlContent": $target.innerHTML,
             "value": $target.getAttribute('data-value'),
-            "currentStatus": "unchecked"
+            "currentStatus": currentStatusType.UNCHECKED
           }
 
           selfInstance.persistentOptions.push(persistentOption);
         }
 
         if ($target.classList.contains(DZS_CHIP_SELECTOR_CHIPS_SELECTED)) {
-          targetOption.currentStatus = 'unchecked';
-          persistentOption.currentStatus = 'unchecked';
+          targetOption.currentStatus = currentStatusType.UNCHECKED;
+          persistentOption.currentStatus = currentStatusType.UNCHECKED;
         } else {
-          targetOption.currentStatus = 'checked';
-          persistentOption.currentStatus = 'checked';
+          // -- turn to checked
+          persistentOptionIndex = selfInstance.persistentOptions.findIndex(el => el.value === persistentOption.value);
+          // -- move to end of array
+          if(persistentOptionIndex < selfInstance.persistentOptions.length - 1){
+            selfInstance.persistentOptions.push(selfInstance.persistentOptions.splice(persistentOptionIndex, 1)[0]);
+          }
+          targetOption.currentStatus = currentStatusType.CHECKED;
+          persistentOption.currentStatus = currentStatusType.CHECKED;
         }
-        console.log(selfInstance.autoCompleteOptions);
 
         selfInstance.updateListFromOptions();
         selfInstance.updateFormFromOptions();
@@ -275,19 +272,12 @@ export class DzsChipSelector {
     // selfInstance.$inputNewElement.addEventListener()
 
     function handleInputEvent(e: Event) {
-      // console.log({selfInstance});
-      // console.log('this - ', this);
-      //
-      //
-      // console.log('event - ', this, e.type);
       const $t = selfInstance.$inputNewElement_;
       if (e.type === 'keyup') {
-        console.log('selfInstance.inputForm_currentQueryString - ', selfInstance.inputForm_currentQueryString, 'value - ', $t.value);
         if (selfInstance.inputForm_currentQueryString === $t.value) {
           return;
         }
         selfInstance.inputForm_currentQueryString = $t.value;
-        console.log('keeeyup', selfInstance.inputForm_currentQueryString);
         selfInstance.autoCompleteFilterResults(selfInstance.inputForm_currentQueryString);
       }
       if (e.type === 'focus') {
@@ -304,11 +294,9 @@ export class DzsChipSelector {
   }
 
   onInputAreaFocus(isFocus = true) {
-    console.log('this.$inputNewElement_ - ', this.$inputNewElement_, this.$elem_);
 
     const autocompleteListX = this.$inputNewElement_.getBoundingClientRect().x - this.$elem_.getBoundingClientRect().x;
 
-    console.log({autocompleteListX}, this.$elem_.getBoundingClientRect(), this.$inputNewElement_.getBoundingClientRect().x, this.$elem_.getBoundingClientRect().x);
     if (isFocus) {
       this.$autoCompleteList.style.left = autocompleteListX + 'px';
       this.$elem_.classList.add(DZS_CHIP_SELECTOR_CLASS_NAME + '--is-new-element-focused');
@@ -333,21 +321,18 @@ export class DzsChipSelector {
 
     const $ulItems = this.$autoCompleteList.querySelector('.dzs-chip-selector--autocompletelist--items');
 
-    console.log('updateListFromOptions-- $ulItems dzs-chip-selector--autocompletelist--items - ', $ulItems);
 
     $ulItems.childNodes.forEach(child => {
-      console.log(child);
 
       const dataValue = (child as HTMLElement).getAttribute('data-value');
       const persistentOption = DzsChipSelector.getOptionFromValue(this.persistentOptions, dataValue);
 
-      console.log('updateListFromOptions--', {persistentOption});
 
       if (persistentOption !== undefined) {
-        if (persistentOption.currentStatus === 'unchecked') {
+        if (persistentOption.currentStatus === currentStatusType.UNCHECKED) {
           (child as HTMLElement).classList.remove(DZS_CHIP_SELECTOR_CHIPS_SELECTED);
         }
-        if (persistentOption.currentStatus === 'checked') {
+        if (persistentOption.currentStatus === currentStatusType.CHECKED) {
           (child as HTMLElement).classList.add(DZS_CHIP_SELECTOR_CHIPS_SELECTED);
         }
       }
@@ -368,7 +353,7 @@ export class DzsChipSelector {
       domRemoveChildren(selfInstance.$form);
     }
 
-    if(this.$elem_.webComponent && this.$elem_.webComponent.onUpdate){
+    if (this.$elem_.webComponent && this.$elem_.webComponent.onUpdate) {
       this.chipSelectorOptions.onUpdateFunction = this.$elem_.webComponent.onUpdate;
     }
     if (this.chipSelectorOptions.onUpdateFunction) {
@@ -378,7 +363,7 @@ export class DzsChipSelector {
 
     if (this.feedSource === 'form') {
       this.persistentOptions.forEach(item => {
-        insertHtml(selfInstance.$form, `<label><input type="checkbox" ${item.currentStatus === 'checked' ? 'checked' : ''} name="subject[]" value="${item.value}">${item.htmlContent}</label>`)
+        insertHtml(selfInstance.$form, `<label><input type="checkbox" ${item.currentStatus === currentStatusType.CHECKED ? currentStatusType.CHECKED : ''} name="subject[]" value="${item.value}">${item.htmlContent}</label>`)
       })
     }
   }
@@ -394,7 +379,7 @@ export class DzsChipSelector {
 
 
     this.persistentOptions.forEach(item => {
-      if (item.currentStatus === 'checked') {
+      if (item.currentStatus === currentStatusType.CHECKED) {
         insertHtml($chipsList as HTMLElement, `<li data-value="${item.value}" class="dzs-chip-selector--item">
 <div class="dzs-chip-selector--item--content">${item.htmlContent}</div>
 <button _ngcontent-mua-c151="" matchipremove="" class="dzs-chip-selector--item--remove"  type="button">
@@ -410,14 +395,13 @@ export class DzsChipSelector {
    * create the list from currentItems
    */
   createListFromOptions() {
-    console.log('createListFromOptions-- ', ' this - ', this);
 
     // todo: wrong, find suggestedItems
     const $ulItems = this.$autoCompleteList.querySelector('.dzs-chip-selector--autocompletelist--items');
 
     domRemoveChildren($ulItems as HTMLElement);
     this.autoCompleteOptions.forEach(item => {
-      insertHtml($ulItems as HTMLElement, `<li class="dzs-chip-selector--autocompletelist--items--item ${item.currentStatus === 'checked' ? DZS_CHIP_SELECTOR_CHIPS_SELECTED : ''}" data-value="${item.value}">${item.htmlContent}</li>`);
+      insertHtml($ulItems as HTMLElement, `<li class="dzs-chip-selector--autocompletelist--items--item ${item.currentStatus === currentStatusType.CHECKED ? DZS_CHIP_SELECTOR_CHIPS_SELECTED : ''}" data-value="${item.value}">${item.htmlContent}</li>`);
     })
   }
 
@@ -436,7 +420,6 @@ export class DzsChipSelector {
   autoCompleteFilterResults(stringSequence: string) {
 
 
-    console.log('stringSequence - ', stringSequence, 'this.inputForm_currentQueryString -', this.inputForm_currentQueryString)
     if (stringSequence != this.inputForm_currentQueryString) {
       return;
     }
@@ -457,7 +440,6 @@ export class DzsChipSelector {
     function filterResultsFrontend(selfInstance: DzsChipSelector) {
 
       selfInstance.autoCompleteOptions.forEach((autocompleteOption) => {
-        // console.log('autocompleteOption - ' , autocompleteOption);
       })
 
       const $autoCompleteListItems = selfInstance.$autoCompleteList.querySelectorAll('.' + DZS_CHIP_SELECTOR_AUTOCOMPLETE_CLASS_NAME_ITEMS);
@@ -481,17 +463,15 @@ export class DzsChipSelector {
     }
   }
 }
-function getWindow(){
+
+function getWindow() {
   return window || globalThis as any;
 }
-getWindow().dzs_initDzsChipSelector = function ($argChip_: HTMLElement, options?: ChipSelectorOptions) {
+
+export function init_chipSelector($argChip_: HTMLElement, options?: ChipSelectorOptions) {
   new DzsChipSelector($argChip_, options);
+
 }
 
-/**
- * returns the sum
- */
-function ceva(arg: number): number {
+getWindow().dzs_initDzsChipSelector = init_chipSelector;
 
-  return arg;
-}
