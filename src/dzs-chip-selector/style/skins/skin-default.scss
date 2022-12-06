@@ -1,13 +1,44 @@
 
+@import "../../TOKENS";
 
-$colorBg: #dadada;
+$colorBg: #ffffff;
+$colorBorder: rgba(34, 34, 34, 0.44);
+$chipsColorBackground: rgba(172, 201, 234, 0.51);
 $arrowSize: 8px;
 $offsetForList: 3px;
 .dzs-chip-selector.dzs-chip-selector--skin-default{
+  font-family: "Droid Sans", sans-serif;
+  .dzs-chip-selector--container{
+    background-color: $colorBg;
+    border: 1px solid $colorBorder;
 
+    .dzs-chip-selector--form-field {
+      .dzs-chip-selector--chip-list ul.dzs-chip-selector--chip-list-wrapper .dzs-chip-selector--item{
+        background-color: $chipsColorBackground;
+
+        &+.dzs-chip-selector--item{
+          margin-left: 5px;
+        }
+        .dzs-chip-selector--item--content{
+          //font-weight: bold;
+        }
+      }
+      .dzs-chip-selector--item--remove{
+        border: 1px solid $colorBorder;
+        border-radius: 50%;
+
+        >figure{
+          font-family: 'Open Sans', Verdana, sans-serif;
+          font-size: 11px;
+          font-weight: bold;
+        }
+      }
+    }
+  }
   .dzs-chip-selector--autocompletelist {
 
 
+    // -- arrow
     &:before{
       content:'';
       position: absolute;
@@ -17,24 +48,30 @@ $offsetForList: 3px;
       height: 0;
       border-left: $arrowSize solid transparent;
       border-right: $arrowSize solid transparent;
-      border-bottom: $arrowSize solid $colorBg;
+      border-bottom: $arrowSize solid $colorBorder;
       top: $offsetForList;
       left: 10px;
     }
 
+    .dzs-chip-selector--autocompletelist--inner{
+      background-color: $colorBorder;
+    }
+
     .dzs-chip-selector--autocompletelist--items{
       .dzs-chip-selector--autocompletelist--items--item{
-        background-color: #ffff00;
-        &.is-selected{
-          background-color: #2a6496;
+        background-color: $colorBg;
+        border-radius: $chipsStyleBorderRadius;
+
+        &+.dzs-chip-selector--autocompletelist--items--item{
+          margin-top: 5px;
         }
         &:hover {
-          background-color: #eea236;
+          background-color: $chipsColorBackground;
         }
 
         &.is-selected {
 
-          background-color: #b46a75;
+          background-color: $chipsColorBackground;
         }
       }
     }
