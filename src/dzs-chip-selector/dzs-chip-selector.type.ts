@@ -2,6 +2,7 @@
 export type ChipSelectorOptions = {
   placeholderNoItemsFound?: string,
   middlewareFilterResults?: any,
+  viewSkin?: string,
   onUpdateFunction?: (...args: any[]) => any;
   persistentOptions?: ChipSelectorItem[]
 };

@@ -10,6 +10,7 @@ import {
   ChipSelectorOptions, currentStatusType
 } from "./dzs-chip-selector.type";
 import {DZS_CHIP_SELECTOR__CLASS_NAME__IS_PLACEHOLDER_VISIBLE} from "./dzs-chip-selector.config";
+import {dzsChipSelectorDefaultOptions} from "./config/dzs-chip-selector--defaultOptions";
 // import {$es} from '../../deps/esjquery/js/_esjquery';
 
 
@@ -59,10 +60,7 @@ export class DzsChipSelector {
       return;
     }
 
-    this.chipSelectorOptions = Object.assign({
-      placeholderNoItemsFound: "No items found",
-      middlewareFilterResults: null,
-    }, chipSelectorOptions);
+    this.chipSelectorOptions = Object.assign(dzsChipSelectorDefaultOptions, chipSelectorOptions);
 
     this.$elem_ = $elem;
     ($elem as any).selfInstance = this;
@@ -78,6 +76,7 @@ export class DzsChipSelector {
     (this.$elem_ as any).isDzsChipsInited = true;
 
     this.$elem_.classList.add(DZS_CHIP_SELECTOR_CLASS_NAME + '--is-inited');
+    this.$elem_.classList.add(DZS_CHIP_SELECTOR_CLASS_NAME + `--skin-${this.chipSelectorOptions.viewSkin}`);
 
     this.initStructure();
     this.initAfterStructure();

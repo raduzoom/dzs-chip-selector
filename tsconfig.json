@@ -3,6 +3,10 @@
     //    "strict": true,
     //    "sourceMap": true,
     "declaration": true,
+    "baseUrl": ".",
+    "paths": {
+      "@dzsChipSelector/*": ["src/dzs-chip-selector/*"]
+    },
 //    "paths": [
 //      "src/**/*"
 //    ],
@@ -15,7 +19,7 @@
     "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "rootDir": ".",
     "noImplicitAny": true,
-    "module": "amd",
+    "module": "esnext",
     "target": "es6",
     "typeRoots": [
       "./types"
@@ -23,7 +27,6 @@
     "allowJs": true,
     "moduleResolution": "node",
     "lib": [
-      "es5",
       "es6",
       "dom"
     ]
