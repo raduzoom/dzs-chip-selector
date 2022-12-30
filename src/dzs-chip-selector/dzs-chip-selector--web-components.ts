@@ -27,7 +27,7 @@ export class DzsChipSelectorWrapper extends HTMLElement {
 
     console.log(this);
     let skinCss = null;
-    let skinLink: HTMLElement = null;
+    let skinLink: HTMLElement | null = null;
     let styleChipInner = null;
 
     this.childNodes.forEach((el) => {
@@ -59,7 +59,7 @@ export class DzsChipSelectorWrapper extends HTMLElement {
       this.shadow.appendChild(styleChipInner);
     }
     if(skinLink){
-      skinLink.setAttribute('href', skinLink.getAttribute('data-lazy-href'));
+      (skinLink as HTMLElement).setAttribute('href', String((skinLink as HTMLElement).getAttribute('data-lazy-href')));
       this.shadow.appendChild(skinLink);
     }
 
@@ -79,7 +79,7 @@ export class DzsChipSelectorWrapper extends HTMLElement {
       const chipSelectorOptions: ChipSelectorOptions = {};
 
       const dataPersistentOptions = this.getAttribute('data-persistentOptions');
-      chipSelectorOptions.persistentOptions = JSON.parse(dataPersistentOptions);
+      chipSelectorOptions.persistentOptions = JSON.parse(String(dataPersistentOptions));
       chipSelectorOptions.onUpdateFunction = (allOptions: ChipSelectorItem[]) => {
         const selectedOptions = allOptions.filter((el: ChipSelectorItem) => el.currentStatus === 'checked');
         console.log({selectedOptions});
@@ -93,7 +93,7 @@ export class DzsChipSelectorWrapper extends HTMLElement {
       //   }) ;
       // },1000);
 
-      new DzsChipSelector(this.wrapper.querySelector('.dzs-chip-selector'), chipSelectorOptions);
+      new DzsChipSelector(this.wrapper.querySelector('.dzs-chip-selector') as HTMLElement, chipSelectorOptions);
     }
   }
 

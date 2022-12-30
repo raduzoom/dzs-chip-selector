@@ -13,7 +13,8 @@ export function insertHtml(t: HTMLElement, html: string, position = 'beforeend')
 export function matchSelector(t: HTMLElement, sel: string): null | HTMLElement {
 
   let matchedEl = null;
-  while (t && t !== this) {
+  // @ts-ignore
+  while (t && t !== (this as any)) {
     if (t && t.matches) {
       if (t.matches(sel)) {
         matchedEl = t;
