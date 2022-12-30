@@ -23,35 +23,35 @@ export default [
       terser(),
     ],
   },
-  // // ES Modules
-  // {
-  //   input: 'src/dzs-chip-selector/dzs-chip-selector--web-components.ts',
-  //   output: {
-  //     file: 'dist/dzsChipSelectorWebComponents.js', format: 'es',
-  //   },
-  //   plugins: [
-  //     typescript(),
-  //     babel({ babelHelpers: 'bundled', extensions: ['.ts'] }),
-  //     terser(),
-  //     postcss({
-  //       plugins: []
-  //     })
-  //   ],
-  // },
-  //
-  // // UMD
-  // {
-  //   input: 'src/dzs-chip-selector/dzs-chip-selector.ts',
-  //   output: {
-  //     file: 'dist/index.umd.min.js',
-  //     format: 'umd',
-  //     name: 'dzsChipSelector',
-  //     indent: false,
-  //   },
-  //   plugins: [
-  //     typescript(),
-  //     babel({ babelHelpers: 'bundled', extensions: ['.ts'], exclude: 'node_modules/**' }),
-  //     terser(),
-  //   ],
-  // },
+  // ES Modules
+  {
+    input: 'src/dzs-chip-selector/dzs-chip-selector--web-components.ts',
+    output: {
+      file: 'dist/dzsChipSelectorWebComponents.js', format: 'es',
+    },
+    plugins: [
+      typescript(),
+      babel({ babelHelpers: 'bundled', extensions: ['.ts'] }),
+      terser(),
+      postcss({
+        plugins: []
+      })
+    ],
+  },
+
+  // UMD
+  {
+    input: 'src/dzs-chip-selector/dzs-chip-selector.ts',
+    output: {
+      file: 'dist/index.umd.min.js',
+      format: 'umd',
+      name: 'dzsChipSelector',
+      indent: false,
+    },
+    plugins: [
+      typescript(),
+      babel({ babelHelpers: 'bundled', extensions: ['.ts'], exclude: 'node_modules/**' }),
+      terser(),
+    ],
+  },
 ]
