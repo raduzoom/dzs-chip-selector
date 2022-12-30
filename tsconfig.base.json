@@ -11,7 +11,7 @@
 //      "src/**/*"
 //    ],
     //    "outDir": "./dist",
-    "declarationDir": "./dist/",
+    "declarationDir": ".",
     //    "esModuleInterop": true,
     //    "skipLibCheck": true,
     //    "forceConsistentCasingInFileNames": true,
@@ -39,7 +39,7 @@
 
 
 
-    "outDir": "./dist/out-tsc",
+    "outDir": "dist",
     "sourceMap": true,
     "module": "es2020",
     "emitDecoratorMetadata": true,

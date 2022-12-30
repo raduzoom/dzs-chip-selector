@@ -7,45 +7,51 @@ import postcss from 'rollup-plugin-postcss'
 export default [
   // ES Modules
   {
-    input: 'src/dzs-chip-selector/dzs-chip-selector--web-components.ts',
-    output: {
-      file: 'dist/dzsChipSelectorWebComponents.js', format: 'es',
-    },
-    plugins: [
-      typescript(),
-      babel({ babelHelpers: 'bundled', extensions: ['.ts'] }),
-      terser(),
-      postcss({
-        plugins: []
-      })
-    ],
-  },
-  // ES Modules
-  {
     input: 'src/dzs-chip-selector/dzs-chip-selector.ts',
     output: {
       file: 'dist/index.js', format: 'es',
     },
     plugins: [
-      typescript(),
+      typescript({
+        tsconfig: 'tsconfig.base.json',
+        compilerOptions: {
+          declaration: true,
+          declarationDir: '.'
+        }
+      }),
       babel({ babelHelpers: 'bundled', extensions: ['.ts'] }),
       terser(),
     ],
   },
-
-  // UMD
-  {
-    input: 'src/dzs-chip-selector/dzs-chip-selector.ts',
-    output: {
-      file: 'dist/index.umd.min.js',
-      format: 'umd',
-      name: 'dzsChipSelector',
-      indent: false,
-    },
-    plugins: [
-      typescript(),
-      babel({ babelHelpers: 'bundled', extensions: ['.ts'], exclude: 'node_modules/**' }),
-      terser(),
-    ],
-  },
+  // // ES Modules
+  // {
+  //   input: 'src/dzs-chip-selector/dzs-chip-selector--web-components.ts',
+  //   output: {
+  //     file: 'dist/dzsChipSelectorWebComponents.js', format: 'es',
+  //   },
+  //   plugins: [
+  //     typescript(),
+  //     babel({ babelHelpers: 'bundled', extensions: ['.ts'] }),
+  //     terser(),
+  //     postcss({
+  //       plugins: []
+  //     })
+  //   ],
+  // },
+  //
+  // // UMD
+  // {
+  //   input: 'src/dzs-chip-selector/dzs-chip-selector.ts',
+  //   output: {
+  //     file: 'dist/index.umd.min.js',
+  //     format: 'umd',
+  //     name: 'dzsChipSelector',
+  //     indent: false,
+  //   },
+  //   plugins: [
+  //     typescript(),
+  //     babel({ babelHelpers: 'bundled', extensions: ['.ts'], exclude: 'node_modules/**' }),
+  //     terser(),
+  //   ],
+  // },
 ]

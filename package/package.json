@@ -8,17 +8,16 @@
     "dist",
     "!dist/dist"
   ],
-  "main": "dist/index.js",
+  "main": "dist/index.umd.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev-server": "tsc-watch --noClear -p ./tsconfig.json",
-    "build-ts": "tsc --out  final.js --module commonjs ./src/dzs-chip-selector/dzs-chip-selector.ts",
+    "build-ts": "tsc --out final.js --module commonjs ./src/dzs-chip-selector/dzs-chip-selector.ts",
     "rollup": "rollup -c",
     "dev": "webpack --watch --config webpack.config.js --mode development",
     "dev-webserver": "webpack-dev-server --config webpack.config.js --mode development",
     "pub": "npm version patch && npm run build && npm publish",
-    "ts-declarations": "tsc -p tsconfig.declarations.json",
-    "build": "webpack --config webpack.config.js --mode production && npm run ts-declarations && npm run rollup && git add -A && git commit -m 'chore: add rollup'"
+    "build": "webpack --config webpack.config.js --mode production && tsc --emitDeclarationOnly && npm run rollup && git add -A && git commit -m 'chore: add rollup'"
   },
   "repository": {
     "type": "git",
