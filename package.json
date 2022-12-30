@@ -11,7 +11,7 @@
     "dev": "webpack --watch --config webpack.config.js --mode development",
     "dev-webserver": "webpack-dev-server --config webpack.config.js --mode development",
     "pub": "npm version patch && npm run build && npm publish",
-    "build": "webpack --config webpack.config.js --mode production && tsc --emitDeclarationOnly"
+    "build": "webpack --config webpack.config.js --mode production && tsc --emitDeclarationOnly && npm run rollup"
   },
   "repository": {
     "type": "git",
