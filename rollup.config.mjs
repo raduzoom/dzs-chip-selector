@@ -1,8 +1,8 @@
-
 import typescript from '@rollup/plugin-typescript';
 import babel from '@rollup/plugin-babel'
 import terser from '@rollup/plugin-terser';
-import postcss from 'rollup-plugin-postcss'
+import postcss from 'rollup-plugin-postcss';
+import copy from 'rollup-plugin-copy';
 
 export default [
   // ES Modules
@@ -13,14 +13,38 @@ export default [
     },
     plugins: [
       typescript({
-        tsconfig: 'tsconfig.base.json',
+        tsconfig: 'tsconfig.prod.json',
+        sourceMap: false,
         compilerOptions: {
           declaration: true,
           declarationDir: '.'
         }
       }),
-      babel({ babelHelpers: 'bundled', extensions: ['.ts'] }),
+      babel({babelHelpers: 'bundled', extensions: ['.ts']}),
+      copy({
+          targets: [
+            { src: 'src/dzs-chip-selector/style/skins', dest: 'dist/style' },
+      ]}),
       terser(),
+    ],
+  },
+  // ES Modules
+  {
+    input: 'src/dzs-chip-selector/dzs-chip-selector.ts',
+    output: {
+      file: 'dist/index-dev.js', format: 'es',
+    },
+    plugins: [
+      typescript({
+        tsconfig: 'tsconfig.dev.json',
+        sourceMap: false,
+        compilerOptions: {
+          declaration: true,
+          declarationDir: '.'
+        }
+      }),
+      // -- sourcemaps
+      babel({babelHelpers: 'bundled', extensions: ['.ts']}),
     ],
   },
   // ES Modules
@@ -30,9 +54,29 @@ export default [
       file: 'dist/dzsChipSelectorWebComponents.js', format: 'es',
     },
     plugins: [
-      typescript(),
-      babel({ babelHelpers: 'bundled', extensions: ['.ts'] }),
+      typescript({
+        tsconfig: 'tsconfig.prod.json',
+        sourceMap: false,
+      }),
+      babel({babelHelpers: 'bundled', extensions: ['.ts']}),
       terser(),
+      postcss({
+        plugins: []
+      })
+    ],
+  },
+  // ES Modules
+  {
+    input: 'src/dzs-chip-selector/dzs-chip-selector--web-components.ts',
+    output: {
+      file: 'dist/dzsChipSelectorWebComponents-dev.js', format: 'es',
+    },
+    plugins: [
+      typescript({
+        tsconfig: 'tsconfig.prod.json',
+        sourceMap: false,
+      }),
+      babel({babelHelpers: 'bundled', extensions: ['.ts']}),
       postcss({
         plugins: []
       })
@@ -49,8 +93,11 @@ export default [
       indent: false,
     },
     plugins: [
-      typescript(),
-      babel({ babelHelpers: 'bundled', extensions: ['.ts'], exclude: 'node_modules/**' }),
+      typescript({
+        tsconfig: 'tsconfig.prod.json',
+        sourceMap: false,
+      }),
+      babel({babelHelpers: 'bundled', extensions: ['.ts'], exclude: 'node_modules/**'}),
       terser(),
     ],
   },
