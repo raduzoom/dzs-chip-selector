@@ -19,6 +19,7 @@
     "pub": "npm version patch && npm run build && npm publish",
     "ts-declarations": "tsc -p tsconfig.declarations.json",
     "build": "webpack --config webpack.config.js --mode production && npm run ts-declarations && npm run rollup && git add -A && git commit -m 'chore: add rollup'"
+    "build-ci": "webpack --config webpack.config.js --mode production && npm run ts-declarations && npm run rollup"
   },
   "repository": {
     "type": "git",
