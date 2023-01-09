@@ -48,6 +48,11 @@ jobs:
         run: |
           echo "see files"
           ls -la
+          cp ./src/simple-feed.html ./dist/simple-feed.html 
+          cd dist
+          echo "see files dist"
+          ls -la
+          
 
 
       - name: Upload artifact
@@ -106,7 +111,7 @@ jobs:
         with:
           name: page
           path: .
-      - uses: actions/configure-pages@v1
+      - uses: actions/configure-pages@v2
       - uses: actions/upload-pages-artifact@v1
         with:
           path: .
