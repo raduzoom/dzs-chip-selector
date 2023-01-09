@@ -38,6 +38,7 @@
     "babel-loader": "^8.2.5",
     "copy-webpack-plugin": "^11.0.0",
     "raw-loader": "^4.0.2",
+    "rollup": "^3.9.1",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-postcss": "^4.0.2",
     "sass": "^1.56.1",
