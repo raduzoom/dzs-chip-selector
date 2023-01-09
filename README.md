@@ -74,10 +74,10 @@
 ## About The Project
 
 
-**Chip selector** is a universal tool that helps you display a .
+**Chip selector** is a universal tool that helps you display a chip selector to your project. The chip selector has an input where you can filter out results. It can be linked to a form **&lt;input type="checkbox"&gt;** that can be manipulated in real time.
 
 
-Use the `BLANK_README.md` to get started.
+![skin-default](https://user-images.githubusercontent.com/58981243/211401746-eb089fdd-044f-4034-916c-458fb9dad221.jpg "Chip Selector")
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
