@@ -4,7 +4,7 @@ name: Deploy static content to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["master2"]
+    branches: ["master"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -41,7 +41,9 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: build # The folder the action should deploy.
-          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #      - name: Init new repo in dist folder and commit generated files
 #        run: |
 #          cd dist
