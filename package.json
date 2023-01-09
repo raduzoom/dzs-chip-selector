@@ -1,6 +1,6 @@
 {
   "name": "chip-selector",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "description": "",
   "module": "dist/index.js",
   "types": "dist/dzs-chip-selector.d.ts",
