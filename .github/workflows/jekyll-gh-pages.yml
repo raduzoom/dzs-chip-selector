@@ -54,7 +54,7 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: page
-          path: .
+          path: ./dist
           if-no-files-found: error
 #      - name: Upload artifact
 #        uses: actions/upload-pages-artifact@v1
