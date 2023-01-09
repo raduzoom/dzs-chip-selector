@@ -43,7 +43,11 @@ jobs:
         uses: actions/jekyll-build-pages@v1
         with:
           source: ./dist
-          destination: ./_site
+          destination: .
+      - name: Init new repo in dist folder and commit generated files
+        run: |
+          echo "see files"
+          ls -la
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
 
