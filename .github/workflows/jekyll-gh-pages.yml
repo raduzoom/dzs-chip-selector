@@ -48,6 +48,14 @@ jobs:
         run: |
           echo "see files"
           ls -la
+
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: page
+          path: .
+          if-no-files-found: error
 #      - name: Upload artifact
 #        uses: actions/upload-pages-artifact@v1
 
