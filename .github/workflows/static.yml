@@ -30,30 +30,37 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Generate static files
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '16'
       - run: npm ci
       - run: npm run build-ci
-      - name: Init new repo in dist folder and commit generated files
-        run: |
-          cd dist
-          git init
-          git add -A
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git config --global --add safe.directory /github/workspace/dist
-          git commit -m 'deploy'
-      - name: Force push to destination branch
-        uses: ad-m/github-push-action@v0.5.0
+
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          # Token for the repo
-          # Can be passed in using $\{{ secrets.GITHUB_TOKEN }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          # Destination branch to push changes
-          branch: gh-pages
-          # Use force push to fully overwrite the destination branch
-          force: true
-          # We have to push from the folder where files were generated.
-          # Same were the new repo was initialized in the previous step
-          directory: ./dist
+          folder: build # The folder the action should deploy.
+#          token: ${{ secrets.GITHUB_TOKEN }}
+#      - name: Init new repo in dist folder and commit generated files
+#        run: |
+#          cd dist
+#          git init
+#          git add -A
+#          git config --local user.email "action@github.com"
+#          git config --local user.name "GitHub Action"
+#          git config --global --add safe.directory /github/workspace/dist
+#          git commit -m 'deploy'
+#      - name: Force push to destination branch
+#        uses: ad-m/github-push-action@v0.5.0
+#        with:
+#          # Token for the repo
+#          # Can be passed in using $\{{ secrets.GITHUB_TOKEN }}
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+#          # Destination branch to push changes
+#          branch: gh-pages
+#          # Use force push to fully overwrite the destination branch
+#          force: true
+#          # We have to push from the folder where files were generated.
+#          # Same were the new repo was initialized in the previous step
+#          directory: ./dist
