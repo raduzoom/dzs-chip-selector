@@ -32,7 +32,7 @@
     <a href="https://github.com/raduzoom/dzs-chip-selector"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/raduzoom/dzs-chip-selector">View Demo</a>
+    <a href="https://raduzoom.github.io/dzs-chip-selector/demo.html">View Demo ( GitHub Pages )</a>
     ·
     <a href="https://github.com/raduzoom/dzs-chip-selector/issues">Report Bug</a>
     ·
