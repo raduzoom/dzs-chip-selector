@@ -3,7 +3,7 @@
 
 $colorBg: #ffffff;
 $colorBorder: rgba(34, 34, 34, 0.44);
-$chipsColorBackground: rgba(172, 201, 234, 0.51);
+$chipsColorBackground: rgb(183, 204, 231);
 $arrowSize: 8px;
 $offsetForList: 3px;
 .dzs-chip-selector.dzs-chip-selector--skin-default{
@@ -11,6 +11,7 @@ $offsetForList: 3px;
   .dzs-chip-selector--container{
     background-color: $colorBg;
     border: 1px solid $colorBorder;
+    min-height: 54px;
 
     .dzs-chip-selector--form-field {
       .dzs-chip-selector--chip-list ul.dzs-chip-selector--chip-list-wrapper .dzs-chip-selector--item{

@@ -22,7 +22,7 @@
 
 </head>
 
-<body>
+<body style="background-color: #d8d8d8;">
 <!-- your content here... -->
 
 
@@ -33,6 +33,13 @@
 
       <h3>Form</h3>
       <div class="dzs-chip-selector " data-persistentOptions='[{"htmlContent":"Apple ","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange ","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span> ","value":"apricot","currentStatus":"unchecked"}]'>
+      </div>
+
+      <h3>Form inside contained</h3>
+      <div style="width: 300px">
+
+        <div id="dcs2" class="dzs-chip-selector " data-persistentOptions='[{"htmlContent":"Apple ","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange ","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span> ","value":"apricot","currentStatus":"unchecked"}]'>
+        </div>
       </div>
 
 
@@ -53,14 +60,6 @@
 <script>var exports = {}
 var require = () => {
 }</script>
-<!--<script src="../build/dzs-chip-selector/dzs-chip-selector.js" type="module"  ></script>-->
-<script src="../dist/index.umd.min.js"></script>
-<script src="../dist/dzsChipSelectorWebComponents.js"></script>
-<!--<script src="../final.js"  ></script>-->
-
-<link rel="stylesheet" href="style/bootstrap.min.css"/>
-<link rel="stylesheet" href="dzs-chip-selector/dzs-chip-selector.css"/>
-<link rel="stylesheet" href="dzs-chip-selector/style/skins/skin-default.css"/>
 
 <script>
 
@@ -100,7 +99,7 @@ var require = () => {
 
     let requestVersion = 0;
 
-    console.log('doc ready')
+    console.log('doc ready');
 
     window.dzs_initDzsChipSelector(document.querySelector('.dzs-chip-selector'), {
       /**
@@ -112,8 +111,28 @@ var require = () => {
         console.log({selectedOptions});
       }
     })
+
+    window.dzs_initDzsChipSelector(document.querySelector('#dcs2'), {
+      /**
+       *
+       * @param {ChipSelectorItem[]} allOptions
+       */
+      onUpdateFunction: (allOptions)=>{
+        const selectedOptions = allOptions.filter((el)=>el.currentStatus==='checked');
+        console.log({selectedOptions});
+      }
+    })
+
     // new DzsChipSelector(document.querySelector('.dzs-chip-selector'));
   })
 </script>
+
+
+<script src="../dist-webpack/dzsChipSelector.js"></script>
+<script src="../dist-webpack/dzsChipSelectorWebComponents.js"></script>
+
+<link rel="stylesheet" href="style/bootstrap.min.css"/>
+<link rel="stylesheet" href="dzs-chip-selector/dzs-chip-selector.css"/>
+<link rel="stylesheet" href="dzs-chip-selector/style/skins/skin-default.css"/>
 </body>
 </html>

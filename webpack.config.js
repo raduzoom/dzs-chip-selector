@@ -9,6 +9,10 @@ module.exports = (env, mod) => {
       dzsChipSelector: './src/dzs-chip-selector/dzs-chip-selector.ts',
       dzsChipSelectorWebComponents: './src/dzs-chip-selector/dzs-chip-selector--web-components.ts',
     },
+    output: {
+      path: path.resolve(__dirname, 'dist-webpack'),
+      filename: '[name].js'
+    },
     devtool: 'eval-source-map',
     module: {
       rules: [

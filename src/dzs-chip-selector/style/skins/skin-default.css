@@ -5,9 +5,10 @@
 .dzs-chip-selector.dzs-chip-selector--skin-default .dzs-chip-selector--container {
   background-color: #ffffff;
   border: 1px solid rgba(34, 34, 34, 0.44);
+  min-height: 54px;
 }
 .dzs-chip-selector.dzs-chip-selector--skin-default .dzs-chip-selector--container .dzs-chip-selector--form-field .dzs-chip-selector--chip-list ul.dzs-chip-selector--chip-list-wrapper .dzs-chip-selector--item {
-  background-color: rgba(172, 201, 234, 0.51);
+  background-color: rgb(183, 204, 231);
 }
 .dzs-chip-selector.dzs-chip-selector--skin-default .dzs-chip-selector--container .dzs-chip-selector--form-field .dzs-chip-selector--chip-list ul.dzs-chip-selector--chip-list-wrapper .dzs-chip-selector--item + .dzs-chip-selector--item {
   margin-left: 5px;
@@ -47,10 +48,10 @@
   margin-top: 5px;
 }
 .dzs-chip-selector.dzs-chip-selector--skin-default .dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item:hover {
-  background-color: rgba(172, 201, 234, 0.51);
+  background-color: rgb(183, 204, 231);
 }
 .dzs-chip-selector.dzs-chip-selector--skin-default .dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item.is-selected {
-  background-color: rgba(172, 201, 234, 0.51);
+  background-color: rgb(183, 204, 231);
 }
 
 /*# sourceMappingURL=skin-default.css.map */
