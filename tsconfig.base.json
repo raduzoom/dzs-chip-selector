@@ -58,7 +58,9 @@
     "node_modules",
     "**/*.spec.ts",
     "dist",
-    "./build"
+    "./build",
+    "**/*.spec.*",
+    "**/__mocks__/*"
   ],
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Recommended"

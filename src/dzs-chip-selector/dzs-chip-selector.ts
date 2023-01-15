@@ -56,7 +56,7 @@ export class DzsChipSelector {
   inputForm_currentQueryString = '';
 
 
-  constructor($elem: HTMLElement, chipSelectorOptions: ChipSelectorOptions) {
+  constructor($elem: HTMLElement, chipSelectorOptions: ChipSelectorOptions, isInitingClass = true) {
 
     if (!$elem) {
       return;
@@ -71,7 +71,9 @@ export class DzsChipSelector {
       return;
     }
 
-    this.initClass()
+    if(isInitingClass){
+      this.initClass();
+    }
   }
 
   initClass() {
@@ -249,10 +251,8 @@ export class DzsChipSelector {
     this.persistentOptions.forEach(item => {
       if (item.currentStatus === currentStatusType.CHECKED) {
         insertHtml($chipsList as HTMLElement, viewChipSelectorChipItemStructure(item));
-        const $lastChip = $chipsList!.lastElementChild as HTMLElement;
 
         if (!selfInstance.chipSelectorOptions.viewIsWrapping) {
-
           if (tooltipContent) {
             tooltipContent += ', ';
           }

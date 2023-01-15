@@ -143,6 +143,19 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
+## Code explanation
+
+Can be used as a web component for creating a chip selector. 
+
+Allows the chip selector to feed from multiple origins. The chip selector allows the user to select one or more options from a list of items. It can either get the options from a form element or from the "data-persistentOptions" attribute on the main element. 
+
+The class has various methods for initializing the structure of the component, handling user input, and updating the view. The class also uses several imported functions and constants from other modules for specific tasks such as removing children from a DOM element, getting the computed style of an element, and inserting HTML. 
+
+The class also extends the HTMLElement interface to add a webComponent property and the Window interface to add a global function "dzs_initDzsChipSelector" which can be used to initialize the component on an HTML element.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
 
 <!-- ROADMAP -->
 ## Roadmap
