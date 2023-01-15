@@ -93,6 +93,7 @@ export class DzsChipSelector {
       this.chipSelectorOptions.persistentOptions = null;
       this.getOptionsFromForm($form);
     } else {
+      // -- get from html
       if (this.$elem_.getAttribute('data-persistentOptions')) {
         this.readAttrForPersistentOptions();
       }
@@ -241,17 +242,9 @@ export class DzsChipSelector {
 
     let tooltipContent = '';
 
-    let overflowPlaceholderWidth = 0;
-
-    const minAutocompleteInputWidth = getComputedProp(selfInstance.$elem_.querySelector('.dzs-chip-selector--input-new-element--label') as HTMLElement, 'min-width', true) as number;
-    const containerWidth = getComputedProp(selfInstance.$elem_.querySelector('.dzs-chip-selector--container') as HTMLElement, 'width', true) as number;
-    let totalChipsWidth = 0;
-    let isOverflowing = false;
 
 
-    if (!selfInstance.chipSelectorOptions.viewIsWrapping) {
-      overflowPlaceholderWidth = Number(getComputedProp(selfInstance.$elem_.querySelector('.dzs-chip-selector--overflow-placeholder') as HTMLElement, 'width', true)) + Number(getComputedProp(selfInstance.$elem_.querySelector('.dzs-chip-selector--overflow-placeholder') as HTMLElement, 'margin-left', true));
-    }
+
 
     this.persistentOptions.forEach(item => {
       if (item.currentStatus === currentStatusType.CHECKED) {
@@ -259,18 +252,45 @@ export class DzsChipSelector {
         const $lastChip = $chipsList!.lastElementChild as HTMLElement;
 
         if (!selfInstance.chipSelectorOptions.viewIsWrapping) {
-          totalChipsWidth += getComputedProp($lastChip as HTMLElement, 'width', true) as number + 3;
 
           if (tooltipContent) {
             tooltipContent += ', ';
           }
 
-          if (totalChipsWidth > containerWidth - minAutocompleteInputWidth - overflowPlaceholderWidth) {
-            $lastChip.style.display = 'none';
-            isOverflowing = true;
-          }
           tooltipContent += item.htmlContent;
         }
+      }
+    })
+
+    if (!selfInstance.chipSelectorOptions.viewIsWrapping) {
+      this.viewCheckIfNeedsWrapping(this);
+      selfInstance.$elem_.querySelector('.' + DZS_CHIP_SELECTOR_CSS_SELECTOR_OVERFLOW_TOOLTIP_CONTENT)!.innerHTML = tooltipContent;
+    }
+
+  }
+
+  viewCheckIfNeedsWrapping(selfInstance: DzsChipSelector){
+    let isOverflowing = false;
+    let overflowPlaceholderWidth = 0;
+    const minAutocompleteInputWidth = getComputedProp(selfInstance.$elem_.querySelector('.dzs-chip-selector--input-new-element--label') as HTMLElement, 'min-width', true) as number;
+    const containerWidth = getComputedProp(selfInstance.$elem_.querySelector('.dzs-chip-selector--container') as HTMLElement, 'width', true) as number;
+    let totalChipsWidth = 0;
+
+
+    if (!selfInstance.chipSelectorOptions.viewIsWrapping) {
+      overflowPlaceholderWidth = Number(getComputedProp(selfInstance.$elem_.querySelector('.dzs-chip-selector--overflow-placeholder') as HTMLElement, 'width', true)) + Number(getComputedProp(selfInstance.$elem_.querySelector('.dzs-chip-selector--overflow-placeholder') as HTMLElement, 'margin-left', true));
+    }
+
+    const $chipsList = selfInstance.$elem_.querySelector('.dzs-chip-selector--chip-list-wrapper');
+    $chipsList!.childNodes.forEach(($chip:ChildNode)=>{
+      const $lastChip = $chip as HTMLElement;
+      $lastChip.style.display = '';
+      totalChipsWidth += getComputedProp($lastChip as HTMLElement, 'width', true) as number + 3;
+      if (totalChipsWidth > containerWidth - minAutocompleteInputWidth - overflowPlaceholderWidth) {
+        $lastChip.style.display = 'none';
+        isOverflowing = true;
+      }else{
+        $lastChip.style.display = '';
       }
     })
 
@@ -280,11 +300,6 @@ export class DzsChipSelector {
 
       selfInstance.$elem_.classList.remove('dzs-chip-selector--is-overflowing');
     }
-    if (!selfInstance.chipSelectorOptions.viewIsWrapping) {
-      selfInstance.$elem_.querySelector('.' + DZS_CHIP_SELECTOR_CSS_SELECTOR_OVERFLOW_TOOLTIP_CONTENT)!.innerHTML = tooltipContent;
-    }
-
-
   }
 
   /**
@@ -325,8 +340,7 @@ export class DzsChipSelector {
 
         filterResultsFrontend(this);
       }).catch((err) => {
-        console.log('error - ');
-        console.log(err)
+        console.log('error - ', err);
       });
     } else {
       filterResultsFrontend(this);

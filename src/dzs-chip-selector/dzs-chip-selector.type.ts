@@ -4,7 +4,7 @@ export type ChipSelectorOptions = {
   middlewareFilterResults?: any,
   viewSkin?: string,
   onUpdateFunction?: (...args: any[]) => any;
-  viewIsWrapping?: any,
+  viewIsWrapping?: boolean,
   persistentOptions?: ChipSelectorItem[]
 };
 

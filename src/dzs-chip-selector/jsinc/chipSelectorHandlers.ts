@@ -17,6 +17,19 @@ export function setupHandlers(selfInstance: DzsChipSelector) {
   selfInstance.$elem_?.querySelector('.dzs-chip-selector--chip-list-wrapper')?.addEventListener('click', handleChipsClick);
 
 
+
+
+  if(!selfInstance.chipSelectorOptions.viewIsWrapping){
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      selfInstance.viewCheckIfNeedsWrapping(selfInstance);
+      console.log('Size changed', entries);
+    });
+
+    resizeObserver.observe(selfInstance.$elem_);
+  }
+
+
   /**
    * clicks on a chip
    */

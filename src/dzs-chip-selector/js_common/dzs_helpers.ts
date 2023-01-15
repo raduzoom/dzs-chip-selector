@@ -13,8 +13,6 @@ export function insertHtml(t: HTMLElement, html: string, position = 'beforeend')
 
 export function getComputedProp(el: HTMLElement, cssProp = "min-width", isGetAsNumber = false): number | string
 {
-  console.log(el);
-  console.trace();
   const val = window.getComputedStyle(el,null).getPropertyValue(cssProp);
   return isGetAsNumber ? parseFloat(val) : val;
 }
