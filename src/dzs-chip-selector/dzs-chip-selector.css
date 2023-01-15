@@ -6,7 +6,7 @@
   align-items: baseline;
   box-sizing: border-box;
   width: 100%;
-  background-color: #0000000a;
+  background-color: rgba(0, 0, 0, 0.0392156863);
   border-radius: 5px;
   padding: 10px;
 }
@@ -15,6 +15,9 @@
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
+}
+.dzs-chip-selector .dzs-chip-selector--container .dzs-chip-selector--form-field .dzs-chip-selector--chip-list {
+  flex-shrink: 0;
 }
 .dzs-chip-selector .dzs-chip-selector--container .dzs-chip-selector--form-field .dzs-chip-selector--chip-list ul.dzs-chip-selector--chip-list-wrapper {
   margin: 0;
@@ -31,8 +34,6 @@
   border-radius: 5px;
   align-items: center;
   cursor: default;
-  min-height: 32px;
-  height: 1px;
   position: relative;
   box-sizing: border-box;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -43,18 +44,27 @@
   padding-right: 8px;
   padding-left: 12px;
   background-color: #e0e0e0;
-  color: #000000de;
+  color: rgba(0, 0, 0, 0.8705882353);
+  display: inline-block;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.dzs-chip-selector .dzs-chip-selector--container .dzs-chip-selector--form-field .dzs-chip-selector--chip-list ul.dzs-chip-selector--chip-list-wrapper .dzs-chip-selector--item .dzs-chip-selector--item--content {
+  display: inline-block;
+  vertical-align: middle;
 }
 .dzs-chip-selector .dzs-chip-selector--container .dzs-chip-selector--form-field .dzs-chip-selector--item--remove {
   order: none;
   appearance: none;
+  display: inline-block;
+  vertical-align: middle;
   border: 0;
   -moz-appearance: none;
   padding: 0;
   background: none;
   margin-left: 8px;
   margin-right: 0;
-  color: #000000de;
+  color: rgba(0, 0, 0, 0.8705882353);
   opacity: 0.4;
   width: 18px;
   height: 18px;
@@ -69,6 +79,69 @@
   transform: translate3d(-50%, -50%, 0);
 }
 
+.dzs-chip-selector.dzs-chip-selector--view-one-line:not(.a):not(.a):not(.a) .dzs-chip-selector--form-field {
+  width: 100%;
+  text-overflow: ellipsis;
+  flex-wrap: nowrap;
+}
+.dzs-chip-selector.dzs-chip-selector--view-one-line:not(.a):not(.a):not(.a) .dzs-chip-selector--chip-list-wrapper {
+  flex-wrap: nowrap;
+}
+.dzs-chip-selector.dzs-chip-selector--view-one-line:not(.a):not(.a):not(.a) .dzs-chip-selector--overflow-placeholder {
+  display: none;
+  width: 15px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+.dzs-chip-selector.dzs-chip-selector--view-one-line:not(.a):not(.a):not(.a).dzs-chip-selector--is-overflowing .dzs-chip-selector--overflow-placeholder {
+  display: inline-block;
+  position: relative;
+}
+.dzs-chip-selector.dzs-chip-selector--view-one-line:not(.a):not(.a):not(.a).dzs-chip-selector--is-overflowing .dzs-chip-selector--overflow-placeholder .dzs-chip-selector--overflow-tooltip {
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 3px;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  visibility: hidden;
+  font-size: 13px;
+  transition: opacity 0.3s;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: bold;
+}
+.dzs-chip-selector.dzs-chip-selector--view-one-line:not(.a):not(.a):not(.a).dzs-chip-selector--is-overflowing .dzs-chip-selector--overflow-placeholder .dzs-chip-selector--overflow-tooltip:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 0;
+  height: 0;
+  margin-left: -2.5px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #555;
+}
+.dzs-chip-selector.dzs-chip-selector--view-one-line:not(.a):not(.a):not(.a).dzs-chip-selector--is-overflowing .dzs-chip-selector--overflow-placeholder:hover .dzs-chip-selector--overflow-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.dzs-chip-selector--input-new-element--label {
+  margin-left: 4px;
+  margin-bottom: 0;
+  max-width: 50%;
+  flex: 1 2 100px;
+  min-width: 100px;
+}
+
 .dzs-chip-selector--input-new-element {
   font: inherit;
   background: rgba(0, 0, 0, 0);
@@ -81,14 +154,7 @@
   text-align: inherit;
   box-sizing: content-box;
   appearance: none;
-  width: 150px;
   margin: 4px;
-  flex: 1 0 150px;
-}
-
-.dzs-chip-selector--input-new-element--label {
-  margin-left: 4px;
-  margin-bottom: 0;
 }
 
 .dzs-chip-selector.dzs-chip-selector--is-new-element-focused .dzs-chip-selector--autocompletelist {

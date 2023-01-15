@@ -22,7 +22,7 @@
 
 </head>
 
-<body style="background-color: #d8d8d8;">
+<body style="background-color: #eae8e8;">
 <!-- your content here... -->
 
 
@@ -31,14 +31,21 @@
     <div class="col-md-12">
 
 
-      <h3>Form</h3>
-      <div class="dzs-chip-selector " data-persistentOptions='[{"htmlContent":"Apple ","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange ","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span> ","value":"apricot","currentStatus":"unchecked"}]'>
+      <h3>Skin default - theme dark</h3>
+      <div class="dzs-chip-selector dzs-chip-selector--skin-default--theme-dark" data-persistentOptions='[{"htmlContent":"Apple ","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange ","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span> ","value":"apricot","currentStatus":"unchecked"}]'>
       </div>
 
-      <h3>Form inside contained</h3>
+      <h3>Skin default - theme default</h3>
+      <div style="width: 350px">
+
+        <div id="dcs2" class="dzs-chip-selector " data-persistentOptions='[{"htmlContent":"Apple","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span>","value":"apricot","currentStatus":"unchecked"}]'>
+        </div>
+      </div>
+
+      <h3>Skin flat</h3>
       <div style="width: 300px">
 
-        <div id="dcs2" class="dzs-chip-selector " data-persistentOptions='[{"htmlContent":"Apple ","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange ","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span> ","value":"apricot","currentStatus":"unchecked"}]'>
+        <div id="dcs-flat" class="dzs-chip-selector dzs-chip-selector--skin-flat" data-persistentOptions='[{"htmlContent":"Apple ","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange ","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span> ","value":"apricot","currentStatus":"unchecked"}]'>
         </div>
       </div>
 
@@ -113,6 +120,18 @@ var require = () => {
     })
 
     window.dzs_initDzsChipSelector(document.querySelector('#dcs2'), {
+      viewIsWrapping: false,
+      /**
+       *
+       * @param {ChipSelectorItem[]} allOptions
+       */
+      onUpdateFunction: (allOptions)=>{
+        const selectedOptions = allOptions.filter((el)=>el.currentStatus==='checked');
+        console.log({selectedOptions});
+      }
+    })
+
+    window.dzs_initDzsChipSelector(document.querySelector('#dcs-flat'), {
       /**
        *
        * @param {ChipSelectorItem[]} allOptions
@@ -134,5 +153,7 @@ var require = () => {
 <link rel="stylesheet" href="style/bootstrap.min.css"/>
 <link rel="stylesheet" href="dzs-chip-selector/dzs-chip-selector.css"/>
 <link rel="stylesheet" href="dzs-chip-selector/style/skins/skin-default.css"/>
+<link rel="stylesheet" href="dzs-chip-selector/style/skins/skin-default--theme-dark.css"/>
+<link rel="stylesheet" href="dzs-chip-selector/style/skins/skin-flat.css"/>
 </body>
 </html>

@@ -1,13 +1,16 @@
 import {
+  DZS_CHIP_SELECTOR_CSS_SELECTOR_OVERFLOW_TOOLTIP_CONTENT,
   DZS_CHIP_SELECTOR_AUTOCOMPLETE_CLASS_NAME_ITEMS,
-  DZS_CHIP_SELECTOR_CHIPS_CLOSE,
   DZS_CHIP_SELECTOR_CHIPS_SELECTED,
   DZS_CHIP_SELECTOR_CLASS_NAME
 } from "./config/dzs-chip-selector.config";
-import {domRemoveChildren, insertHtml, matchSelector} from "./js_common/dzs_helpers";
+import {domRemoveChildren, getComputedProp, insertHtml} from "./js_common/dzs_helpers";
 import {ChipSelectorItem, ChipSelectorOptions, currentStatusType} from "./dzs-chip-selector.type";
 import {DZS_CHIP_SELECTOR__CLASS_NAME__IS_PLACEHOLDER_VISIBLE} from "./dzs-chip-selector.config";
 import {dzsChipSelectorDefaultOptions} from "./config/dzs-chip-selector--defaultOptions";
+import {initChipSelector} from "./jsinc/chipSelectorHelpers";
+import {setupHandlers} from "./jsinc/chipSelectorHandlers";
+import {chipSelectorInitStructure, viewChipSelectorChipItemStructure} from "./jsinc/chipSelectorViewConstructStructure";
 // import {$es} from '../../deps/esjquery/js/_esjquery';
 
 
@@ -38,6 +41,8 @@ export class DzsChipSelector {
   // $elem: esJquery;
   // $inputNewElement: esJquery;
 
+  styleIsSkinSet = false;
+
   feedSource = 'form';
 
   /** single source of truth -- filtered by keyboard */
@@ -57,7 +62,7 @@ export class DzsChipSelector {
       return;
     }
 
-    this.chipSelectorOptions = Object.assign(dzsChipSelectorDefaultOptions, chipSelectorOptions);
+    this.chipSelectorOptions = Object.assign({...dzsChipSelectorDefaultOptions}, chipSelectorOptions);
 
     this.$elem_ = $elem;
     ($elem as any).selfInstance = this;
@@ -70,49 +75,11 @@ export class DzsChipSelector {
   }
 
   initClass() {
-    (this.$elem_ as any).isDzsChipsInited = true;
 
-    this.$elem_.classList.add(DZS_CHIP_SELECTOR_CLASS_NAME + '--is-inited');
-    this.$elem_.classList.add(DZS_CHIP_SELECTOR_CLASS_NAME + `--skin-${this.chipSelectorOptions.viewSkin}`);
+    initChipSelector(this);
 
-    this.initStructure();
+    chipSelectorInitStructure(this);
     this.initAfterStructure();
-  }
-
-  initStructure() {
-
-    if (!this.$elem_.querySelector('.dzs-chip-selector--container')) {
-
-      insertHtml(this.$elem_, `<div class="dzs-chip-selector--container">
-          <div class="dzs-chip-selector--form-field">
-            <div class="dzs-chip-selector--chip-list">
-              <ul class="dzs-chip-selector--chip-list-wrapper">
-
-              </ul>
-            </div>
-            <label class="dzs-chip-selector--input-new-element--label">
-              <input placeholder="New fruit..." class="dzs-chip-selector--input-new-element"
-                     autocomplete="off"
-                     role="combobox" aria-autocomplete="list" aria-expanded="false"
-                     aria-haspopup="listbox"
-                     aria-owns="mat-autocomplete-1">
-            </label>
-          </div>
-        </div>`)
-
-    }
-
-    if (!this.$elem_.querySelector('.dzs-chip-selector--autocompletelist')) {
-
-      insertHtml(this.$elem_, `<div class="dzs-chip-selector--autocompletelist">
-          <div class="dzs-chip-selector--autocompletelist--inner">
-            <div class="dzs-chip-selector--autocompletelist--placeholder">No items found</div>
-            <ul class="dzs-chip-selector--autocompletelist--items">
-            </ul>
-          </div>
-        </div>`)
-
-    }
   }
 
   reinit() {
@@ -181,111 +148,7 @@ export class DzsChipSelector {
     selfInstance.$autoCompleteList = this.$elem_.querySelector('.dzs-chip-selector--autocompletelist') as HTMLInputElement;
     selfInstance.$form = this.$elem_.querySelector('.dzs-chip-selector--form') as HTMLInputElement;
 
-
-    this.$inputNewElement_.addEventListener('focus', handleInputEvent);
-    this.$inputNewElement_.addEventListener('blur', handleInputEvent);
-    this.$inputNewElement_.addEventListener('keyup', handleInputEvent);
-    this.$autoCompleteList.addEventListener('click', handleAutoCompleteList);
-    this.$elem_?.querySelector('.dzs-chip-selector--chip-list-wrapper')?.addEventListener('click', handleChipsClick);
-
-
-    /**
-     * clicks on a chip
-     */
-    function handleChipsClick(e: Event) {
-
-      if (e.type === 'click') {
-        let t = e.target as HTMLElement;
-        const target = matchSelector(t, '.' + DZS_CHIP_SELECTOR_CHIPS_CLOSE);
-
-        if (target) {
-          const $chip = target.parentNode;
-          const dataValue = String(($chip as HTMLElement).getAttribute('data-value'));
-
-          const targetOption = DzsChipSelector.getOptionFromValue(selfInstance.autoCompleteOptions, (dataValue));
-          const persistentOption = DzsChipSelector.getOptionFromValue(selfInstance.persistentOptions, (dataValue));
-          targetOption.currentStatus = currentStatusType.UNCHECKED;
-          persistentOption.currentStatus = currentStatusType.UNCHECKED;
-
-          selfInstance.updateListFromOptions();
-          selfInstance.updateChipsFromOptions();
-          selfInstance.updateFormFromOptions();
-        }
-
-
-      }
-    }
-
-
-    /**
-     * clicks on list
-     */
-    function handleAutoCompleteList(e: Event) {
-
-      if (e.type === 'click') {
-
-
-        const sel = '';
-        let t = e.target as HTMLElement;
-        const $target = matchSelector(t, '.' + DZS_CHIP_SELECTOR_AUTOCOMPLETE_CLASS_NAME_ITEMS);
-        let persistentOptionIndex: number | null = null;
-        const dataValue = String($target?.getAttribute('data-value'));
-        const targetOption = DzsChipSelector.getOptionFromValue(selfInstance.autoCompleteOptions, dataValue);
-        let persistentOption = DzsChipSelector.getOptionFromValue(selfInstance.persistentOptions, dataValue);
-
-        if (persistentOption === undefined) {
-
-          persistentOption = {
-            "htmlContent": $target?.innerHTML,
-            "value": $target?.getAttribute('data-value'),
-            "currentStatus": currentStatusType.UNCHECKED
-          }
-
-          selfInstance.persistentOptions.push(persistentOption);
-        }
-
-        if ($target?.classList.contains(DZS_CHIP_SELECTOR_CHIPS_SELECTED)) {
-          targetOption.currentStatus = currentStatusType.UNCHECKED;
-          persistentOption.currentStatus = currentStatusType.UNCHECKED;
-        } else {
-          // -- turn to checked
-          persistentOptionIndex = selfInstance.persistentOptions.findIndex(el => el.value === persistentOption.value);
-          // -- move to end of array
-          if (persistentOptionIndex < selfInstance.persistentOptions.length - 1) {
-            selfInstance.persistentOptions.push(selfInstance.persistentOptions.splice(persistentOptionIndex, 1)[0]);
-          }
-          targetOption.currentStatus = currentStatusType.CHECKED;
-          persistentOption.currentStatus = currentStatusType.CHECKED;
-        }
-
-        selfInstance.updateListFromOptions();
-        selfInstance.updateFormFromOptions();
-        selfInstance.updateChipsFromOptions();
-        selfInstance.$inputNewElement_.value = '';
-        selfInstance.$inputNewElement_.dispatchEvent(new Event('keyup'));
-        selfInstance.$inputNewElement_.dispatchEvent(new Event('change'));
-      }
-    }
-
-    // selfInstance.$inputNewElement.addEventListener()
-
-    function handleInputEvent(e: Event) {
-      const $t = selfInstance.$inputNewElement_;
-      if (e.type === 'keyup') {
-        if (selfInstance.inputForm_currentQueryString === $t.value) {
-          return;
-        }
-        selfInstance.inputForm_currentQueryString = $t.value;
-        selfInstance.autoCompleteFilterResults(selfInstance.inputForm_currentQueryString);
-      }
-      if (e.type === 'focus') {
-        selfInstance.onInputAreaFocus();
-      }
-      if (e.type === 'blur') {
-
-        selfInstance.onInputAreaFocus(false);
-      }
-    }
+    setupHandlers(this);
 
 
     this.reinit();
@@ -320,6 +183,7 @@ export class DzsChipSelector {
     const $ulItems = this.$autoCompleteList.querySelector('.dzs-chip-selector--autocompletelist--items');
 
 
+    let minWidthChild = null;
     $ulItems?.childNodes.forEach(child => {
 
       const dataValue = String((child as HTMLElement).getAttribute('data-value'));
@@ -375,18 +239,52 @@ export class DzsChipSelector {
     const $chipsList = selfInstance.$elem_.querySelector('.dzs-chip-selector--chip-list-wrapper');
     domRemoveChildren($chipsList as HTMLElement);
 
+    let tooltipContent = '';
+
+    let overflowPlaceholderWidth = 0;
+
+    const minAutocompleteInputWidth = getComputedProp(selfInstance.$elem_.querySelector('.dzs-chip-selector--input-new-element--label') as HTMLElement, 'min-width', true) as number;
+    const containerWidth = getComputedProp(selfInstance.$elem_.querySelector('.dzs-chip-selector--container') as HTMLElement, 'width', true) as number;
+    let totalChipsWidth = 0;
+    let isOverflowing = false;
+
+
+    if (!selfInstance.chipSelectorOptions.viewIsWrapping) {
+      overflowPlaceholderWidth = Number(getComputedProp(selfInstance.$elem_.querySelector('.dzs-chip-selector--overflow-placeholder') as HTMLElement, 'width', true)) + Number(getComputedProp(selfInstance.$elem_.querySelector('.dzs-chip-selector--overflow-placeholder') as HTMLElement, 'margin-left', true));
+    }
 
     this.persistentOptions.forEach(item => {
       if (item.currentStatus === currentStatusType.CHECKED) {
-        insertHtml($chipsList as HTMLElement, `<li data-value="${item.value}" class="dzs-chip-selector--item">
-<div class="dzs-chip-selector--item--content">${item.htmlContent}</div>
-<button _ngcontent-mua-c151="" matchipremove="" class="dzs-chip-selector--item--remove"  type="button">
-  <figure>x</figure>
-</button>
-</li>`)
+        insertHtml($chipsList as HTMLElement, viewChipSelectorChipItemStructure(item));
+        const $lastChip = $chipsList!.lastElementChild as HTMLElement;
 
+        if (!selfInstance.chipSelectorOptions.viewIsWrapping) {
+          totalChipsWidth += getComputedProp($lastChip as HTMLElement, 'width', true) as number + 3;
+
+          if (tooltipContent) {
+            tooltipContent += ', ';
+          }
+
+          if (totalChipsWidth > containerWidth - minAutocompleteInputWidth - overflowPlaceholderWidth) {
+            $lastChip.style.display = 'none';
+            isOverflowing = true;
+          }
+          tooltipContent += item.htmlContent;
+        }
       }
     })
+
+    if (isOverflowing) {
+      selfInstance.$elem_.classList.add('dzs-chip-selector--is-overflowing');
+    } else {
+
+      selfInstance.$elem_.classList.remove('dzs-chip-selector--is-overflowing');
+    }
+    if (!selfInstance.chipSelectorOptions.viewIsWrapping) {
+      selfInstance.$elem_.querySelector('.' + DZS_CHIP_SELECTOR_CSS_SELECTOR_OVERFLOW_TOOLTIP_CONTENT)!.innerHTML = tooltipContent;
+    }
+
+
   }
 
   /**

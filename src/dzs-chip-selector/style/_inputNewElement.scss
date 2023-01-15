@@ -1,4 +1,16 @@
 
+
+
+.dzs-chip-selector--input-new-element--label {
+
+  margin-left: 4px;
+  margin-bottom: 0;
+
+  max-width: 50%;
+  flex: 1 2 100px;
+  min-width: 100px;
+
+}
 .dzs-chip-selector--input-new-element {
   font: inherit;
   background: rgba(0, 0, 0, 0);
@@ -12,14 +24,5 @@
   box-sizing: content-box;
 
   appearance: none;
-  width: 150px;
   margin: 4px;
-  flex: 1 0 150px;
-}
-
-.dzs-chip-selector--input-new-element--label {
-
-  margin-left: 4px;
-  margin-bottom: 0;
-
 }

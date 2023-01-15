@@ -29,14 +29,14 @@
   <p style="text-align: center">
     Chip selector 
     <br />
-    <a href="https://github.com/raduzoom/dzs-chip-selector"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/raduzoom/dzs-chip-selector" target="_blank"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://raduzoom.github.io/dzs-chip-selector/demo.html">View Demo ( GitHub Pages )</a>
+    <a href="https://raduzoom.github.io/dzs-chip-selector/demo.html" target="_blank">View Demo ( GitHub Pages )</a>
     ·
-    <a href="https://github.com/raduzoom/dzs-chip-selector/issues">Report Bug</a>
+    <a href="https://github.com/raduzoom/dzs-chip-selector/issues" target="_blank">Report Bug</a>
     ·
-    <a href="https://github.com/raduzoom/dzs-chip-selector/issues">Request Feature</a>
+    <a href="https://github.com/raduzoom/dzs-chip-selector/issues" target="_blank">Request Feature</a>
   </p>
 </div>
 
@@ -85,12 +85,13 @@
 
 ### Works With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+This component has been made to be versatile, it includes both ES6 and UMD builds ( module / bundled ).
 
+* Vanilla javascript / html via UMD embed
+* [Typescript](https://www.typescriptlang.org/)
 * [Next.js](https://nextjs.org/)
 * [React.js](https://reactjs.org/)
 * [Angular](https://angular.io/)
-* [Laravel](https://laravel.com)
 * [Bootstrap](https://getbootstrap.com)
 * [JQuery](https://jquery.com)
 

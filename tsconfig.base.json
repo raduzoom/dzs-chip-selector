@@ -5,7 +5,7 @@
     "declaration": true,
     "baseUrl": ".",
     "paths": {
-      "@dzsChipSelector/*": ["src/dzs-chip-selector/*"]
+//      "@dzsChipSelector/*": ["src/dzs-chip-selector/*"]
     },
 //    "paths": [
 //      "src/**/*"

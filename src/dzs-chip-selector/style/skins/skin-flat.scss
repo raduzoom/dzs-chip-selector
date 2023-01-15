@@ -2,28 +2,53 @@
 
 $colorBg: #ffffff;
 $colorBorder: rgba(34, 34, 34, 0.44);
-$chipsColorBackground: rgb(183, 204, 231);
+$chipsColorBackground: rgba(248, 248, 248);
+$chipsColorBorder: rgba(63, 62, 62, 0.3);
+$chipsColorBorderRadius: 0;
+$chipsRemoveSize: 10px;
+
+
+
 $chipsTextBackground: rgb(53, 54, 56);
 $colorAutocompleteList: $chipsTextBackground;
 $arrowSize: 8px;
 $offsetForList: 3px;
+$borderRadius: 1px;
+
+$chipSelectorContainerPadding: 3px;
+$chipSelectorContainerBorderRadius: 0px;
 
 @mixin skin-generate() {
 
   font-family: "Droid Sans", sans-serif;
+  font-size: 11px;
 
   .dzs-chip-selector--container {
     background-color: $colorBg;
     border: 1px solid $colorBorder;
-    min-height: 54px;
+    min-height: 30px;
+
+    padding: $chipSelectorContainerPadding;
+    border-radius: $chipSelectorContainerBorderRadius;
 
     .dzs-chip-selector--form-field {
       .dzs-chip-selector--chip-list ul.dzs-chip-selector--chip-list-wrapper .dzs-chip-selector--item {
         background-color: $chipsColorBackground;
+        border: 1px solid $chipsColorBorder;
+        border-radius: $chipsColorBorderRadius;
+
+
+        padding-top: 3px;
+        padding-bottom: 3px;
+        padding-right: 3px;
+        padding-left: 3px;
+
 
         & + .dzs-chip-selector--item {
           margin-left: 5px;
         }
+
+
 
         .dzs-chip-selector--item--content {
           //font-weight: bold;
@@ -33,8 +58,14 @@ $offsetForList: 3px;
       }
 
       .dzs-chip-selector--item--remove {
-        border: 1px solid $chipsTextBackground;
+        //border: 1px solid $chipsTextBackground;
         border-radius: 50%;
+
+        padding-left: 0px;
+        margin-left: 0px;
+
+        width: $chipsRemoveSize;
+        height: $chipsRemoveSize;
 
         > figure {
           font-size: 0;
@@ -44,7 +75,7 @@ $offsetForList: 3px;
 
             content: "\00d7";
             font-family: Helvetica, sans-serif;
-            font-size: 11px;
+            font-size: 13px;
             font-weight: bold;
             color: $chipsTextBackground;
           }
@@ -103,6 +134,6 @@ $offsetForList: 3px;
   }
 }
 
-.dzs-chip-selector.dzs-chip-selector--skin-default {
+.dzs-chip-selector.dzs-chip-selector--skin-flat  {
   @include skin-generate();
 }

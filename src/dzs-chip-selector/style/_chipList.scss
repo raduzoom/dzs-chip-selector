@@ -1,4 +1,6 @@
+
 .dzs-chip-selector--chip-list {
+  flex-shrink: 0;
   ul.dzs-chip-selector--chip-list-wrapper {
     margin: 0;
     padding: 0;
@@ -15,8 +17,6 @@
       border-radius: $chipsStyleBorderRadius;
       align-items: center;
       cursor: default;
-      min-height: 32px;
-      height: 1px;
       position: relative;
       box-sizing: border-box;
       -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -28,6 +28,15 @@
       padding-left: 12px;
       background-color: #e0e0e0;
       color: #000000de;
+      display: inline-block;
+      vertical-align: middle;
+      white-space: nowrap;
+
+
+      .dzs-chip-selector--item--content{
+        display: inline-block;
+        vertical-align: middle;
+      }
     }
   }
 }
@@ -36,6 +45,9 @@
 
   order: none;
   appearance: none;
+
+  display: inline-block;
+  vertical-align: middle;
 
   border: 0;
   -moz-appearance: none;
@@ -61,3 +73,4 @@
   }
 
 }
+

@@ -89,7 +89,6 @@ export class DzsChipSelectorWrapper extends HTMLElement {
       // setTimeout(()=>{
       //
       //   import('./style/skins/skin-default.scss').then((ar)=>{
-      //     console.log(ar)
       //   }) ;
       // },1000);
 
