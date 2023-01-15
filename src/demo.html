@@ -130,6 +130,19 @@ var require = () => {
       }
     })
 
+
+    window.dzs_initDzsChipSelector(document.querySelector('#dcs-flat'), {
+      /**
+       *
+       * @param {ChipSelectorItem[]} allOptions
+       */
+      onUpdateFunction: (allOptions)=>{
+        const selectedOptions = allOptions.filter((el)=>el.currentStatus==='checked');
+        console.log({selectedOptions});
+      }
+    })
+
+
     // new DzsChipSelector(document.querySelector('.dzs-chip-selector'));
   })
 </script>
@@ -139,5 +152,7 @@ var require = () => {
 <script src="./dzsChipSelectorWebComponents.js"></script>
 <link rel="stylesheet" href="./dzs-chip-selector.css"/>
 <link rel="stylesheet" href="./style/skins/skin-default.css"/>
+<link rel="stylesheet" href="./style/skins/skin-flat.css"/>
+<link rel="stylesheet" href="./style/skins/skin-default--theme-dark.css"/>
 </body>
 </html>
