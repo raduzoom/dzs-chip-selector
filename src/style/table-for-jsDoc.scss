@@ -1,0 +1,60 @@
+.table-for-jsDoc {
+  background-color: transparent;
+  color: #363636;
+  margin-bottom: 1.5rem;
+  width: 100%;
+
+  .prop-name{
+    font-weight: bold;
+  }
+
+  tr{
+    th:first-child, td:first-child{
+width: 30%;
+    }
+  }
+
+  thead {
+    tr {
+      th {
+        border: 1px solid #dbdbdb;
+        border-width: 0 0 1px;
+        padding: 0.5em 0.75em;
+        vertical-align: top;
+        border-width: 0 0 2px;
+        border: none;
+        .label,&{
+          text-align: left;
+          color: #363636;
+
+        }
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      td {
+        border: 1px solid #dbdbdb;
+        border-width: 0 0 1px;
+        padding: 0.5em 0.75em;
+        vertical-align: top;
+        color: #111114;
+      }
+
+    }
+  }
+
+
+  & > thead > tr > th {
+    border: none;
+  }
+
+
+  td {
+    color: #fff4c2;
+    padding: 10px;
+    border-color: #fff4c2;
+  }
+
+}

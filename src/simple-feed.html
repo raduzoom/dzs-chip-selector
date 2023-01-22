@@ -22,43 +22,106 @@
 
 </head>
 
-<body style="background-color: #eae8e8;">
+<body style=";">
 <!-- your content here... -->
+<div class="main-wrap">
+  <div class="big-container" style="background-color: #eae8e8; ">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Light themes.</h1>
+          <br>
 
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
+          <h4>Skin default - theme default</h4>
+          <div style="width: 350px; max-width: 90vw;">
+
+            <div id="dcs2" class="dzs-chip-selector "
+                 data-persistentOptions='[{"htmlContent":"Apple","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span>","value":"apricot","currentStatus":"unchecked"}]'>
+            </div>
+          </div>
+
+          <h4>Skin flat - does not wrap</h4>
+          <div style="width: 300px">
+
+            <div id="dcs-flat" class="dzs-chip-selector dzs-chip-selector--skin-flat"
+                 data-persistentOptions='[{"htmlContent":"Apple ","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange ","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span> ","value":"apricot","currentStatus":"unchecked"}]'>
+            </div>
+          </div>
 
 
-      <h3>Skin default - theme dark</h3>
-      <div class="dzs-chip-selector dzs-chip-selector--skin-default--theme-dark" data-persistentOptions='[{"htmlContent":"Apple ","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange ","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span> ","value":"apricot","currentStatus":"unchecked"}]'>
-      </div>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <table class="table-for-jsDoc">
+            <thead>
+            <tr>
+              <th><label class=" ">propName</label></th>
+              <th><label class=" ">description</label></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td><span class="prop-name">  placeholderNoItemsFound?:</span> <em> string</em></td>
+              <td class="prop-description"> text for no items found</td>
+            </tr>
+            <tr>
+              <td><span class="prop-name">  middlewareFilterResults?:</span> <em> any</em></td>
+              <td class="prop-description"> include a middleware function like filtering the results</td>
+            </tr>
+            <tr>
+              <td><span class="prop-name">  viewSkin?:</span> <em> string</em></td>
+              <td class="prop-description"> the skin can be "skin-default", "skin-flat" - also needs css file being
+                loaded
+              </td>
+            </tr>
+            <tr>
+              <td><span class="prop-name">  inputPlaceholderText?:</span> <em> string</em></td>
+              <td class="prop-description"> the placeholder for Filter Results ... text</td>
+            </tr>
+            <tr>
+              <td><span class="prop-name">  onUpdateFunction?:</span> <em> (...args: any[]) => any</em></td>
+              <td class="prop-description"> custom function for onUpdate</td>
+            </tr>
+            <tr>
+              <td><span class="prop-name">  viewIsWrapping?:</span> <em> boolean</em></td>
+              <td class="prop-description"> wrap false or true</td>
+            </tr>
+            <tr>
+              <td><span class="prop-name">  persistentOptions?:</span> <em> ChipSelectorItem[]</em></td>
+              <td class="prop-description"> the persistent options</td>
+            </tr>
+            </tbody>
+          </table>
 
-      <h3>Skin default - theme default</h3>
-      <div style="width: 350px; max-width: 90vw;">
+          <br>
+          <br>
+          <br>
 
-        <div id="dcs2" class="dzs-chip-selector " data-persistentOptions='[{"htmlContent":"Apple","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span>","value":"apricot","currentStatus":"unchecked"}]'>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="big-container" style="background-color: #3b3d3d; color: #dee5e4; padding: 15px 0;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Dark themes.</h1>
+          <br>
 
-      <h3>Skin flat</h3>
-      <div style="width: 300px">
+          <h4>Skin default - theme dark</h4>
+          <div id="def-dark" class="dzs-chip-selector dzs-chip-selector--skin-default--theme-dark"
+               data-persistentOptions='[{"htmlContent":"Apple ","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange ","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span> ","value":"apricot","currentStatus":"unchecked"}]'>
+          </div>
+          <br>
+          <br>
 
-        <div id="dcs-flat" class="dzs-chip-selector dzs-chip-selector--skin-flat" data-persistentOptions='[{"htmlContent":"Apple ","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange ","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span> ","value":"apricot","currentStatus":"unchecked"}]'>
+          <br>
+          <br>
         </div>
       </div>
-
-
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-
     </div>
   </div>
 </div>
@@ -108,13 +171,13 @@ var require = () => {
 
     console.log('doc ready');
 
-    window.dzs_initDzsChipSelector(document.querySelector('.dzs-chip-selector'), {
+    window.dzs_initDzsChipSelector(document.querySelector('#def-dark'), {
       /**
        *
        * @param {ChipSelectorItem[]} allOptions
        */
-      onUpdateFunction: (allOptions)=>{
-        const selectedOptions = allOptions.filter((el)=>el.currentStatus==='checked');
+      onUpdateFunction: (allOptions) => {
+        const selectedOptions = allOptions.filter((el) => el.currentStatus === 'checked');
         console.log({selectedOptions});
       }
     })
@@ -125,19 +188,20 @@ var require = () => {
        *
        * @param {ChipSelectorItem[]} allOptions
        */
-      onUpdateFunction: (allOptions)=>{
-        const selectedOptions = allOptions.filter((el)=>el.currentStatus==='checked');
+      onUpdateFunction: (allOptions) => {
+        const selectedOptions = allOptions.filter((el) => el.currentStatus === 'checked');
         console.log({selectedOptions});
       }
     })
 
     window.dzs_initDzsChipSelector(document.querySelector('#dcs-flat'), {
+      viewIsWrapping: false,
       /**
        *
        * @param {ChipSelectorItem[]} allOptions
        */
-      onUpdateFunction: (allOptions)=>{
-        const selectedOptions = allOptions.filter((el)=>el.currentStatus==='checked');
+      onUpdateFunction: (allOptions) => {
+        const selectedOptions = allOptions.filter((el) => el.currentStatus === 'checked');
         console.log({selectedOptions});
       }
     })
@@ -146,10 +210,18 @@ var require = () => {
   })
 </script>
 
+<style>
+  h4 {
+    font-style: italic;
+    font-weight: normal;
+  }
+</style>
+
 
 <script src="../dist-webpack/dzsChipSelector.js"></script>
 <script src="../dist-webpack/dzsChipSelectorWebComponents.js"></script>
 
+<link rel="stylesheet" href="style/table-for-jsDoc.css"/>
 <link rel="stylesheet" href="style/bootstrap.min.css"/>
 <link rel="stylesheet" href="dzs-chip-selector/dzs-chip-selector.css"/>
 <link rel="stylesheet" href="dzs-chip-selector/style/skins/skin-default.css"/>

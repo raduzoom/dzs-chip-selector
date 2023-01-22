@@ -1,0 +1,41 @@
+.table-for-jsDoc {
+  background-color: transparent;
+  color: #363636;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+.table-for-jsDoc .prop-name {
+  font-weight: bold;
+}
+.table-for-jsDoc tr th:first-child, .table-for-jsDoc tr td:first-child {
+  width: 30%;
+}
+.table-for-jsDoc thead tr th {
+  border: 1px solid #dbdbdb;
+  border-width: 0 0 1px;
+  padding: 0.5em 0.75em;
+  vertical-align: top;
+  border-width: 0 0 2px;
+  border: none;
+}
+.table-for-jsDoc thead tr th .label, .table-for-jsDoc thead tr th {
+  text-align: left;
+  color: #363636;
+}
+.table-for-jsDoc tbody tr td {
+  border: 1px solid #dbdbdb;
+  border-width: 0 0 1px;
+  padding: 0.5em 0.75em;
+  vertical-align: top;
+  color: #111114;
+}
+.table-for-jsDoc > thead > tr > th {
+  border: none;
+}
+.table-for-jsDoc td {
+  color: #fff4c2;
+  padding: 10px;
+  border-color: #fff4c2;
+}
+
+/*# sourceMappingURL=table-for-jsDoc.css.map */

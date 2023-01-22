@@ -31,7 +31,7 @@
     "type": "git",
     "url": "git+https://github.com/raduzoom/dzs-chip-selector"
   },
-  "author": "",
+  "author": "raduzoom",
   "license": "(MIT OR Apache-2.0)",
   "devDependencies": {
     "@babel/core": "^7.18.2",

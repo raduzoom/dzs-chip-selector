@@ -1,7 +1,7 @@
 @import "../../TOKENS";
 
 $colorBg: #ffffff;
-$colorBorder: rgba(34, 34, 34, 0.44);
+$colorBorder: rgba(205, 208, 208, 0.99);
 $chipsColorBackground: rgba(248, 248, 248);
 $chipsColorBorder: rgba(63, 62, 62, 0.3);
 $chipsColorBorderRadius: 0;
@@ -11,6 +11,8 @@ $chipsRemoveSize: 10px;
 
 $chipsTextBackground: rgb(53, 54, 56);
 $colorAutocompleteList: $chipsTextBackground;
+$colorAutocompleteBgChip: rgb(216, 219, 220);
+$colorAutocompleteSelectedChip: rgb(245, 252, 255);
 $arrowSize: 8px;
 $offsetForList: 3px;
 $borderRadius: 1px;
@@ -22,6 +24,8 @@ $chipSelectorContainerBorderRadius: 0px;
 
   font-family: "Droid Sans", sans-serif;
   font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
 
   .dzs-chip-selector--container {
     background-color: $colorBg;
@@ -43,6 +47,11 @@ $chipSelectorContainerBorderRadius: 0px;
         padding-right: 3px;
         padding-left: 3px;
 
+        font-size: 11px;
+
+        display: inline-flex;
+        flex-direction: row-reverse;
+        gap: 5px;
 
         & + .dzs-chip-selector--item {
           margin-left: 5px;
@@ -88,6 +97,7 @@ $chipSelectorContainerBorderRadius: 0px;
 
   // -- autocomplete list
   .dzs-chip-selector--autocompletelist {
+    font-size: 11px;
 
 
     color: $colorAutocompleteList;
@@ -108,25 +118,22 @@ $chipSelectorContainerBorderRadius: 0px;
 
     .dzs-chip-selector--autocompletelist--inner {
       background-color: $colorBorder;
+      border-radius: $borderRadius;
     }
 
     .dzs-chip-selector--autocompletelist--items {
       .dzs-chip-selector--autocompletelist--items--item {
-        background-color: $colorBg;
+        background-color: $colorAutocompleteBgChip  ;
         border-radius: $chipsStyleBorderRadius;
-
 
         & + .dzs-chip-selector--autocompletelist--items--item {
           margin-top: 5px;
         }
 
-        &:hover {
-          background-color: $chipsColorBackground;
-        }
 
-        &.is-selected {
+        &:hover, &.is-selected {
 
-          background-color: $chipsColorBackground;
+          background-color: $colorAutocompleteSelectedChip;
         }
       }
     }

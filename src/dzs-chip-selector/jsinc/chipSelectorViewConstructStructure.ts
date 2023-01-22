@@ -28,7 +28,7 @@ export function chipSelectorInitStructure(selfInstance: DzsChipSelector) {
   <span class="${DZS_CHIP_SELECTOR_CSS_SELECTOR_OVERFLOW_TOOLTIP_CONTENT}">This is the tooltip text</span></div>`;
 
     const chipListInputNewElement = `<label class="dzs-chip-selector--input-new-element--label">
-              <input placeholder="New fruit..." class="dzs-chip-selector--input-new-element"
+              <input placeholder="${selfInstance.chipSelectorOptions.inputPlaceholderText}" class="dzs-chip-selector--input-new-element"
                      autocomplete="off"
                      role="combobox" aria-autocomplete="list" aria-expanded="false"
                      aria-haspopup="listbox"

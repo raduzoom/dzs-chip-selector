@@ -11,7 +11,6 @@ import {dzsChipSelectorDefaultOptions} from "./config/dzs-chip-selector--default
 import {initChipSelector} from "./jsinc/chipSelectorHelpers";
 import {setupHandlers} from "./jsinc/chipSelectorHandlers";
 import {chipSelectorInitStructure, viewChipSelectorChipItemStructure} from "./jsinc/chipSelectorViewConstructStructure";
-// import {$es} from '../../deps/esjquery/js/_esjquery';
 
 
 declare global {
@@ -24,13 +23,6 @@ declare global {
   }
 }
 
-
-// todo: temp
-// type esJquery = {
-//
-//   addClass: (arg:string) => {}
-//   find: (arg:string) => esJquery
-// };
 
 export class DzsChipSelector {
   /** DOM - main element wrapper */
