@@ -64,6 +64,7 @@ module.exports = (env, mod) => {
 
   if (mod.mode == 'production') {
     webpackConfig.devtool = 'source-map';
+    webpackConfig.devServer = undefined;
     webpackConfig.optimization = {
       splitChunks: {
         chunks: 'all',
