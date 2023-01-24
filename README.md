@@ -156,6 +156,50 @@ The class also extends the HTMLElement interface to add a webComponent property 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
+<!-- Options -->
+## Options
+<table class="table-for-jsDoc">
+            <thead>
+            <tr>
+              <th><label class=" ">propName</label></th>
+              <th><label class=" ">description</label></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td><span class="prop-name">  placeholderNoItemsFound?:</span> <em> string</em></td>
+              <td class="prop-description"> text for no items found</td>
+            </tr>
+            <tr>
+              <td><span class="prop-name">  middlewareFilterResults?:</span> <em> any</em></td>
+              <td class="prop-description"> include a middleware function like filtering the results</td>
+            </tr>
+            <tr>
+              <td><span class="prop-name">  viewSkin?:</span> <em> string</em></td>
+              <td class="prop-description"> the skin can be "skin-default", "skin-flat" - also needs css file being
+                loaded
+              </td>
+            </tr>
+            <tr>
+              <td><span class="prop-name">  inputPlaceholderText?:</span> <em> string</em></td>
+              <td class="prop-description"> the placeholder for Filter Results ... text</td>
+            </tr>
+            <tr>
+              <td><span class="prop-name">  onUpdateFunction?:</span> <em> (...args: any[]) => any</em></td>
+              <td class="prop-description"> custom function for onUpdate</td>
+            </tr>
+            <tr>
+              <td><span class="prop-name">  viewIsWrapping?:</span> <em> boolean</em></td>
+              <td class="prop-description"> wrap false or true</td>
+            </tr>
+            <tr>
+              <td><span class="prop-name">  persistentOptions?:</span> <em> ChipSelectorItem[]</em></td>
+              <td class="prop-description"> the persistent options</td>
+            </tr>
+            </tbody>
+          </table>
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -204,9 +248,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+Your Name - [@ZoomItFlash](https://twitter.com/ZoomItFlash) - email@example.com
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/raduzoom/dzs-chip-selector#readme](https://github.com/raduzoom/dzs-chip-selector#readme)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

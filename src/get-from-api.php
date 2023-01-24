@@ -9,16 +9,15 @@ ini_set("error_log", $log_file);
 
 
 if (!function_exists('print_rr')) {
-    function print_rr($arg)
-    {
+  function print_rr($arg) {
 
-        $fout = '';
-        $fout .= '<pre>';
-        $fout .= print_r($arg, true);
-        $fout .= '</pre>';
+    $fout = '';
+    $fout .= '<pre>';
+    $fout .= print_r($arg, true);
+    $fout .= '</pre>';
 
-        echo $fout;
-    }
+    echo $fout;
+  }
 }
 $options = file_get_contents("options.json");
 $allValues = json_decode($options, true);
@@ -29,50 +28,48 @@ $listedSubjects = array_slice($listedSubjects, 0, 3); // return the first five e
 
 if (isset($_POST) && isset($_POST['subject'])) {
 
-    $selectedSubjects = $_POST['subject'];
+  $selectedSubjects = $_POST['subject'];
 }
 
 
 
-function checkInListedSubjects()
-{
+function checkInListedSubjects() {
 
-    global $selectedSubjects;
-    global $listedSubjects;
+  global $selectedSubjects;
+  global $listedSubjects;
 
-    foreach ($selectedSubjects as $selectedSubjectLab => $selectedSubject) {
-        foreach ($listedSubjects as $listedSubjectLab => $subject) {
-            if ($subject['value'] == $selectedSubject) {
-                $listedSubjects[$listedSubjectLab]['currentStatus'] = 'checked';
-                unset($selectedSubjects[$selectedSubjectLab]);
-            }
-        }
+  foreach ($selectedSubjects as $selectedSubjectLab => $selectedSubject) {
+    foreach ($listedSubjects as $listedSubjectLab => $subject) {
+      if ($subject['value'] == $selectedSubject) {
+        $listedSubjects[$listedSubjectLab]['currentStatus'] = 'checked';
+        unset($selectedSubjects[$selectedSubjectLab]);
+      }
     }
+  }
 }
 
-function checkInAllValues()
-{
-    global $selectedSubjects;
-    global $allValues;
-    global $listedSubjects;
+function checkInAllValues() {
+  global $selectedSubjects;
+  global $allValues;
+  global $listedSubjects;
 
-    // -- add missing listed subject
-    foreach ($selectedSubjects as $selectedSubjectLab => $selectedSubject) {
-        foreach ($allValues as $allValueLab => $allValue) {
-            if ($allValue['value'] == $selectedSubject) {
-                $allValue['currentStatus'] = 'checked';
-                array_push($listedSubjects, $allValue);
-            }
-        }
+  // -- add missing listed subject
+  foreach ($selectedSubjects as $selectedSubjectLab => $selectedSubject) {
+    foreach ($allValues as $allValueLab => $allValue) {
+      if ($allValue['value'] == $selectedSubject) {
+        $allValue['currentStatus'] = 'checked';
+        array_push($listedSubjects, $allValue);
+      }
     }
+  }
 }
 
 
 
 if ($selectedSubjects) {
 
-    checkInListedSubjects();
-    checkInAllValues();
+  checkInListedSubjects();
+  checkInAllValues();
 }
 
 
@@ -108,46 +105,46 @@ if ($selectedSubjects) {
   <div class="row">
     <div class="col-md-12">
 
-        <?php
+      <?php
 
-        if (isset($_POST) && isset($_POST['subject'])) {
-            ?>
-          <h3>Post</h3><?php
-            echo '<pre>';
-            print_r($_POST);
-
-            echo '<h4>hmm</h4>';
-            echo '</pre>';
-        }
-
-        echo '$selectedSubjects';
-        print_rr($selectedSubjects);
-        echo ' <hr>';
-        echo '$listedSubjects';
-        print_rr($listedSubjects);
-        echo ' <hr>';
-        //      echo '$allValues';
-        //      print_rr($allValues);
-        //      echo ' <hr>';
-
-
-        print_r($selectedSubjects);
+      if (isset($_POST) && isset($_POST['subject'])) {
         ?>
+        <h3>Post</h3><?php
+        echo '<pre>';
+        print_r($_POST);
+
+        echo '<h4>hmm</h4>';
+        echo '</pre>';
+      }
+
+      echo '$selectedSubjects';
+      print_rr($selectedSubjects);
+      echo ' <hr>';
+      echo '$listedSubjects';
+      print_rr($listedSubjects);
+      echo ' <hr>';
+      //      echo '$allValues';
+      //      print_rr($allValues);
+      //      echo ' <hr>';
+
+
+      print_r($selectedSubjects);
+      ?>
 
       <h3>Form</h3>
       <form method="post">
         <div class="dzs-chip-selector dzs-chip-selector--skin-default">
           <div class="dzs-chip-selector--form">
-              <?php
-              foreach ($listedSubjects as $subject) {
-                  echo '<label><input type="checkbox" name="subject[]" ';
+            <?php
+            foreach ($listedSubjects as $subject) {
+              echo '<label><input type="checkbox" name="subject[]" ';
 
-                  if ($subject['currentStatus'] === 'checked') {
-                      echo ' checked';
-                  }
-                  echo ' value="' . $subject['value'] . '">' . $subject['htmlContent'] . ' </label>';
+              if ($subject['currentStatus'] === 'checked') {
+                echo ' checked';
               }
-              ?>
+              echo ' value="' . $subject['value'] . '">' . $subject['htmlContent'] . ' </label>';
+            }
+            ?>
           </div>
           <div class="dzs-chip-selector--container">
             <div class="dzs-chip-selector--form-field">
@@ -199,7 +196,7 @@ if ($selectedSubjects) {
   var require = () => {
   }</script>
 <!--<script src="../build/dzs-chip-selector/dzs-chip-selector.js" type="module"  ></script>-->
-<script src="../dist/dzsChipSelector.js"></script>
+<script src="../dist-webpack/dzsChipSelector.js"></script>
 <!--<script src="../final.js"  ></script>-->
 
 <link rel="stylesheet" href="style/bootstrap.min.css"/>
@@ -209,13 +206,13 @@ if ($selectedSubjects) {
 <script>
 
   // -- helper functions
-  function getOptionFromValue (options, dataValue) {
+  function getOptionFromValue(options, dataValue) {
     const foundItems = options.filter((item) => item.value === dataValue)
 
     return foundItems[0]
   }
 
-  function documentReady (callback) {
+  function documentReady(callback) {
     new Promise((resolutionFunc, rejectionFunc) => {
       if (document.readyState === 'interactive' || document.readyState === 'complete') {
         resolutionFunc('interactive')
@@ -232,6 +229,7 @@ if ($selectedSubjects) {
       callback(err)
     })
   }
+
   // -- helper functions end
 </script>
 <script>
@@ -264,9 +262,9 @@ if ($selectedSubjects) {
 
 
         let url = `api-search.php?search=${encodeURIComponent(argVal)}`
-        url += '&delay=1&requestVersion='+(++requestVersion);
+        url += '&delay=1&requestVersion=' + (++requestVersion);
 
-        console.log('[index] - ', { url })
+        console.log('[index] - ', {url})
 
         return new Promise((resolve, reject) => {
 
@@ -276,16 +274,16 @@ if ($selectedSubjects) {
               .then((newResults) => {
 
                 console.log('[index] - ', requestVersion, Number(newResults.requestVersion));
-                if(requestVersion == Number(newResults.requestVersion)){
+                if (requestVersion == Number(newResults.requestVersion)) {
 
                   newResults.foundSubjects.forEach(dataItem => {
-                    console.log('[index] - ', { dataItem }, getOptionFromValue(finalOptions, dataItem.value))
+                    console.log('[index] - ', {dataItem}, getOptionFromValue(finalOptions, dataItem.value))
                     if (getOptionFromValue(finalOptions, dataItem.value) === undefined) {
                       finalOptions.push(dataItem)
                     }
                   })
 
-                  console.log({ finalOptions })
+                  console.log({finalOptions})
                   selfInstance.autoCompleteOptions = finalOptions;
 
                   console.log('[index] - ', newResults)

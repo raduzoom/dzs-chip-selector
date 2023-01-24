@@ -1,0 +1,35 @@
+@import "../../TOKENS";
+
+@import "skin-flat";
+
+
+$colorBg: #313131;
+$colorBorder: rgba(67, 68, 68, 0.99);
+$chipsColorBackground: rgb(66, 64, 64);
+$chipsColorBorder: rgba(63, 62, 62, 0.3);
+$chipsColorBorderRadius: 0;
+$chipsRemoveSize: 10px;
+
+
+
+$chipsTextBackground: rgb(217, 218, 220);
+$colorAutocompleteList: $chipsTextBackground;
+$colorAutocompleteBgChip: rgb(61, 61, 61);
+$colorAutocompleteSelectedChip: rgb(42, 40, 40);
+$arrowSize: 8px;
+$offsetForList: 3px;
+$borderRadius: 1px;
+
+$chipSelectorContainerPadding: 3px;
+$chipSelectorContainerBorderRadius: 0px;
+
+
+
+
+.dzs-chip-selector.dzs-chip-selector--skin-flat--theme-dark {
+  @include skin-generate();
+
+  .dzs-chip-selector--item--content{
+    font-weight: bold;
+  }
+}

@@ -118,6 +118,15 @@
           <br>
           <br>
 
+          <h4>Skin flat - theme dark</h4>
+          <div style="width: 300px">
+          <div id="flat-dark" class="dzs-chip-selector dzs-chip-selector--skin-flat--theme-dark"
+               data-persistentOptions='[{"htmlContent":"Apple ","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange ","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span> ","value":"apricot","currentStatus":"unchecked"}]'>
+          </div>
+          </div>
+          <br>
+          <br>
+
           <br>
           <br>
         </div>
@@ -204,9 +213,19 @@ var require = () => {
         const selectedOptions = allOptions.filter((el) => el.currentStatus === 'checked');
         console.log({selectedOptions});
       }
-    })
+    });
 
-    // new DzsChipSelector(document.querySelector('.dzs-chip-selector'));
+    window.dzs_initDzsChipSelector(document.querySelector('#flat-dark'), {
+      viewIsWrapping: false,
+      /**
+       *
+       * @param {ChipSelectorItem[]} allOptions
+       */
+      onUpdateFunction: (allOptions) => {
+        const selectedOptions = allOptions.filter((el) => el.currentStatus === 'checked');
+        console.log({selectedOptions});
+      }
+    });
   })
 </script>
 
@@ -227,5 +246,6 @@ var require = () => {
 <link rel="stylesheet" href="dzs-chip-selector/style/skins/skin-default.css"/>
 <link rel="stylesheet" href="dzs-chip-selector/style/skins/skin-default--theme-dark.css"/>
 <link rel="stylesheet" href="dzs-chip-selector/style/skins/skin-flat.css"/>
+<link rel="stylesheet" href="dzs-chip-selector/style/skins/skin-flat--theme-dark.css"/>
 </body>
 </html>

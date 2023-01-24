@@ -33,7 +33,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "checkJs": true,
+    "checkJs": false,
     "declarationMap": true,
     "allowSyntheticDefaultImports": true,
 

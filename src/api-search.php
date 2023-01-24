@@ -23,7 +23,7 @@ if (isset($_GET['delay']) && $_GET['delay']) {
   $DELAY_TIME = floatval($_GET['delay']);
 }
 
-$foundSubjects = array('foundSubjects'=>array(), 'requestVersion'=>$requestVersion);
+$foundSubjects = array('foundSubjects' => array(), 'requestVersion' => $requestVersion);
 if ($query) {
   $query = strtolower($query);
   foreach ($subjects as $subject) {
@@ -36,7 +36,7 @@ if ($query) {
 }
 
 header('Content-Type: application/json');
-header('X-Request-Version: '.$requestVersion);
+header('X-Request-Version: ' . $requestVersion);
 sleep($DELAY_TIME);
 echo json_encode($foundSubjects);
 //echo json_encode($foundSubjects);
