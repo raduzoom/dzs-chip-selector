@@ -45,7 +45,7 @@ export function setupHandlers(selfInstance: DzsChipSelector) {
 
         const targetOption = DzsChipSelector.getOptionFromValue(selfInstance.autoCompleteOptions, (dataValue));
         const persistentOption = DzsChipSelector.getOptionFromValue(selfInstance.persistentOptions, (dataValue));
-        targetOption.currentStatus = currentStatusType.UNCHECKED;
+        targetOption ? (targetOption.currentStatus = currentStatusType.UNCHECKED) : console.log('[targetOption] targetOption not existing', selfInstance.autoCompleteOptions);
         persistentOption.currentStatus = currentStatusType.UNCHECKED;
 
         selfInstance.updateListFromOptions();
