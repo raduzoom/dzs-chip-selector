@@ -70,7 +70,7 @@ describe('DzsChipSelector', () => {
     dzsChipSelector.chipSelectorOptions.viewIsWrapping = false;
     dzsChipSelector.initClass();
     dzsChipSelector.updateChipsFromOptions();
-    jest.spyOn(window, 'getComputedStyle');
+    jest.spyOn(globalThis, 'getComputedStyle');
     const chips = $elem.querySelectorAll('.dzs-chip-selector--item');
     expect(chips.length).toBe(1);
     expect(chips[0].innerHTML).toContain('Test1');

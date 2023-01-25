@@ -23,8 +23,7 @@ export function insertHtml(t: HTMLElement, html: string, position = 'beforeend')
 export function getComputedProp(el: HTMLElement, cssProp = "min-width", isGetAsNumber = false): number | string
 {
   if(el){
-
-    const val = (window as any).getComputedStyle(el,null).getPropertyValue(cssProp);
+    const val = (globalThis as any).getComputedStyle(el,null).getPropertyValue(cssProp);
     return isGetAsNumber ? parseFloat(val) : val;
   }
   return '';

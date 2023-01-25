@@ -4,6 +4,17 @@ import {DzsChipSelector} from "./dzs-chip-selector";
 import styleChipTextContent from './dzs-chip-selector.scss';
 
 
+declare global {
+  interface Window {
+    dzs_chipSelector_inited: boolean;
+  }
+}
+declare module globalThis {
+  let dzs_chipSelector_inited: boolean;
+  let dzsChipSelectorWebComponent_init: () => void;
+}
+globalThis.dzs_chipSelector_inited = false;
+
 export class DzsChipSelectorWrapper extends HTMLElement {
   shadow: ShadowRoot;
   wrapper: HTMLElement;
@@ -44,8 +55,7 @@ export class DzsChipSelectorWrapper extends HTMLElement {
     styleChip.appendChild(document.createTextNode(styleChipTextContent));
 
 
-
-    if(skinCss){
+    if (skinCss) {
       styleChipInner = document.createElement('style');
       styleChipInner.type = 'text/css';
       styleChipInner.appendChild(skinCss);
@@ -55,10 +65,10 @@ export class DzsChipSelectorWrapper extends HTMLElement {
     // Attach the created elements to the shadow dom
     this.shadow.appendChild(this.wrapper);
     this.shadow.appendChild(styleChip);
-    if(styleChipInner){
+    if (styleChipInner) {
       this.shadow.appendChild(styleChipInner);
     }
-    if(skinLink){
+    if (skinLink) {
       (skinLink as HTMLElement).setAttribute('href', String((skinLink as HTMLElement).getAttribute('data-lazy-href')));
       this.shadow.appendChild(skinLink);
     }
@@ -107,8 +117,15 @@ export class DzsChipSelectorWrapper extends HTMLElement {
 
 }
 
-// Define the new element
-customElements.define('dzs-chip-selector', DzsChipSelectorWrapper);
+export function dzsChipSelectorWebComponent_init() {
+
+  if (!globalThis.dzs_chipSelector_inited) {
+    customElements.define('dzs-chip-selector', DzsChipSelectorWrapper);
+    globalThis.dzs_chipSelector_inited = true;
+  }
+}
+
+globalThis.dzsChipSelectorWebComponent_init = dzsChipSelectorWebComponent_init;
 
 /**
  * returns the sum

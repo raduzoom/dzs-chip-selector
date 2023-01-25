@@ -207,10 +207,6 @@ The class also extends the HTMLElement interface to add a webComponent property 
 - [x] Add Changelog
 - [x] Add back to top links
 - [] Add Additional Templates w/ Examples
-- [] Add "components" document to easily copy & paste sections of the readme
-- [] Multi-language Support
-    - [] Chinese
-    - [] Spanish
 
 See the [open issues](https://github.com/raduzoom/dzs-chip-selector/issues) for a full list of proposed features (and known issues).
 

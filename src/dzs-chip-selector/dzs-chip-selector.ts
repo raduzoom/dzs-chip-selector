@@ -367,7 +367,7 @@ export class DzsChipSelector {
 }
 
 function getWindow() {
-  return window || globalThis as any;
+  return globalThis as any || window as any;
 }
 
 export function init_chipSelector($argChip_: HTMLElement, options: ChipSelectorOptions = {}) {
