@@ -54,12 +54,10 @@ $offsetForList: 3px;
   }
 
 
-
   // -- autocomplete list
   .dzs-chip-selector--autocompletelist {
 
 
-    color: $colorAutocompleteList;
     // -- arrow
     &:before {
       content: '';
@@ -76,6 +74,8 @@ $offsetForList: 3px;
     }
 
     .dzs-chip-selector--autocompletelist--inner {
+      color: $colorAutocompleteList;
+
       background-color: $colorBorder;
     }
 
