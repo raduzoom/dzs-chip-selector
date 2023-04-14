@@ -91,6 +91,7 @@ This component has been made to be versatile, it includes both ES6 and UMD build
 * [Typescript](https://www.typescriptlang.org/)
 * [Next.js](https://nextjs.org/)
 * [React.js](https://reactjs.org/)
+* * example - [Functional](https://stackblitz.com/edit/react-ts-btq4kq?file=App.tsx)
 * [Angular](https://angular.io/)
 * [Bootstrap](https://getbootstrap.com)
 * [JQuery](https://jquery.com)

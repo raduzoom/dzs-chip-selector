@@ -2,6 +2,7 @@
 import {ChipSelectorItem, ChipSelectorOptions} from "./dzs-chip-selector.type";
 import {DzsChipSelector} from "./dzs-chip-selector";
 import styleChipTextContent from './dzs-chip-selector.scss';
+import {DZS_CHIP_SELECTOR__CLASS_NAME__PRINCIPAL} from "./dzs-chip-selector.config";
 
 
 declare global {
@@ -28,15 +29,14 @@ export class DzsChipSelectorWrapper extends HTMLElement {
 
     // Create spans
     this.wrapper = document.createElement('div');
-    this.wrapper.setAttribute('class', 'dzs-chip-selector-wrapper');
+    this.wrapper.setAttribute('class', `${DZS_CHIP_SELECTOR__CLASS_NAME__PRINCIPAL}-wrapper`);
 
-    this.wrapper.innerHTML = `<div class="dzs-chip-selector" >
+    this.wrapper.innerHTML = `<div class="${DZS_CHIP_SELECTOR__CLASS_NAME__PRINCIPAL}" >
       </div>`;
 
 
     // Create some CSS to apply to the shadow dom
 
-    console.log(this);
     let skinCss = null;
     let skinLink: HTMLElement | null = null;
     let styleChipInner = null;
@@ -77,19 +77,32 @@ export class DzsChipSelectorWrapper extends HTMLElement {
   }
 
   renderComponent() {
-    console.log('rendered component');
 
 
-    const $chipSelector = this.wrapper.querySelector('.dzs-chip-selector');
+    const $chipSelector = this.wrapper.querySelector(`.${DZS_CHIP_SELECTOR__CLASS_NAME__PRINCIPAL}`);
     ($chipSelector as any).webComponent = this;
 
 
     if ($chipSelector) {
 
-      const chipSelectorOptions: ChipSelectorOptions = {};
+      let chipSelectorOptions: ChipSelectorOptions = {};
 
+
+
+      if(this.getAttribute('data-chip-selector-options')){
+
+        try{
+          const dataChipSelectorOptions = this.getAttribute('data-chip-selector-options');
+          chipSelectorOptions = JSON.parse(String(dataChipSelectorOptions));
+        }catch (e){
+          console.log('cannot parse', e);
+        }
+      }
       const dataPersistentOptions = this.getAttribute('data-persistentOptions');
       chipSelectorOptions.persistentOptions = JSON.parse(String(dataPersistentOptions));
+
+
+
       chipSelectorOptions.onUpdateFunction = (allOptions: ChipSelectorItem[]) => {
         const selectedOptions = allOptions.filter((el: ChipSelectorItem) => el.currentStatus === 'checked');
         console.log({selectedOptions});
@@ -102,7 +115,7 @@ export class DzsChipSelectorWrapper extends HTMLElement {
       //   }) ;
       // },1000);
 
-      new DzsChipSelector(this.wrapper.querySelector('.dzs-chip-selector') as HTMLElement, chipSelectorOptions);
+      new DzsChipSelector(this.wrapper.querySelector(`.${DZS_CHIP_SELECTOR__CLASS_NAME__PRINCIPAL}`) as HTMLElement, chipSelectorOptions);
     }
   }
 
@@ -110,7 +123,6 @@ export class DzsChipSelectorWrapper extends HTMLElement {
    * called on connected
    */
   connectedCallback() {
-    console.log('connectedCallback()');
     this.renderComponent();
 
   }
@@ -120,7 +132,7 @@ export class DzsChipSelectorWrapper extends HTMLElement {
 export function dzsChipSelectorWebComponent_init() {
 
   if (!globalThis.dzs_chipSelector_inited) {
-    customElements.define('dzs-chip-selector', DzsChipSelectorWrapper);
+    customElements.define(DZS_CHIP_SELECTOR__CLASS_NAME__PRINCIPAL, DzsChipSelectorWrapper);
     globalThis.dzs_chipSelector_inited = true;
   }
 }

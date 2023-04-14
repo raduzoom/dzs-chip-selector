@@ -71,40 +71,45 @@ export function setupHandlers(selfInstance: DzsChipSelector) {
       const $target = matchSelector(t, '.' + DZS_CHIP_SELECTOR_AUTOCOMPLETE_CLASS_NAME_ITEMS);
       let persistentOptionIndex: number | null = null;
       const dataValue = String($target?.getAttribute('data-value'));
-      const targetOption = DzsChipSelector.getOptionFromValue(selfInstance.autoCompleteOptions, dataValue);
-      let persistentOption = DzsChipSelector.getOptionFromValue(selfInstance.persistentOptions, dataValue);
 
-      if (persistentOption === undefined) {
 
-        persistentOption = {
-          "htmlContent": $target?.innerHTML,
-          "value": $target?.getAttribute('data-value'),
-          "currentStatus": currentStatusType.UNCHECKED
+      if(dataValue){
+
+        const targetOption = DzsChipSelector.getOptionFromValue(selfInstance.autoCompleteOptions, dataValue);
+        let persistentOption = DzsChipSelector.getOptionFromValue(selfInstance.persistentOptions, dataValue);
+
+        if (persistentOption === undefined) {
+
+          persistentOption = {
+            "htmlContent": $target?.innerHTML,
+            "value": $target?.getAttribute('data-value'),
+            "currentStatus": currentStatusType.UNCHECKED
+          }
+
+          selfInstance.persistentOptions.push(persistentOption);
         }
 
-        selfInstance.persistentOptions.push(persistentOption);
-      }
-
-      if ($target?.classList.contains(DZS_CHIP_SELECTOR_CHIPS_SELECTED)) {
-        targetOption.currentStatus = currentStatusType.UNCHECKED;
-        persistentOption.currentStatus = currentStatusType.UNCHECKED;
-      } else {
-        // -- turn to checked
-        persistentOptionIndex = selfInstance.persistentOptions.findIndex(el => el.value === persistentOption.value);
-        // -- move to end of array
-        if (persistentOptionIndex < selfInstance.persistentOptions.length - 1) {
-          selfInstance.persistentOptions.push(selfInstance.persistentOptions.splice(persistentOptionIndex, 1)[0]);
+        if ($target?.classList.contains(DZS_CHIP_SELECTOR_CHIPS_SELECTED)) {
+          targetOption.currentStatus = currentStatusType.UNCHECKED;
+          persistentOption.currentStatus = currentStatusType.UNCHECKED;
+        } else {
+          // -- turn to checked
+          persistentOptionIndex = selfInstance.persistentOptions.findIndex(el => el.value === persistentOption.value);
+          // -- move to end of array
+          if (persistentOptionIndex < selfInstance.persistentOptions.length - 1) {
+            selfInstance.persistentOptions.push(selfInstance.persistentOptions.splice(persistentOptionIndex, 1)[0]);
+          }
+          targetOption.currentStatus = currentStatusType.CHECKED;
+          persistentOption.currentStatus = currentStatusType.CHECKED;
         }
-        targetOption.currentStatus = currentStatusType.CHECKED;
-        persistentOption.currentStatus = currentStatusType.CHECKED;
-      }
 
-      selfInstance.updateListFromOptions();
-      selfInstance.updateFormFromOptions();
-      selfInstance.updateChipsFromOptions();
-      selfInstance.$inputNewElement_.value = '';
-      selfInstance.$inputNewElement_.dispatchEvent(new Event('keyup'));
-      selfInstance.$inputNewElement_.dispatchEvent(new Event('change'));
+        selfInstance.updateListFromOptions();
+        selfInstance.updateFormFromOptions();
+        selfInstance.updateChipsFromOptions();
+        selfInstance.$inputNewElement_.value = '';
+        selfInstance.$inputNewElement_.dispatchEvent(new Event('keyup'));
+        selfInstance.$inputNewElement_.dispatchEvent(new Event('change'));
+      }
 
 
     }
