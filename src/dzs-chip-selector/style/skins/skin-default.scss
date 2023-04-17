@@ -1,6 +1,7 @@
 @import "../../TOKENS";
 
 $colorBg: #ffffff;
+$colorText: #232323;
 $colorBorder: rgba(34, 34, 34, 0.44);
 $chipsColorBackground: rgb(183, 204, 231);
 $chipsTextBackground: rgb(53, 54, 56);
@@ -17,19 +18,29 @@ $offsetForList: 3px;
     border: 1px solid $colorBorder;
     min-height: 54px;
 
+    .dzs-chip-selector--item {
+
+      border-radius: $chipsStyleBorderRadius;
+    }
     .dzs-chip-selector--form-field {
-      .dzs-chip-selector--chip-list ul.dzs-chip-selector--chip-list-wrapper .dzs-chip-selector--item {
-        background-color: $chipsColorBackground;
+      .dzs-chip-selector--chip-list {
+        ul.dzs-chip-selector--chip-list-wrapper .dzs-chip-selector--item {
+          background-color: $chipsColorBackground;
 
-        & + .dzs-chip-selector--item {
-          margin-left: 5px;
+          & + .dzs-chip-selector--item {
+            margin-left: 5px;
+          }
+
+          .dzs-chip-selector--item--content {
+            //font-weight: bold;
+
+            color: $chipsTextBackground;
+          }
         }
+      }
 
-        .dzs-chip-selector--item--content {
-          //font-weight: bold;
-
-          color: $chipsTextBackground;
-        }
+      .dzs-chip-selector--input-new-element--label{
+        color: $colorText;
       }
 
       .dzs-chip-selector--item--remove {

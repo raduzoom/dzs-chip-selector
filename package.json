@@ -1,7 +1,7 @@
 {
   "name": "chip-selector",
   "version": "1.0.39",
-  "description": "an all purpose input multiselect with chips",
+  "description": "an all purpose input multiselect with chips - includes search on the tooltip",
   "module": "dist/index.js",
   "types": "dist/dzs-chip-selector.d.ts",
   "files": [
@@ -24,9 +24,10 @@
   "keywords": [
     "chips",
     "input",
-    "react",
+    "search",
     "multiselect"
   ],
+  "homepage": "https://digitalzoomstudio.net",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/raduzoom/dzs-chip-selector"

@@ -70,10 +70,11 @@ export function setupHandlers(selfInstance: DzsChipSelector) {
       let t = e.target as HTMLElement;
       const $target = matchSelector(t, '.' + DZS_CHIP_SELECTOR_AUTOCOMPLETE_CLASS_NAME_ITEMS);
       let persistentOptionIndex: number | null = null;
-      const dataValue = String($target?.getAttribute('data-value'));
 
 
-      if(dataValue){
+      const dataValueTarget = $target?.getAttribute('data-value');
+      if(dataValueTarget){
+        const dataValue = String(dataValueTarget);
 
         const targetOption = DzsChipSelector.getOptionFromValue(selfInstance.autoCompleteOptions, dataValue);
         let persistentOption = DzsChipSelector.getOptionFromValue(selfInstance.persistentOptions, dataValue);

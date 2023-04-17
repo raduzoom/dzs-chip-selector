@@ -1,8 +1,8 @@
 // Create a class for the element
-import {ChipSelectorItem, ChipSelectorOptions} from "./dzs-chip-selector.type";
+import {ChipSelectorItem} from "./dzs-chip-selector.type";
 import {DzsChipSelector} from "./dzs-chip-selector";
-import styleChipTextContent from './dzs-chip-selector.scss';
 import {DZS_CHIP_SELECTOR__CLASS_NAME__PRINCIPAL} from "./dzs-chip-selector.config";
+import {appendStyle, getChipSelectorOptions} from "./jsinc/web-component/web-component-view";
 
 
 declare global {
@@ -35,44 +35,10 @@ export class DzsChipSelectorWrapper extends HTMLElement {
       </div>`;
 
 
-    // Create some CSS to apply to the shadow dom
-
-    let skinCss = null;
-    let skinLink: HTMLElement | null = null;
-    let styleChipInner = null;
-
-    this.childNodes.forEach((el) => {
-      if ((el as any).tagName === 'STYLE') {
-        skinCss = el;
-      }
-      if ((el as any).tagName === 'LINK') {
-        skinLink = el as HTMLElement;
-      }
-    });
-
-    const styleChip = document.createElement('style');
-    styleChip.type = 'text/css';
-    styleChip.appendChild(document.createTextNode(styleChipTextContent));
-
-
-    if (skinCss) {
-      styleChipInner = document.createElement('style');
-      styleChipInner.type = 'text/css';
-      styleChipInner.appendChild(skinCss);
-    }
-
-
     // Attach the created elements to the shadow dom
     this.shadow.appendChild(this.wrapper);
-    this.shadow.appendChild(styleChip);
-    if (styleChipInner) {
-      this.shadow.appendChild(styleChipInner);
-    }
-    if (skinLink) {
-      (skinLink as HTMLElement).setAttribute('href', String((skinLink as HTMLElement).getAttribute('data-lazy-href')));
-      this.shadow.appendChild(skinLink);
-    }
 
+    appendStyle(this);
 
   }
 
@@ -85,27 +51,11 @@ export class DzsChipSelectorWrapper extends HTMLElement {
 
     if ($chipSelector) {
 
-      let chipSelectorOptions: ChipSelectorOptions = {};
 
-
-
-      if(this.getAttribute('data-chip-selector-options')){
-
-        try{
-          const dataChipSelectorOptions = this.getAttribute('data-chip-selector-options');
-          chipSelectorOptions = JSON.parse(String(dataChipSelectorOptions));
-        }catch (e){
-          console.log('cannot parse', e);
-        }
-      }
-      const dataPersistentOptions = this.getAttribute('data-persistentOptions');
-      chipSelectorOptions.persistentOptions = JSON.parse(String(dataPersistentOptions));
-
-
+      const chipSelectorOptions = getChipSelectorOptions(this);
 
       chipSelectorOptions.onUpdateFunction = (allOptions: ChipSelectorItem[]) => {
         const selectedOptions = allOptions.filter((el: ChipSelectorItem) => el.currentStatus === 'checked');
-        console.log({selectedOptions});
       };
       // chipSelectorOptions.viewSkin = 'alceva';
 

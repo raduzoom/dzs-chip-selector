@@ -48,6 +48,36 @@
         <link rel="stylesheet" data-lazy-href="dzs-chip-selector/style/skins/skin-default.css"/>
       </dzs-chip-selector>
 
+      <br>
+      <br>
+      <dzs-chip-selector
+        data-chip-selector-options='{"inputPlaceholderText":"Custom placeholder ...", "viewSkin":"default--theme-dark"}'
+
+        >
+        <link rel="stylesheet" data-lazy-href="dzs-chip-selector/style/skins/skin-default--theme-dark.css"/>
+      </dzs-chip-selector>
+      <br>
+      <br>
+      <dzs-chip-selector
+        data-chip-selector-options='{"inputPlaceholderText":"ceva", "viewSkin":"flat"}'
+        data-persistentOptions='[{"htmlContent":"Apple ","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange ","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span> ","value":"apricot","currentStatus":"unchecked"}]'
+        >
+        <link rel="stylesheet" data-lazy-href="dzs-chip-selector/style/skins/skin-flat.css"/>
+      </dzs-chip-selector>
+      <br>
+      <br>
+      <dzs-chip-selector
+        data-chip-selector-options='{"inputPlaceholderText":"ceva", "viewSkin":"flat--theme-dark"}'
+        data-persistentOptions='[{"htmlContent":"Apple ","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange ","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span> ","value":"apricot","currentStatus":"unchecked"}]'
+        >
+        <link rel="stylesheet" data-lazy-href="dzs-chip-selector/style/skins/skin-flat--theme-dark.css"/>
+      </dzs-chip-selector>
+
+
+      <!--
+      data-persistentOptions='[{"htmlContent":"Apple ","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange ","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span> ","value":"apricot","currentStatus":"unchecked"}]'
+      -->
+
       <script>
         const $cs_ = document.body.querySelector('dzs-chip-selector');
         console.log('hier - ', document.body.querySelector('dzs-chip-selector'));
