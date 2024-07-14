@@ -1,0 +1,4 @@
+[06-Nov-2022 20:36:27 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function xdebug_break() in /Users/raduh/Dropbox/hosts/devsite/dzs-general-assets/projects/chip-selector/chip-selector/src/api-search.php:29
+Stack trace:
+#0 {main}
+  thrown in /Users/raduh/Dropbox/hosts/devsite/dzs-general-assets/projects/chip-selector/chip-selector/src/api-search.php on line 29

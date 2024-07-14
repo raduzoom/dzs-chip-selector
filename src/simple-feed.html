@@ -1,0 +1,250 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>DzsCse - Simple feed</title>
+  <meta name="description" content="A simple HTML5 Template for new projects.">
+  <meta name="author" content="SitePoint">
+
+  <meta property="og:title" content="Chip selector">
+  <meta property="og:type" content="website">
+  <meta property="og:description" content="Web components -> Chip selector">
+  <meta property="og:image" content="image.png">
+
+  <!--  <link rel="icon" href="/favicon.ico">-->
+  <!--  <link rel="icon" href="/favicon.svg" type="image/svg+xml">-->
+  <!--  <link rel="apple-touch-icon" href="/apple-touch-icon.png">-->
+
+  <!--  <link rel="stylesheet" href="css/styles.css?v=1.0">-->
+
+</head>
+
+<body style=";">
+<!-- your content here... -->
+<div class="main-wrap">
+  <div class="big-container" style="background-color: #eae8e8; ">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Light themes.</h1>
+          <br>
+
+
+          <h4>Skin default - theme default</h4>
+          <div style="width: 350px; max-width: 90vw;">
+
+            <div id="dcs2" class="dzs-chip-selector "
+                 data-persistentOptions='[{"htmlContent":"Apple","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span>","value":"apricot","currentStatus":"unchecked"}]'>
+            </div>
+          </div>
+
+          <h4>Skin flat - does not wrap</h4>
+          <div style="width: 300px">
+
+            <div id="dcs-flat" class="dzs-chip-selector dzs-chip-selector--skin-flat"
+                 data-persistentOptions='[{"htmlContent":"Apple ","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange ","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span> ","value":"apricot","currentStatus":"unchecked"}]'>
+            </div>
+          </div>
+
+
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <table class="table-for-jsDoc">
+            <thead>
+            <tr>
+              <th><label class=" ">propName</label></th>
+              <th><label class=" ">description</label></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td><span class="prop-name">  placeholderNoItemsFound?:</span> <em> string</em></td>
+              <td class="prop-description"> text for no items found</td>
+            </tr>
+            <tr>
+              <td><span class="prop-name">  middlewareFilterResults?:</span> <em> any</em></td>
+              <td class="prop-description"> include a middleware function like filtering the results</td>
+            </tr>
+            <tr>
+              <td><span class="prop-name">  viewSkin?:</span> <em> string</em></td>
+              <td class="prop-description"> the skin can be "skin-default", "skin-flat" - also needs css file being
+                loaded
+              </td>
+            </tr>
+            <tr>
+              <td><span class="prop-name">  inputPlaceholderText?:</span> <em> string</em></td>
+              <td class="prop-description"> the placeholder for Filter Results ... text</td>
+            </tr>
+            <tr>
+              <td><span class="prop-name">  onUpdateFunction?:</span> <em> (...args: any[]) => any</em></td>
+              <td class="prop-description"> custom function for onUpdate</td>
+            </tr>
+            <tr>
+              <td><span class="prop-name">  viewIsWrapping?:</span> <em> boolean</em></td>
+              <td class="prop-description"> wrap false or true</td>
+            </tr>
+            <tr>
+              <td><span class="prop-name">  persistentOptions?:</span> <em> ChipSelectorItem[]</em></td>
+              <td class="prop-description"> the persistent options</td>
+            </tr>
+            </tbody>
+          </table>
+
+          <br>
+          <br>
+          <br>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="big-container" style="background-color: #3b3d3d; color: #dee5e4; padding: 15px 0;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Dark themes.</h1>
+          <br>
+
+          <h4>Skin default - theme dark</h4>
+          <div id="def-dark" class="dzs-chip-selector dzs-chip-selector--skin-default--theme-dark"
+               data-persistentOptions='[{"htmlContent":"Apple ","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange ","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span> ","value":"apricot","currentStatus":"unchecked"}]'>
+          </div>
+          <br>
+          <br>
+
+          <h4>Skin flat - theme dark</h4>
+          <div style="width: 300px">
+          <div id="flat-dark" class="dzs-chip-selector dzs-chip-selector--skin-flat--theme-dark"
+               data-persistentOptions='[{"htmlContent":"Apple ","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange ","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span> ","value":"apricot","currentStatus":"unchecked"}]'>
+          </div>
+          </div>
+          <br>
+          <br>
+
+          <br>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>var exports = {}
+var require = () => {
+}</script>
+
+<script>
+
+  // -- helper functions
+  function getOptionFromValue(options, dataValue) {
+    const foundItems = options.filter((item) => item.value === dataValue)
+
+    return foundItems[0]
+  }
+
+  function documentReady(callback) {
+    new Promise((resolutionFunc, rejectionFunc) => {
+      if (document.readyState === 'interactive' || document.readyState === 'complete') {
+        resolutionFunc('interactive')
+      }
+      document.addEventListener('DOMContentLoaded', () => {
+        resolutionFunc('DOMContentLoaded')
+      }, false)
+      setTimeout(() => {
+        resolutionFunc('timeout')
+      }, 5000)
+    }).then(resolution => {
+      callback(resolution)
+    }).catch(err => {
+      callback(err)
+    })
+  }
+
+  // -- helper functions end
+</script>
+<script>
+
+
+
+  documentReady(() => {
+
+    let requestVersion = 0;
+
+    console.log('doc ready');
+
+    window.dzs_initDzsChipSelector(document.querySelector('#def-dark'), {
+      /**
+       *
+       * @param {ChipSelectorItem[]} allOptions
+       */
+      onUpdateFunction: (allOptions) => {
+        const selectedOptions = allOptions.filter((el) => el.currentStatus === 'checked');
+        console.log({selectedOptions});
+      }
+    })
+
+    window.dzs_initDzsChipSelector(document.querySelector('#dcs2'), {
+      viewIsWrapping: false,
+      /**
+       *
+       * @param {ChipSelectorItem[]} allOptions
+       */
+      onUpdateFunction: (allOptions) => {
+        const selectedOptions = allOptions.filter((el) => el.currentStatus === 'checked');
+        console.log({selectedOptions});
+      }
+    })
+
+    window.dzs_initDzsChipSelector(document.querySelector('#dcs-flat'), {
+      viewIsWrapping: false,
+      /**
+       *
+       * @param {ChipSelectorItem[]} allOptions
+       */
+      onUpdateFunction: (allOptions) => {
+        const selectedOptions = allOptions.filter((el) => el.currentStatus === 'checked');
+        console.log({selectedOptions});
+      }
+    });
+
+    window.dzs_initDzsChipSelector(document.querySelector('#flat-dark'), {
+      viewIsWrapping: false,
+      /**
+       *
+       * @param {ChipSelectorItem[]} allOptions
+       */
+      onUpdateFunction: (allOptions) => {
+        const selectedOptions = allOptions.filter((el) => el.currentStatus === 'checked');
+        console.log({selectedOptions});
+      }
+    });
+  })
+</script>
+
+<style>
+  h4 {
+    font-style: italic;
+    font-weight: normal;
+  }
+</style>
+
+
+<script src="../dist-webpack/dzsChipSelector.js"></script>
+<script src="../dist-webpack/dzsChipSelectorWebComponents.js"></script>
+
+<link rel="stylesheet" href="style/table-for-jsDoc.css"/>
+<link rel="stylesheet" href="style/bootstrap.min.css"/>
+<link rel="stylesheet" href="dzs-chip-selector/dzs-chip-selector.css"/>
+<link rel="stylesheet" href="dzs-chip-selector/style/skins/skin-default.css"/>
+<link rel="stylesheet" href="dzs-chip-selector/style/skins/skin-default--theme-dark.css"/>
+<link rel="stylesheet" href="dzs-chip-selector/style/skins/skin-flat.css"/>
+<link rel="stylesheet" href="dzs-chip-selector/style/skins/skin-flat--theme-dark.css"/>
+</body>
+</html>

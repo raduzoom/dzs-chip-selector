@@ -1,0 +1,62 @@
+[
+  {
+    "htmlContent": "Apple",
+    "value": "apple",
+    "currentStatus": null
+  },
+  {
+    "htmlContent": "Orange",
+    "value": "orange",
+    "currentStatus": null
+  },
+  {
+    "htmlContent": "<span>Apricot<\/span>",
+    "value": "apricot",
+    "currentStatus": null
+  },
+  {
+    "htmlContent": "Nirvana",
+    "value": "44",
+    "currentStatus": null
+  },
+  {
+    "htmlContent": "Palopete",
+    "value": "55",
+    "currentStatus": null
+  },
+  {
+    "htmlContent": "<span>Congrats<\/span> <strong>wut<\/strong>",
+    "value": "566",
+    "currentStatus": null
+  },
+  {
+    "htmlContent": "Bachata",
+    "value": "231",
+    "currentStatus": null
+  },
+  {
+    "htmlContent": "Bailar",
+    "value": "421",
+    "currentStatus": null
+  },
+  {
+    "htmlContent": "<span>wut<\/span> <strong>HTML<\/strong>",
+    "value": "5662",
+    "currentStatus": null
+  },
+  {
+    "htmlContent": "una bachata",
+    "value": "11",
+    "currentStatus": null
+  },
+  {
+    "htmlContent": "una kizomba",
+    "value": "12",
+    "currentStatus": null
+  },
+  {
+    "htmlContent": "wuth is this",
+    "value": "13",
+    "currentStatus": null
+  }
+]

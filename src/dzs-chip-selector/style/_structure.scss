@@ -1,0 +1,103 @@
+@use 'sass:math';
+.dzs-chip-selector {
+  position: relative;
+
+  .dzs-chip-selector--container {
+    display: inline-flex;
+    align-items: baseline;
+    box-sizing: border-box;
+    width: 100%;
+
+    background-color: #0000000a;
+
+    padding: 10px;
+
+    .dzs-chip-selector--form-field {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      width: 100%;
+
+
+      @import "./chipList";
+
+    }
+  }
+
+}
+.dzs-chip-selector.dzs-chip-selector--view-one-line:not(.a):not(.a):not(.a){
+  .dzs-chip-selector--form-field{
+
+    width: 100%;
+    //overflow: hidden;
+    text-overflow: ellipsis;
+    flex-wrap: nowrap;
+  }
+  .dzs-chip-selector--chip-list-wrapper{
+
+    flex-wrap: nowrap;
+  }
+
+
+  .dzs-chip-selector--overflow-placeholder{
+    display: none;
+    width: 15px;
+    margin-left: 5px;
+    cursor: pointer;
+  }
+
+  &.dzs-chip-selector--is-overflowing{
+
+    .dzs-chip-selector--overflow-placeholder {
+      display: inline-block;
+
+      position: relative;
+
+
+      $tooltipWidth: 120px;
+      .dzs-chip-selector--overflow-tooltip {
+        width: $tooltipWidth;
+        background-color: #555;
+        color: #fff;
+        text-align: center;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        bottom: 150%;
+        left: 50%;
+        margin-left: math.div(-$tooltipWidth, 2);
+        opacity: 0;
+        visibility: hidden;
+        //opacity: 1;
+        font-size: 13px;
+        transition: opacity 0.3s;
+
+        text-transform: uppercase;
+        font-size: 11px;
+        font-weight: bold;
+        $triangleSize: 5px;
+        &:after{
+
+          content: "";
+          position: absolute;
+          left: 50%;
+          top: 100%;
+          width: 0;
+          height: 0;
+          margin-left: math.div(-$triangleSize, 2);
+          border-left: $triangleSize solid transparent;
+          border-right: $triangleSize solid transparent;
+
+          border-top: $triangleSize solid #555;
+        }
+      }
+
+      &:hover .dzs-chip-selector--overflow-tooltip {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+  }
+}
+

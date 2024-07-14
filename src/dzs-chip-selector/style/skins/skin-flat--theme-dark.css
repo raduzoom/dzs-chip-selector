@@ -1,0 +1,163 @@
+@charset "UTF-8";
+.dzs-chip-selector.dzs-chip-selector--skin-flat {
+  font-family: "Droid Sans", sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-flat .dzs-chip-selector--container {
+  background-color: #ffffff;
+  border: 1px solid rgba(205, 208, 208, 0.99);
+  min-height: 30px;
+  padding: 3px;
+  border-radius: 0px;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-flat .dzs-chip-selector--container .dzs-chip-selector--form-field .dzs-chip-selector--chip-list ul.dzs-chip-selector--chip-list-wrapper .dzs-chip-selector--item {
+  background-color: #f8f8f8;
+  border: 1px solid rgba(63, 62, 62, 0.3);
+  border-radius: 0;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 3px;
+  padding-left: 3px;
+  font-size: 11px;
+  display: inline-flex;
+  flex-direction: row-reverse;
+  gap: 5px;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-flat .dzs-chip-selector--container .dzs-chip-selector--form-field .dzs-chip-selector--chip-list ul.dzs-chip-selector--chip-list-wrapper .dzs-chip-selector--item + .dzs-chip-selector--item {
+  margin-left: 5px;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-flat .dzs-chip-selector--container .dzs-chip-selector--form-field .dzs-chip-selector--chip-list ul.dzs-chip-selector--chip-list-wrapper .dzs-chip-selector--item .dzs-chip-selector--item--content {
+  color: #353638;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-flat .dzs-chip-selector--container .dzs-chip-selector--form-field .dzs-chip-selector--item--remove {
+  border-radius: 50%;
+  padding-left: 0px;
+  margin-left: 0px;
+  width: 10px;
+  height: 10px;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-flat .dzs-chip-selector--container .dzs-chip-selector--form-field .dzs-chip-selector--item--remove > figure {
+  font-size: 0;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-flat .dzs-chip-selector--container .dzs-chip-selector--form-field .dzs-chip-selector--item--remove > figure:before {
+  content: "×";
+  font-family: Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  color: #353638;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-flat .dzs-chip-selector--autocompletelist {
+  font-size: 11px;
+  color: #353638;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-flat .dzs-chip-selector--autocompletelist:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid rgba(205, 208, 208, 0.99);
+  top: 3px;
+  left: 10px;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-flat .dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--inner {
+  background-color: rgba(205, 208, 208, 0.99);
+  border-radius: 1px;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-flat .dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item {
+  background-color: #d8dbdc;
+  border-radius: 5px;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-flat .dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item + .dzs-chip-selector--autocompletelist--items--item {
+  margin-top: 5px;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-flat .dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item:hover, .dzs-chip-selector.dzs-chip-selector--skin-flat .dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item.is-selected {
+  background-color: #f5fcff;
+}
+
+.dzs-chip-selector.dzs-chip-selector--skin-flat--theme-dark {
+  font-family: "Droid Sans", sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-flat--theme-dark .dzs-chip-selector--container {
+  background-color: #313131;
+  border: 1px solid rgba(67, 68, 68, 0.99);
+  min-height: 30px;
+  padding: 3px;
+  border-radius: 0px;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-flat--theme-dark .dzs-chip-selector--container .dzs-chip-selector--form-field .dzs-chip-selector--chip-list ul.dzs-chip-selector--chip-list-wrapper .dzs-chip-selector--item {
+  background-color: #424040;
+  border: 1px solid rgba(63, 62, 62, 0.3);
+  border-radius: 0;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 3px;
+  padding-left: 3px;
+  font-size: 11px;
+  display: inline-flex;
+  flex-direction: row-reverse;
+  gap: 5px;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-flat--theme-dark .dzs-chip-selector--container .dzs-chip-selector--form-field .dzs-chip-selector--chip-list ul.dzs-chip-selector--chip-list-wrapper .dzs-chip-selector--item + .dzs-chip-selector--item {
+  margin-left: 5px;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-flat--theme-dark .dzs-chip-selector--container .dzs-chip-selector--form-field .dzs-chip-selector--chip-list ul.dzs-chip-selector--chip-list-wrapper .dzs-chip-selector--item .dzs-chip-selector--item--content {
+  color: #d9dadc;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-flat--theme-dark .dzs-chip-selector--container .dzs-chip-selector--form-field .dzs-chip-selector--item--remove {
+  border-radius: 50%;
+  padding-left: 0px;
+  margin-left: 0px;
+  width: 10px;
+  height: 10px;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-flat--theme-dark .dzs-chip-selector--container .dzs-chip-selector--form-field .dzs-chip-selector--item--remove > figure {
+  font-size: 0;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-flat--theme-dark .dzs-chip-selector--container .dzs-chip-selector--form-field .dzs-chip-selector--item--remove > figure:before {
+  content: "×";
+  font-family: Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  color: #d9dadc;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-flat--theme-dark .dzs-chip-selector--autocompletelist {
+  font-size: 11px;
+  color: #d9dadc;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-flat--theme-dark .dzs-chip-selector--autocompletelist:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid rgba(67, 68, 68, 0.99);
+  top: 3px;
+  left: 10px;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-flat--theme-dark .dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--inner {
+  background-color: rgba(67, 68, 68, 0.99);
+  border-radius: 1px;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-flat--theme-dark .dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item {
+  background-color: #3d3d3d;
+  border-radius: 5px;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-flat--theme-dark .dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item + .dzs-chip-selector--autocompletelist--items--item {
+  margin-top: 5px;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-flat--theme-dark .dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item:hover, .dzs-chip-selector.dzs-chip-selector--skin-flat--theme-dark .dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item.is-selected {
+  background-color: #2a2828;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-flat--theme-dark .dzs-chip-selector--item--content {
+  font-weight: bold;
+}
+
+/*# sourceMappingURL=skin-flat--theme-dark.css.map */

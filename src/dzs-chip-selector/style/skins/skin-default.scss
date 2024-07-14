@@ -1,0 +1,119 @@
+@import "../../TOKENS";
+
+$colorBg: #ffffff;
+$colorText: #232323;
+$colorBorder: rgba(34, 34, 34, 0.44);
+$chipsColorBackground: rgb(183, 204, 231);
+$chipsTextBackground: rgb(53, 54, 56);
+$colorAutocompleteList: $chipsTextBackground;
+$arrowSize: 8px;
+$offsetForList: 3px;
+
+@mixin skin-generate() {
+
+  font-family: "Droid Sans", sans-serif;
+
+  .dzs-chip-selector--container {
+    background-color: $colorBg;
+    border: 1px solid $colorBorder;
+    min-height: 54px;
+
+    .dzs-chip-selector--item {
+
+      border-radius: $chipsStyleBorderRadius;
+    }
+    .dzs-chip-selector--form-field {
+      .dzs-chip-selector--chip-list {
+        ul.dzs-chip-selector--chip-list-wrapper .dzs-chip-selector--item {
+          background-color: $chipsColorBackground;
+
+          & + .dzs-chip-selector--item {
+            margin-left: 5px;
+          }
+
+          .dzs-chip-selector--item--content {
+            //font-weight: bold;
+
+            color: $chipsTextBackground;
+          }
+        }
+      }
+
+      .dzs-chip-selector--input-new-element--label{
+        color: $colorText;
+      }
+
+      .dzs-chip-selector--item--remove {
+        border: 1px solid $chipsTextBackground;
+        border-radius: 50%;
+
+        > figure {
+          font-size: 0;
+
+          &:before {
+
+
+            content: "\00d7";
+            font-family: Helvetica, sans-serif;
+            font-size: 11px;
+            font-weight: bold;
+            color: $chipsTextBackground;
+          }
+        }
+      }
+    }
+  }
+
+
+  // -- autocomplete list
+  .dzs-chip-selector--autocompletelist {
+
+
+    // -- arrow
+    &:before {
+      content: '';
+      position: absolute;
+
+
+      width: 0;
+      height: 0;
+      border-left: $arrowSize solid transparent;
+      border-right: $arrowSize solid transparent;
+      border-bottom: $arrowSize solid $colorBorder;
+      top: $offsetForList;
+      left: 10px;
+    }
+
+    .dzs-chip-selector--autocompletelist--inner {
+      color: $colorAutocompleteList;
+
+      background-color: $colorBorder;
+    }
+
+    .dzs-chip-selector--autocompletelist--items {
+      .dzs-chip-selector--autocompletelist--items--item {
+        background-color: $colorBg;
+        border-radius: $chipsStyleBorderRadius;
+
+
+        & + .dzs-chip-selector--autocompletelist--items--item {
+          margin-top: 5px;
+        }
+
+        &:hover {
+          background-color: $chipsColorBackground;
+        }
+
+        &.is-selected {
+
+          background-color: $chipsColorBackground;
+        }
+      }
+    }
+
+  }
+}
+
+.dzs-chip-selector.dzs-chip-selector--skin-default {
+  @include skin-generate();
+}

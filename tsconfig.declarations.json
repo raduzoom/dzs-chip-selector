@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "plugins": [{ "name": "typescript-plugin-css-modules" }],
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "skipLibCheck": true,
+    "emitDeclarationOnly": true,
+    "esModuleInterop": true
+  },
+  "include": [
+    "src/**/*", "declarations.d.ts"
+  ]
+}

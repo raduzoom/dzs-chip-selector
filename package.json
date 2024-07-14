@@ -1,0 +1,67 @@
+{
+  "name": "chip-selector",
+  "version": "1.0.41",
+  "description": "an all purpose input multiselect with chips - includes search on the tooltip",
+  "module": "dist/index.js",
+  "types": "dist/dzs-chip-selector.d.ts",
+  "files": [
+    "dist",
+    "!dist/dist"
+  ],
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest",
+    "dev-server": "tsc-watch --noClear -p ./tsconfig.json",
+    "build-ts": "tsc --out  final.js --module commonjs ./src/dzs-chip-selector/dzs-chip-selector.ts",
+    "rollup": "rollup -c",
+    "dev": "webpack --watch --config webpack.config.js --mode development --env demo_var=var",
+    "dev-webserver": "webpack-dev-server --config webpack.config.js --mode development",
+    "pub": "npm version patch && npm run build && npm publish",
+    "ts-declarations": "tsc -p tsconfig.declarations.json",
+    "build": "webpack --config webpack.config.js --mode production && npm run ts-declarations && npm run rollup && git add -A && git commit -m 'chore: add rollup'",
+    "build-ci": "webpack --config webpack.config.js --mode production && npm run ts-declarations && npm run rollup"
+  },
+  "keywords": [
+    "chips",
+    "input",
+    "search",
+    "multiselect"
+  ],
+  "homepage": "https://digitalzoomstudio.net",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raduzoom/dzs-chip-selector"
+  },
+  "author": "raduzoom",
+  "license": "(MIT OR Apache-2.0)",
+  "devDependencies": {
+    "@babel/core": "^7.18.2",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-typescript": "^7.17.12",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-terser": "^0.2.1",
+    "@rollup/plugin-typescript": "11.1.6",
+    "@types/jest": "^29.2.5",
+    "@types/node-sass": "^4.11.3",
+    "babel-loader": "^8.2.5",
+    "copy-webpack-plugin": "^11.0.0",
+    "jest": "^29.3.1",
+    "jest-environment-jsdom": "^29.3.1",
+    "raw-loader": "^4.0.2",
+    "rollup": "^3",
+    "rollup-plugin-copy": "^3.5.0",
+    "rollup-plugin-postcss": "^4.0.2",
+    "sass": "^1.56.1",
+    "sass-loader": "^13.2.0",
+    "ts-jest": "^29.0.5",
+    "ts-loader": "^9.3.0",
+    "ts-node": "^10.9.1",
+    "tsc-watch": "^5.0.3",
+    "typescript": "^4.9.4",
+    "typescript-plugin-css-modules": "^3.4.0",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.9.1"
+  }
+}

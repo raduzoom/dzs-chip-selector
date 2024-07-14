@@ -1,0 +1,6 @@
+
+#<Directory /Users/raduh/Dropbox/hosts/devsite/dzs-general-assets/projects/chip-selector/chip-selector/src/dzs-chip-selector>
+#    Options Indexes FollowSymLinks
+#    AllowOverride All
+#    Require all granted
+#</Directory>

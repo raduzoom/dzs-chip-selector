@@ -1,0 +1,68 @@
+{
+  "compilerOptions": {
+    //    "strict": true,
+    //    "sourceMap": true,
+    "declaration": true,
+    "baseUrl": ".",
+    "paths": {
+//      "@dzsChipSelector/*": ["src/dzs-chip-selector/*"]
+    },
+//    "paths": [
+//      "src/**/*"
+//    ],
+    //    "outDir": "./dist",
+    "declarationDir": ".",
+    //    "esModuleInterop": true,
+    //    "skipLibCheck": true,
+    //    "forceConsistentCasingInFileNames": true,
+    //    "outFile": "./dist/dzs-chip-selector.js",
+    "plugins": [{ "name": "typescript-plugin-css-modules" }],
+    "rootDir": ".",
+    "noImplicitAny": true,
+    "typeRoots": [
+      "./types"
+    ],
+    "allowJs": true,
+    "moduleResolution": "node",
+    "lib": [
+      "es2020",
+      "dom"
+    ],
+
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "checkJs": false,
+    "declarationMap": true,
+    "allowSyntheticDefaultImports": true,
+
+
+
+    "outDir": "dist",
+    "sourceMap": true,
+    "module": "es2020",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2020",
+    "useDefineForClassFields": false
+  },
+  "include": [
+    "src/**/*", "declarations.d.ts"
+  ],
+  //  "files": [
+  //    "./src/dzs-chip-selector/dzs-chip-selector.ts"
+  //  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts",
+    "dist",
+    "./build",
+    "**/*.spec.*",
+    "**/__mocks__/*"
+  ],
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Recommended"
+}
+//{"files":["./src/dzs-chip-selector/dzs-chip-selector.ts"]}

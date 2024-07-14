@@ -1,0 +1,30 @@
+
+
+
+.dzs-chip-selector--input-new-element--label {
+
+  margin-left: 4px;
+  margin-bottom: 0;
+
+  max-width: 50%;
+  flex: 1 2 100px;
+  min-width: 100px;
+
+}
+.dzs-chip-selector--input-new-element {
+  font: inherit;
+  background: rgba(0, 0, 0, 0);
+  color: currentColor;
+  border: none;
+  outline: none;
+  padding: 0;
+  max-width: 100%;
+  vertical-align: bottom;
+  text-align: inherit;
+  box-sizing: content-box;
+
+  text-align: left;
+
+  appearance: none;
+  margin: 4px;
+}

@@ -1,0 +1,40 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "declaration": true,
+    "baseUrl": ".",
+    "paths": {
+      "@dzsChipSelector/*": ["src/dzs-chip-selector/*"]
+    },
+    "declarationDir": ".",
+    "plugins": [{ "name": "typescript-plugin-css-modules" }],
+    "rootDir": ".",
+    "noImplicitAny": true,
+    "typeRoots": [
+      "./types"
+    ],
+    "allowJs": true,
+    "moduleResolution": "node",
+    "lib": [
+      "es2020",
+      "dom"
+    ],
+
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "checkJs": true,
+    "declarationMap": true,
+    "allowSyntheticDefaultImports": true,
+
+    "outDir": "dist",
+    "sourceMap": false,
+    "module": "es2020",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2020",
+    "useDefineForClassFields": false
+  }
+}

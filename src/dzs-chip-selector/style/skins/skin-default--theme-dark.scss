@@ -1,0 +1,20 @@
+@import "../../TOKENS";
+
+@import "skin-default";
+
+$colorBg: #222222;
+$colorText: #e8e8e8;
+$colorBorder: rgba(70, 69, 69, 0.93);
+$chipsColorBackground: rgb(111, 148, 168);
+$chipsTextBackground: rgb(228, 231, 238);
+$colorAutocompleteList: $chipsTextBackground;
+
+
+
+.dzs-chip-selector.dzs-chip-selector--skin-default--theme-dark {
+  @include skin-generate();
+
+  .dzs-chip-selector--item--content{
+    font-weight: bold;
+  }
+}

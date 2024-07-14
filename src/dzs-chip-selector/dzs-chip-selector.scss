@@ -1,0 +1,28 @@
+@import "TOKENS";
+
+
+@import "style/structure";
+
+@import "style/inputNewElement";
+
+@import "style/autocompleteList";
+
+.dzs-chip-selector{
+  opacity: 1;
+
+
+  .dzs-chip-selector--autocompletelist--inner{
+
+    opacity: 1;
+    $transition-property:  opacity;
+    $transition-duration: 0.3s;
+    $transition-timing: ease-out;
+    @include apply_transition($transition-property, $transition-duration, $transition-timing);
+  }
+  &.dzs-chip-selector--is-autocomplete-list-loading {
+    .dzs-chip-selector--autocompletelist--inner {
+      opacity: 0.7;
+      visibility: visible;
+    }
+  }
+}

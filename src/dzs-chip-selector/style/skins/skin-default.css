@@ -1,0 +1,65 @@
+@charset "UTF-8";
+.dzs-chip-selector.dzs-chip-selector--skin-default {
+  font-family: "Droid Sans", sans-serif;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-default .dzs-chip-selector--container {
+  background-color: #ffffff;
+  border: 1px solid rgba(34, 34, 34, 0.44);
+  min-height: 54px;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-default .dzs-chip-selector--container .dzs-chip-selector--item {
+  border-radius: 5px;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-default .dzs-chip-selector--container .dzs-chip-selector--form-field .dzs-chip-selector--chip-list ul.dzs-chip-selector--chip-list-wrapper .dzs-chip-selector--item {
+  background-color: rgb(183, 204, 231);
+}
+.dzs-chip-selector.dzs-chip-selector--skin-default .dzs-chip-selector--container .dzs-chip-selector--form-field .dzs-chip-selector--chip-list ul.dzs-chip-selector--chip-list-wrapper .dzs-chip-selector--item + .dzs-chip-selector--item {
+  margin-left: 5px;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-default .dzs-chip-selector--container .dzs-chip-selector--form-field .dzs-chip-selector--chip-list ul.dzs-chip-selector--chip-list-wrapper .dzs-chip-selector--item .dzs-chip-selector--item--content {
+  color: rgb(53, 54, 56);
+}
+.dzs-chip-selector.dzs-chip-selector--skin-default .dzs-chip-selector--container .dzs-chip-selector--form-field .dzs-chip-selector--item--remove {
+  border: 1px solid rgb(53, 54, 56);
+  border-radius: 50%;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-default .dzs-chip-selector--container .dzs-chip-selector--form-field .dzs-chip-selector--item--remove > figure {
+  font-size: 0;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-default .dzs-chip-selector--container .dzs-chip-selector--form-field .dzs-chip-selector--item--remove > figure:before {
+  content: "×";
+  font-family: Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  color: rgb(53, 54, 56);
+}
+.dzs-chip-selector.dzs-chip-selector--skin-default .dzs-chip-selector--autocompletelist:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid rgba(34, 34, 34, 0.44);
+  top: 3px;
+  left: 10px;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-default .dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--inner {
+  color: rgb(53, 54, 56);
+  background-color: rgba(34, 34, 34, 0.44);
+}
+.dzs-chip-selector.dzs-chip-selector--skin-default .dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item {
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-default .dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item + .dzs-chip-selector--autocompletelist--items--item {
+  margin-top: 5px;
+}
+.dzs-chip-selector.dzs-chip-selector--skin-default .dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item:hover {
+  background-color: rgb(183, 204, 231);
+}
+.dzs-chip-selector.dzs-chip-selector--skin-default .dzs-chip-selector--autocompletelist .dzs-chip-selector--autocompletelist--items .dzs-chip-selector--autocompletelist--items--item.is-selected {
+  background-color: rgb(183, 204, 231);
+}
+
+/*# sourceMappingURL=skin-default.css.map */
