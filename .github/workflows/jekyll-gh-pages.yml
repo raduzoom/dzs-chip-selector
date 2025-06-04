@@ -44,6 +44,7 @@ jobs:
           ls -la
           cp ./src/demo.html ./dist/demo.html 
           cp ./src/simple-feed.html ./dist/simple-feed.html 
+          cp ./src/simple-feed--web-components.html ./dist/simple-feed--web-components.html 
           cd dist
           echo "see files dist"
           ls -la
