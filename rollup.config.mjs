@@ -17,7 +17,7 @@ export default [
         sourceMap: false,
         compilerOptions: {
           declaration: true,
-          declarationDir: '.'
+          "declarationDir": "./types",    // all .d.ts files go here
         }
       }),
       babel({babelHelpers: 'bundled', extensions: ['.ts']}),
