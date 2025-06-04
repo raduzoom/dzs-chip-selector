@@ -116,8 +116,5 @@ jobs:
         with:
           path: .
       - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
       - id: deployment
         uses: actions/deploy-pages@v3
