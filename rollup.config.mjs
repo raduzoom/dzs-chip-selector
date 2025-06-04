@@ -24,6 +24,7 @@ export default [
       copy({
         targets: [
           { src: 'src/dzs-chip-selector/style/skins', dest: 'dist/style' },
+          { src: 'src/dzs-chip-selector/style/skins', dest: 'dist/dzs-chip-selector/style' },
           { src: ['src/dzs-chip-selector/dzs-chip-selector.css', 'src/style/table-for-jsDoc.css', 'src/style/bootstrap.min.css'], dest: 'dist/style' },
         ]}),
       terser(),
