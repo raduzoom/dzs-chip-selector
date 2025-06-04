@@ -1,18 +1,19 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "declaration": true,
     "baseUrl": ".",
     "paths": {
       "@dzsChipSelector/*": ["src/dzs-chip-selector/*"]
     },
-    "declarationDir": ".",
     "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "rootDir": ".",
     "noImplicitAny": true,
     "typeRoots": [
       "./types"
     ],
+    "declaration": true,
+    "declarationMap": true,
+    "declarationDir": "./types",    // all .d.ts files go here
     "allowJs": true,
     "moduleResolution": "node",
     "lib": [
@@ -25,7 +26,6 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "checkJs": true,
-    "declarationMap": true,
     "allowSyntheticDefaultImports": true,
 
     "outDir": "dist",
