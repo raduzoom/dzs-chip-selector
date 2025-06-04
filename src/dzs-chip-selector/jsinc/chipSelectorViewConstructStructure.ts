@@ -6,7 +6,7 @@ import {ChipSelectorItem} from "../dzs-chip-selector.type";
 export function viewChipSelectorChipItemStructure(item: ChipSelectorItem) {
   return `<li data-value="${item.value}" class="dzs-chip-selector--item">
 <div class="dzs-chip-selector--item--content">${item.htmlContent}</div>
-<button _ngcontent-mua-c151="" matchipremove="" class="dzs-chip-selector--item--remove"  type="button">
+<button class="dzs-chip-selector--item--remove" matChipRemove type="button">
   <figure>x</figure>
 </button>
 </li>`;
