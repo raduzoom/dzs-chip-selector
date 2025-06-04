@@ -56,7 +56,7 @@ jobs:
 
 
       - name: Upload artifact
-        uses: actions/upload-artifact@master
+        uses: actions/upload-artifact@v3
         with:
           name: page
           path: ./dist
@@ -99,7 +99,7 @@ jobs:
 
 
 
-  deploy:
+  deploy-job:
     runs-on: ubuntu-latest
     needs: build
     environment:
@@ -107,7 +107,7 @@ jobs:
       url: ${{steps.deployment.outputs.page_url}}
 
     steps:
-      - uses: actions/download-artifact@master
+      - uses: actions/download-artifact@v3
         with:
           name: page
           path: .
@@ -116,4 +116,4 @@ jobs:
         with:
           path: .
       - id: deployment
-        uses: actions/deploy-pages@main
+        uses: actions/deploy-pages@v2

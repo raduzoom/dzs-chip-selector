@@ -82,7 +82,64 @@
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
+## Getting Started
+Clone the repository and install dependencies:
 
+* npm
+```sh
+  git clone <repo-url>
+  cd dzs-chip-selector
+  npm install
+```
+Start the development build:
+
+* npm
+```sh
+  npm run dev
+```
+____
+
+- Open src/demo.html in a browser to see the component in action.
+
+
+
+
+## Usage
+1. Initialize via the global function dzs_initDzsChipSelector or by importing the module in TypeScript.
+
+2. Feed options through a form’s checkboxes or via the data-persistentOptions attribute on the root element.
+
+3. Available configuration options include:
+
+- placeholderNoItemsFound – text when filtering yields no results.
+
+- middlewareFilterResults – custom function for filtering.
+
+- viewSkin – choose a skin such as skin-default or skin-flat.
+
+- inputPlaceholderText – placeholder for the filter input.
+
+See the documentation in **README.md** and explore src/demo.html for practical examples.
+
+## Important Files
+src/dzs-chip-selector/dzs-chip-selector.ts – main component class.
+
+src/dzs-chip-selector/config/ – default configuration and class names.
+
+src/dzs-chip-selector/js_common/ – shared DOM utilities.
+
+src/dzs-chip-selector/jsinc/ – event listeners and initial DOM setup.
+
+Unit tests – located alongside the source files (*.spec.ts).
+
+## Learning Next
+Examine the interface ChipSelectorOptions in src/dzs-chip-selector/dzs-chip-selector.type.ts for available settings.
+
+Review the SCSS themes under src/dzs-chip-selector/style/skins/ to customize the look and feel.
+
+Explore unit tests in src/dzs-chip-selector/*.spec.ts to understand expected behavior and how the component handles option updates and autocomplete filtering.
+
+This overview should help newcomers quickly orient themselves in the codebase and know where to look for configuration, demos, and tests.
 ### Works With
 
 This component has been made to be versatile, it includes both ES6 and UMD builds ( module / bundled ).
