@@ -5,6 +5,11 @@
     "declaration": true,
     "declarationMap": true,
     "declarationDir": "./types",    // all .d.ts files go here
+    "typeRoots": [
+      "./types",
+      "./node_modules/@types"
+    ],
+    "types": [],
     "baseUrl": ".",
     "paths": {
 //      "@dzsChipSelector/*": ["src/dzs-chip-selector/*"]
@@ -20,9 +25,6 @@
     "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "rootDir": ".",
     "noImplicitAny": true,
-    "typeRoots": [
-      "./types"
-    ],
     "allowJs": true,
     "moduleResolution": "node",
     "lib": [
