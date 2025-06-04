@@ -34,7 +34,12 @@ export default [
   {
     input: 'src/dzs-chip-selector/dzs-chip-selector.ts',
     output: {
-      file: 'dist/index-dev.js', format: 'es',
+      // dir: 'dist/dev',
+      file: 'dist/index-dev.js',
+      format: 'es',
+      sourcemap: true,
+      // preserveModules: true,
+      // preserveModulesRoot: 'src',
     },
     plugins: [
       typescript({
