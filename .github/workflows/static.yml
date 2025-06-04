@@ -106,11 +106,12 @@ jobs:
 
 
 
-  deploy-job:
+  deploy:
     runs-on: ubuntu-latest
     needs: build
     environment:
       name: github-pages
+      url: ${{steps.deployment.outputs.page_url}}
 
     steps:
 #      - uses: actions/download-artifact@v4
