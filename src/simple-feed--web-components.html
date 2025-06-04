@@ -85,10 +85,28 @@
         $cs_.ceva = 'ceva';
 
       </script>
+
+      <br>
+      <div>
+
+      <button id="remove-third-component">Remove 3rd Component</button>
+      </div>
     </div>
   </div>
 </div>
 
+<script>
+  document.getElementById('remove-third-component').addEventListener('click', () => {
+    const components = document.querySelectorAll('dzs-chip-selector');
+    if (components.length >= 3) {
+      const third = components[2];
+      third.remove(); // triggers disconnectedCallback if implemented
+      console.log('✅ Removed 3rd dzs-chip-selector component:', third);
+    } else {
+      console.warn('⚠️ Less than 3 dzs-chip-selector components found');
+    }
+  });
+</script>
 
 <script>var exports = {}
 var require = () => {

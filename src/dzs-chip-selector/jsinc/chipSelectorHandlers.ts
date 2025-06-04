@@ -18,6 +18,7 @@ export function setupHandlers(selfInstance: DzsChipSelector) {
   selfInstance.$elem_?.querySelector('.dzs-chip-selector--chip-list-wrapper')?.addEventListener('click', handleChipsClick);
 
 
+  // console.log('setupHandlers');
 
 
   if(!selfInstance.chipSelectorOptions.viewIsWrapping){

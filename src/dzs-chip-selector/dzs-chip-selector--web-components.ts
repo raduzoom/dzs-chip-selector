@@ -42,6 +42,15 @@ export class DzsChipSelectorWrapper extends HTMLElement {
 
   }
 
+
+  disconnectedCallback() {
+    console.log(`[DzsChipSelectorWrapper] Removed from DOM`, this);
+    // You can also do:
+    // - Remove global references
+    // - Cleanup observers, intervals, or event listeners
+    // - Trigger custom events
+  }
+
   renderComponent() {
 
 
@@ -56,6 +65,7 @@ export class DzsChipSelectorWrapper extends HTMLElement {
 
       chipSelectorOptions.onUpdateFunction = (allOptions: ChipSelectorItem[]) => {
         const selectedOptions = allOptions.filter((el: ChipSelectorItem) => el.currentStatus === 'checked');
+        console.log(selectedOptions)
       };
       // chipSelectorOptions.viewSkin = 'alceva';
 
@@ -85,6 +95,18 @@ export function dzsChipSelectorWebComponent_init() {
     customElements.define(DZS_CHIP_SELECTOR__CLASS_NAME__PRINCIPAL, DzsChipSelectorWrapper);
     globalThis.dzs_chipSelector_inited = true;
   }
+
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      mutation.removedNodes.forEach((node) => {
+        if (node instanceof HTMLElement && node.tagName.toLowerCase() === 'dzs-chip-selector') {
+          console.log('⚠️ Web component removed from DOM:', node);
+        }
+      });
+    });
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
 }
 
 globalThis.dzsChipSelectorWebComponent_init = dzsChipSelectorWebComponent_init;
