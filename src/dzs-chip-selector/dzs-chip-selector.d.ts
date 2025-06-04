@@ -52,7 +52,7 @@ export declare class DzsChipSelector {
      * create the list from currentItems
      */
     createListFromOptions(): void;
-    getAutocompleteItemDomFromValue(arg: string): void;
+    getAutocompleteItemDomFromValue(arg: string): HTMLElement | null;
     /**
      * filter on each letter
      */

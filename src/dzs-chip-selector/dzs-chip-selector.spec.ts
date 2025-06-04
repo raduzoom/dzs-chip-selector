@@ -201,9 +201,30 @@ describe('autoCompleteFilterResults', () => {
     expect(findIsHidden).toEqual(true);
 
     // @ts-ignore
-    findIsHidden = dzsChipSelector?.$autoCompleteList?.querySelector('[data-value="test"]').classList.contains('is-hidden');
-    expect(findIsHidden).toEqual(false);
+  findIsHidden = dzsChipSelector?.$autoCompleteList?.querySelector('[data-value="test"]').classList.contains('is-hidden');
+  expect(findIsHidden).toEqual(false);
   });
 
 
+});
+
+describe('getAutocompleteItemDomFromValue', () => {
+  test('should return the DOM element matching the value', () => {
+    const $elem = document.createElement('div');
+    const dzsChipSelector = new DzsChipSelector($elem, {}, false);
+
+    dzsChipSelector.initClass();
+
+    dzsChipSelector.autoCompleteOptions = [
+      { htmlContent: 'Option 1', value: 'option1', currentStatus: currentStatusType.CHECKED },
+      { htmlContent: 'Option 2', value: 'option2', currentStatus: currentStatusType.UNCHECKED },
+    ];
+
+    dzsChipSelector.createListFromOptions();
+
+    const found = dzsChipSelector.getAutocompleteItemDomFromValue('option2');
+
+    expect(found).not.toBeNull();
+    expect((found as HTMLElement).getAttribute('data-value')).toBe('option2');
+  });
 });

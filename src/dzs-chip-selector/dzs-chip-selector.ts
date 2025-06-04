@@ -308,13 +308,16 @@ export class DzsChipSelector {
     })
   }
 
-  getAutocompleteItemDomFromValue(arg: string) {
+  getAutocompleteItemDomFromValue(arg: string): HTMLElement | null {
     const $items = this.$autoCompleteList.querySelectorAll('.' + DZS_CHIP_SELECTOR_AUTOCOMPLETE_CLASS_NAME_ITEMS);
-    $items.forEach(($item) => {
+
+    for (const $item of Array.from($items)) {
       if ($item.getAttribute('data-value') === arg) {
-        return $item;
+        return $item as HTMLElement;
       }
-    })
+    }
+
+    return null;
   }
 
   /**
