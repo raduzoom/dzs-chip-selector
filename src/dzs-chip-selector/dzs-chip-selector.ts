@@ -171,7 +171,7 @@ export class DzsChipSelector {
 
 
   /**
-   * updates from single source of truth this.$autoCompleteList -- .dzs-chip-selector--autocompletelist--items
+   * updates from a single source of truth this.$autoCompleteList -- .dzs-chip-selector--autocompletelist--items
    */
   updateListFromOptions() {
 
