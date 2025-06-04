@@ -56,10 +56,16 @@ jobs:
           
 
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
+#      - name: Upload artifact
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: page
+#          path: ./dist
+
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: page
           path: ./dist
 
   #      - name: Upload artifact
@@ -108,13 +114,13 @@ jobs:
       url: ${{steps.deployment.outputs.page_url}}
 
     steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: page
-          path: .
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
-      - uses: actions/configure-pages@v5
+#      - uses: actions/download-artifact@v4
+#        with:
+#          name: page
+#          path: .
+#      - uses: actions/upload-pages-artifact@v3
+#        with:
+#          path: .
+#      - uses: actions/configure-pages@v5
       - id: deployment
         uses: actions/deploy-pages@v3
