@@ -11,6 +11,7 @@ import {dzsChipSelectorDefaultOptions} from "./config/dzs-chip-selector--default
 import {initChipSelector} from "./jsinc/chipSelectorHelpers";
 import {setupHandlers} from "./jsinc/chipSelectorHandlers";
 import {chipSelectorInitStructure, viewChipSelectorChipItemStructure} from "./jsinc/chipSelectorViewConstructStructure";
+import {getOptionFromValue} from "./dzs-chip-selector.util";
 
 
 declare global {
@@ -162,12 +163,6 @@ export class DzsChipSelector {
   }
 
 
-  static getOptionFromValue(options: any[], dataValue: string) {
-
-    const foundItems = options.filter((item) => item.value === dataValue);
-
-    return foundItems[0];
-  }
 
 
   /**
@@ -182,7 +177,7 @@ export class DzsChipSelector {
     $ulItems?.childNodes.forEach(child => {
 
       const dataValue = String((child as HTMLElement).getAttribute('data-value'));
-      const persistentOption = DzsChipSelector.getOptionFromValue(this.persistentOptions, dataValue);
+      const persistentOption = getOptionFromValue(this.persistentOptions, dataValue);
 
 
       if (persistentOption !== undefined) {

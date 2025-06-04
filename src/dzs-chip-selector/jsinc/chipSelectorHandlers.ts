@@ -5,6 +5,7 @@ import {
 } from "../config/dzs-chip-selector.config";
 import {currentStatusType} from "../dzs-chip-selector.type";
 import {DzsChipSelector} from "../dzs-chip-selector";
+import {getOptionFromValue} from "../dzs-chip-selector.util";
 
 
 export function setupHandlers(selfInstance: DzsChipSelector) {
@@ -43,8 +44,8 @@ export function setupHandlers(selfInstance: DzsChipSelector) {
         const $chip = target.parentNode;
         const dataValue = String(($chip as HTMLElement).getAttribute('data-value'));
 
-        const targetOption = DzsChipSelector.getOptionFromValue(selfInstance.autoCompleteOptions, (dataValue));
-        const persistentOption = DzsChipSelector.getOptionFromValue(selfInstance.persistentOptions, (dataValue));
+        const targetOption = getOptionFromValue(selfInstance.autoCompleteOptions, (dataValue));
+        const persistentOption = getOptionFromValue(selfInstance.persistentOptions, (dataValue));
         targetOption ? (targetOption.currentStatus = currentStatusType.UNCHECKED) : console.log('[targetOption] targetOption not existing', selfInstance.autoCompleteOptions);
         persistentOption.currentStatus = currentStatusType.UNCHECKED;
 
@@ -76,8 +77,8 @@ export function setupHandlers(selfInstance: DzsChipSelector) {
       if(dataValueTarget){
         const dataValue = String(dataValueTarget);
 
-        const targetOption = DzsChipSelector.getOptionFromValue(selfInstance.autoCompleteOptions, dataValue);
-        let persistentOption = DzsChipSelector.getOptionFromValue(selfInstance.persistentOptions, dataValue);
+        const targetOption = getOptionFromValue(selfInstance.autoCompleteOptions, dataValue);
+        let persistentOption = getOptionFromValue(selfInstance.persistentOptions, dataValue);
 
         if (persistentOption === undefined) {
 
