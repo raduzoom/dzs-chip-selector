@@ -30,6 +30,16 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
+      - name: Init new repo in dist folder and commit generated files
+        run: |
+          echo "see files"
+          ls -la
+          cp ./src/demo.html ./dist/demo.html 
+          cp ./src/simple-feed.html ./dist/simple-feed.html 
+          cd dist
+          echo "see files dist"
+          ls -la
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
