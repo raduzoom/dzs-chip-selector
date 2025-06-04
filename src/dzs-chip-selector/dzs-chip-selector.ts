@@ -35,7 +35,7 @@ export class DzsChipSelector {
 
   styleIsSkinSet = false;
 
-  feedSource = 'form';
+  feedSource: 'form'|'options' = 'form';
 
   /** single source of truth -- filtered by keyboard */
   autoCompleteOptions: ChipSelectorItem[] = [];
@@ -210,6 +210,7 @@ export class DzsChipSelector {
       domRemoveChildren(selfInstance.$form);
     }
 
+    // todo export web component onUpdate for typescript
     if (this.$elem_.webComponent && this.$elem_.webComponent.onUpdate) {
       this.chipSelectorOptions.onUpdateFunction = this.$elem_.webComponent.onUpdate;
     }
