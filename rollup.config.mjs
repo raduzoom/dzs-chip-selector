@@ -64,6 +64,10 @@ export default [
       typescript({
         tsconfig: 'tsconfig.prod.json',
         sourceMap: false,
+        compilerOptions: {
+          declaration: true,
+          "declarationDir": "./types",    // all .d.ts files go here
+        }
       }),
       babel({babelHelpers: 'bundled', extensions: ['.ts']}),
       terser(),

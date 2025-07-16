@@ -1,9 +1,9 @@
 {
   "name": "chip-selector",
-  "version": "1.0.41",
+  "version": "1.0.45",
   "description": "an all purpose input multiselect with chips - includes search on the tooltip",
   "module": "dist/index.js",
-  "types": "dist/dzs-chip-selector.d.ts",
+  "types": "dist/types/src/index.d.ts",
   "files": [
     "dist",
     "!dist/dist"
