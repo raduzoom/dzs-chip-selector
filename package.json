@@ -4,28 +4,50 @@
   "description": "an all purpose input multiselect with chips - includes search on the tooltip",
   "module": "dist/index.js",
   "types": "dist/types/src/index.d.ts",
+  "main": "dist/index.umd.min.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.umd.min.js",
+      "types": "./dist/types/src/index.d.ts"
+    },
+    "./web-components": {
+      "import": "./dist/dzsChipSelectorWebComponents.js",
+      "require": "./dist/dzsChipSelectorWebComponents.js",
+      "types": "./dist/types/src/dzs-chip-selector/dzs-chip-selector--web-components.d.ts"
+    }
+  },
+  "sideEffects": false,
   "files": [
     "dist",
-    "!dist/dist"
+    "!dist/dist",
+    "!dist/**/*.map"
   ],
-  "main": "dist/index.js",
   "scripts": {
     "test": "jest",
     "dev-server": "tsc-watch --noClear -p ./tsconfig.json",
-    "build-ts": "tsc --out  final.js --module commonjs ./src/dzs-chip-selector/dzs-chip-selector.ts",
+    "build-ts": "tsc --project tsconfig.base.json --outDir dist-ts",
     "rollup": "rollup -c",
     "dev": "webpack --watch --config webpack.config.js --mode development --env demo_var=var",
     "dev-webserver": "webpack-dev-server --config webpack.config.js --mode development",
     "pub": "npm version patch && npm run build && npm publish",
     "ts-declarations": "tsc -p tsconfig.declarations.json",
     "build": "webpack --config webpack.config.js --mode production && npm run ts-declarations && npm run rollup && git add -A && git commit -m 'chore: add rollup'",
-    "build-ci": "webpack --config webpack.config.js --mode production && npm run ts-declarations && npm run rollup"
+    "build-ci": "webpack --config webpack.config.js --mode production && npm run ts-declarations && npm run rollup",
+    "prepublishOnly": "npm run build-ci",
+    "clean": "rm -rf dist types",
+    "type-check": "tsc --noEmit",
+    "size": "npm run build-ci && npx bundle-size",
+    "analyze": "npx webpack --config webpack.analyze.js --profile --json > dist-webpack/stats.json && npx webpack-bundle-analyzer dist-webpack/stats.json",
+    "file-sizes": "npm run build-ci && ls -lh dist/*.js dist-webpack/*.js"
   },
   "keywords": [
     "chips",
     "input",
     "search",
-    "multiselect"
+    "multiselect",
+    "typescript",
+    "web-components"
   ],
   "homepage": "https://digitalzoomstudio.net",
   "repository": {
@@ -34,6 +56,23 @@
   },
   "author": "raduzoom",
   "license": "(MIT OR Apache-2.0)",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "bundleSize": [
+    {
+      "path": "./dist/index.js",
+      "maxSize": "15 kB"
+    },
+    {
+      "path": "./dist/index.umd.min.js",
+      "maxSize": "12 kB"
+    },
+    {
+      "path": "./dist/dzsChipSelectorWebComponents.js",
+      "maxSize": "25 kB"
+    }
+  ],
   "devDependencies": {
     "@babel/core": "^7.18.2",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",

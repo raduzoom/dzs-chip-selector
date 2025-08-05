@@ -1,3 +1,61 @@
-node_modules/
+# Source files
+src/
+*.ts
+*.tsx
+*.js
+*.jsx
+*.scss
+*.sass
+*.css
+
+# Development files
+*.spec.ts
+*.test.ts
+*.spec.js
+*.test.js
+__tests__/
+__mocks__/
+test/
+tests/
+
+# Build artifacts
+dist-webpack/
+types/
+*.map
+*.d.ts.map
+
+# Development tools
+webpack.config.js
+rollup.config.mjs
+tsconfig*.json
+jest.config.ts
+.babelrc
+.babelrc.js
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
 .DS_Store
-.idea
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+docs/
+*.md
+!README.md
+
+# Development dependencies
+node_modules/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/

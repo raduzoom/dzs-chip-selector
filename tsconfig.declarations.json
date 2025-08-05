@@ -1,13 +1,16 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "declarationDir": "./types",    // all .d.ts files go here
+    "declarationDir": "./types",
     "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "moduleResolution": "node",
     "outDir": "./dist",
     "skipLibCheck": true,
     "emitDeclarationOnly": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM"],
+    "downlevelIteration": true
   },
   "include": [
     "src/**/*", "declarations.d.ts"

@@ -1,10 +1,8 @@
 {
   "compilerOptions": {
-    //    "strict": true,
-    //    "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
-    "declarationDir": "./types",    // all .d.ts files go here
+    "declarationDir": "./types",
     "typeRoots": [
       "./types",
       "./node_modules/@types"
@@ -12,59 +10,67 @@
     "types": [],
     "baseUrl": ".",
     "paths": {
-//      "@dzsChipSelector/*": ["src/dzs-chip-selector/*"]
+      // "@dzsChipSelector/*": ["src/dzs-chip-selector/*"]
     },
-//    "paths": [
-//      "src/**/*"
-//    ],
-    //    "outDir": "./dist",
-    //    "esModuleInterop": true,
-    //    "skipLibCheck": true,
-    //    "forceConsistentCasingInFileNames": true,
-    //    "outFile": "./dist/dzs-chip-selector.js",
     "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "rootDir": ".",
-    "noImplicitAny": true,
-    "allowJs": true,
-    "moduleResolution": "node",
-    "lib": [
-      "es2020",
-      "dom"
-    ],
-
+    
+    // Strict type checking
     "strict": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "exactOptionalPropertyTypes": true,
+    "noUncheckedIndexedAccess": true,
+    
+    // Module resolution
+    "moduleResolution": "node",
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
+    "allowJs": true,
     "checkJs": false,
-    "allowSyntheticDefaultImports": true,
-
-
-
+    
+    // Target and libraries
+    "target": "ES2020",
+    "module": "ES2020",
+    "lib": [
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    
+    // Output
     "outDir": "dist",
     "sourceMap": true,
-    "module": "es2020",
+    "removeComments": false,
+    "importHelpers": true,
+    "useDefineForClassFields": true,
+    
+    // Decorators
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "importHelpers": true,
-    "target": "ES2020",
-    "useDefineForClassFields": false
+    
+    // Performance
+    "incremental": true,
+    "tsBuildInfoFile": "./node_modules/.cache/.tsbuildinfo"
   },
   "include": [
-    "src/**/*", "declarations.d.ts"
+    "src/**/*", 
+    "declarations.d.ts"
   ],
-  //  "files": [
-  //    "./src/dzs-chip-selector/dzs-chip-selector.ts"
-  //  ],
   "exclude": [
     "node_modules",
     "**/*.spec.ts",
     "dist",
     "./build",
     "**/*.spec.*",
-    "**/__mocks__/*"
+    "**/__mocks__/*",
+    "**/*.test.*"
   ],
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Recommended"
 }
-//{"files":["./src/dzs-chip-selector/dzs-chip-selector.ts"]}

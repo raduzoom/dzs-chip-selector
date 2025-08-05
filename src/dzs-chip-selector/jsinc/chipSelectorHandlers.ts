@@ -68,7 +68,6 @@ export function setupHandlers(selfInstance: DzsChipSelector) {
     if (e.type === 'click') {
 
 
-      const sel = '';
       let t = e.target as HTMLElement;
       const $target = matchSelector(t, '.' + DZS_CHIP_SELECTOR_AUTOCOMPLETE_CLASS_NAME_ITEMS);
       let persistentOptionIndex: number | null = null;
@@ -100,7 +99,10 @@ export function setupHandlers(selfInstance: DzsChipSelector) {
           persistentOptionIndex = selfInstance.persistentOptions.findIndex(el => el.value === persistentOption.value);
           // -- move to end of array
           if (persistentOptionIndex < selfInstance.persistentOptions.length - 1) {
-            selfInstance.persistentOptions.push(selfInstance.persistentOptions.splice(persistentOptionIndex, 1)[0]);
+            const spliced = selfInstance.persistentOptions.splice(persistentOptionIndex, 1)[0];
+            if (spliced) {
+              selfInstance.persistentOptions.push(spliced);
+            }
           }
           targetOption.currentStatus = currentStatusType.CHECKED;
           persistentOption.currentStatus = currentStatusType.CHECKED;

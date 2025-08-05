@@ -173,7 +173,6 @@ export class DzsChipSelector {
     const $ulItems = this.$autoCompleteList.querySelector('.dzs-chip-selector--autocompletelist--items');
 
 
-    let minWidthChild = null;
     $ulItems?.childNodes.forEach(child => {
 
       const dataValue = String((child as HTMLElement).getAttribute('data-value'));
@@ -306,11 +305,12 @@ export class DzsChipSelector {
 
   getAutocompleteItemDomFromValue(arg: string) {
     const $items = this.$autoCompleteList.querySelectorAll('.' + DZS_CHIP_SELECTOR_AUTOCOMPLETE_CLASS_NAME_ITEMS);
-    $items.forEach(($item) => {
+    for (const $item of Array.from($items)) {
       if ($item.getAttribute('data-value') === arg) {
         return $item;
       }
-    })
+    }
+    return null;
   }
 
   /**
@@ -336,9 +336,6 @@ export class DzsChipSelector {
 
 
     function filterResultsFrontend(selfInstance: DzsChipSelector) {
-
-      selfInstance.autoCompleteOptions.forEach((autocompleteOption) => {
-      })
 
       const $autoCompleteListItems = selfInstance.$autoCompleteList.querySelectorAll('.' + DZS_CHIP_SELECTOR_AUTOCOMPLETE_CLASS_NAME_ITEMS);
       stringSequence = stringSequence.toLowerCase();

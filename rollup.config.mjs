@@ -5,111 +5,156 @@ import postcss from 'rollup-plugin-postcss';
 import copy from 'rollup-plugin-copy';
 
 export default [
-  // ES Modules
+  // ES Modules - Main
   {
     input: 'src/dzs-chip-selector/dzs-chip-selector.ts',
     output: {
-      file: 'dist/index.js', format: 'es',
+      file: 'dist/index.js',
+      format: 'es',
+      sourcemap: true,
+      exports: 'named'
     },
+    external: [], // No external dependencies for this package
     plugins: [
       typescript({
         tsconfig: 'tsconfig.prod.json',
         sourceMap: false,
         compilerOptions: {
           declaration: true,
-          "declarationDir": "./types",    // all .d.ts files go here
+          "declarationDir": "./types",
         }
       }),
-      babel({babelHelpers: 'bundled', extensions: ['.ts']}),
+      babel({
+        babelHelpers: 'bundled',
+        extensions: ['.ts'],
+        exclude: 'node_modules/**'
+      }),
       copy({
         targets: [
           { src: 'src/dzs-chip-selector/style/skins', dest: 'dist/style' },
           { src: 'src/dzs-chip-selector/style/skins', dest: 'dist/dzs-chip-selector/style' },
           { src: ['src/dzs-chip-selector/dzs-chip-selector.css', 'src/style/table-for-jsDoc.css', 'src/style/bootstrap.min.css'], dest: 'dist/style' },
-        ]}),
-      terser(),
+        ]
+      }),
     ],
   },
-  // ES Modules
+  // ES Modules - Development
   {
     input: 'src/dzs-chip-selector/dzs-chip-selector.ts',
     output: {
-      // dir: 'dist/dev',
       file: 'dist/index-dev.js',
       format: 'es',
       sourcemap: true,
-      // preserveModules: true,
-      // preserveModulesRoot: 'src',
+      exports: 'named'
     },
+    external: [],
     plugins: [
       typescript({
         tsconfig: 'tsconfig.dev.json',
-        sourceMap: false,
+        sourceMap: true,
         compilerOptions: {
           declaration: true,
           declarationDir: '.'
         }
       }),
-      // -- sourcemaps
-      babel({babelHelpers: 'bundled', extensions: ['.ts']}),
-    ],
-  },
-  // ES Modules
-  {
-    input: 'src/dzs-chip-selector/dzs-chip-selector--web-components.ts',
-    output: {
-      file: 'dist/dzsChipSelectorWebComponents.js', format: 'es',
-    },
-    plugins: [
-      typescript({
-        tsconfig: 'tsconfig.prod.json',
-        sourceMap: false,
-        compilerOptions: {
-          declaration: true,
-          "declarationDir": "./types",    // all .d.ts files go here
-        }
+      babel({
+        babelHelpers: 'bundled',
+        extensions: ['.ts'],
+        exclude: 'node_modules/**'
       }),
-      babel({babelHelpers: 'bundled', extensions: ['.ts']}),
-      terser(),
-      postcss({
-        plugins: []
-      })
     ],
   },
-  // ES Modules
-  {
-    input: 'src/dzs-chip-selector/dzs-chip-selector--web-components.ts',
-    output: {
-      file: 'dist/dzsChipSelectorWebComponents-dev.js', format: 'es',
-    },
-    plugins: [
-      typescript({
-        tsconfig: 'tsconfig.prod.json',
-        sourceMap: false,
-      }),
-      babel({babelHelpers: 'bundled', extensions: ['.ts']}),
-      postcss({
-        plugins: []
-      })
-    ],
-  },
-
-  // UMD
+  // UMD - Minified
   {
     input: 'src/dzs-chip-selector/dzs-chip-selector.ts',
     output: {
       file: 'dist/index.umd.min.js',
       format: 'umd',
       name: 'dzsChipSelector',
-      indent: false,
+      sourcemap: true,
+      exports: 'named'
     },
+    external: [],
     plugins: [
       typescript({
         tsconfig: 'tsconfig.prod.json',
-        sourceMap: false,
+        sourceMap: true,
       }),
-      babel({babelHelpers: 'bundled', extensions: ['.ts'], exclude: 'node_modules/**'}),
-      terser(),
+      babel({
+        babelHelpers: 'bundled',
+        extensions: ['.ts'],
+        exclude: 'node_modules/**'
+      }),
+      terser({
+        compress: {
+          drop_console: true,
+          drop_debugger: true
+        }
+      }),
+    ],
+  },
+  // Web Components - ES Modules
+  {
+    input: 'src/dzs-chip-selector/dzs-chip-selector--web-components.ts',
+    output: {
+      file: 'dist/dzsChipSelectorWebComponents.js',
+      format: 'es',
+      sourcemap: true,
+      exports: 'named'
+    },
+    external: [],
+    plugins: [
+      typescript({
+        tsconfig: 'tsconfig.prod.json',
+        sourceMap: true,
+        compilerOptions: {
+          declaration: true,
+          "declarationDir": "./types",
+        }
+      }),
+      babel({
+        babelHelpers: 'bundled',
+        extensions: ['.ts'],
+        exclude: 'node_modules/**'
+      }),
+      terser({
+        compress: {
+          drop_console: true,
+          drop_debugger: true
+        }
+      }),
+      postcss({
+        plugins: [],
+        extract: false,
+        inject: false
+      })
+    ],
+  },
+  // Web Components - Development
+  {
+    input: 'src/dzs-chip-selector/dzs-chip-selector--web-components.ts',
+    output: {
+      file: 'dist/dzsChipSelectorWebComponents-dev.js',
+      format: 'es',
+      sourcemap: true,
+      exports: 'named'
+    },
+    external: [],
+    plugins: [
+      typescript({
+        tsconfig: 'tsconfig.prod.json',
+        sourceMap: true,
+      }),
+      babel({
+        babelHelpers: 'bundled',
+        extensions: ['.ts'],
+        exclude: 'node_modules/**'
+      }),
+      postcss({
+        plugins: [],
+        extract: false,
+        inject: false
+      })
     ],
   },
 ]
