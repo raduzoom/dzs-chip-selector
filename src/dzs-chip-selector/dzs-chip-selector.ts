@@ -371,5 +371,8 @@ export function init_chipSelector($argChip_: HTMLElement, options: ChipSelectorO
 
 }
 
+// Re-export types for external use
+export type { ChipSelectorOptions, ChipSelectorItem, currentStatusType } from './dzs-chip-selector.type';
+
 getWindow().dzs_initDzsChipSelector = init_chipSelector;
 
