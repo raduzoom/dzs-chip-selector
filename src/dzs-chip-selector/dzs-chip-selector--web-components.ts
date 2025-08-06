@@ -16,8 +16,40 @@ declare module globalThis {
 }
 globalThis.dzs_chipSelector_inited = false;
 
+/**
+ * Web Component wrapper for the DzsChipSelector.
+ * 
+ * This class extends HTMLElement to create a custom HTML element `<dzs-chip-selector>`
+ * that encapsulates the chip selector functionality within a Shadow DOM.
+ * 
+ * @description
+ * The wrapper provides:
+ * - Shadow DOM encapsulation for styling and behavior isolation
+ * - Automatic initialization of the chip selector when connected to DOM
+ * - Lifecycle management with proper cleanup
+ * - Data attribute configuration support
+ * 
+ * @example
+ * ```html
+ * <!-- Basic usage -->
+ * <dzs-chip-selector></dzs-chip-selector>
+ * 
+ * <!-- With configuration -->
+ * <dzs-chip-selector 
+ *   data-persistent-options='[{"value":"option1","htmlContent":"Option 1","currentStatus":"unchecked"}]'
+ *   data-view-skin="default"
+ *   data-view-is-wrapping="true">
+ * </dzs-chip-selector>
+ * ```
+ * 
+ * @extends {HTMLElement}
+ * @since 1.0.0
+ * @author raduzoom
+ */
 export class DzsChipSelectorWrapper extends HTMLElement {
+  /** Shadow DOM root for encapsulation */
   shadow: ShadowRoot;
+  /** Main wrapper element within shadow DOM */
   wrapper: HTMLElement;
 
   constructor() {
@@ -43,7 +75,31 @@ export class DzsChipSelectorWrapper extends HTMLElement {
   }
 
 
-  disconnectedCallback() {
+  /**
+   * Lifecycle callback called when the element is removed from the DOM.
+   * 
+   * This method is automatically called by the browser when the custom element
+   * is disconnected from the document. It provides an opportunity for cleanup
+   * operations such as removing event listeners, clearing intervals, or
+   * cleaning up references.
+   * 
+   * @description
+   * Currently logs the removal event. Can be extended to:
+   * - Remove global references
+   * - Cleanup observers, intervals, or event listeners
+   * - Trigger custom events
+   * - Perform memory cleanup
+   * 
+   * @example
+   * ```javascript
+   * // The method is called automatically when element is removed
+   * const element = document.querySelector('dzs-chip-selector');
+   * element.remove(); // This will trigger disconnectedCallback()
+   * ```
+   * 
+   * @since 1.0.0
+   */
+  disconnectedCallback(): void {
     console.log(`[DzsChipSelectorWrapper] Removed from DOM`, this);
     // You can also do:
     // - Remove global references
@@ -51,7 +107,32 @@ export class DzsChipSelectorWrapper extends HTMLElement {
     // - Trigger custom events
   }
 
-  renderComponent() {
+  /**
+   * Renders and initializes the chip selector component.
+   * 
+   * This method sets up the chip selector within the web component's shadow DOM.
+   * It configures the component with options from data attributes and initializes
+   * the main DzsChipSelector instance.
+   * 
+   * @description
+   * The method performs the following operations:
+   * 1. Finds the chip selector element within the shadow DOM
+   * 2. Sets up the web component reference for communication
+   * 3. Retrieves configuration options from data attributes
+   * 4. Configures the update callback for selected options
+   * 5. Initializes the main DzsChipSelector instance
+   * 
+   * @example
+   * ```javascript
+   * // This method is called automatically when the component is connected
+   * const element = document.createElement('dzs-chip-selector');
+   * document.body.appendChild(element); // Triggers renderComponent()
+   * ```
+   * 
+   * @since 1.0.0
+   * @private
+   */
+  renderComponent(): void {
 
 
     const $chipSelector = this.wrapper.querySelector(`.${DZS_CHIP_SELECTOR__CLASS_NAME__PRINCIPAL}`);
@@ -80,16 +161,81 @@ export class DzsChipSelectorWrapper extends HTMLElement {
   }
 
   /**
-   * called on connected
+   * Lifecycle callback called when the element is connected to the DOM.
+   * 
+   * This method is automatically called by the browser when the custom element
+   * is added to the document. It triggers the component rendering and initialization.
+   * 
+   * @description
+   * The method:
+   * - Calls renderComponent() to set up the chip selector
+   * - Ensures the component is properly initialized when added to DOM
+   * - Handles the initial setup of the web component
+   * 
+   * @example
+   * ```javascript
+   * // The method is called automatically when element is added to DOM
+   * const element = document.createElement('dzs-chip-selector');
+   * document.body.appendChild(element); // This will trigger connectedCallback()
+   * ```
+   * 
+   * @since 1.0.0
    */
-  connectedCallback() {
+  connectedCallback(): void {
     this.renderComponent();
 
   }
 
 }
 
-export function dzsChipSelectorWebComponent_init() {
+/**
+ * Initializes the DzsChipSelector Web Component functionality.
+ * 
+ * This function registers the custom element `<dzs-chip-selector>` and sets up
+ * DOM monitoring for component lifecycle management. It should be called once
+ * before using the web component in your application.
+ * 
+ * @description
+ * The function performs the following operations:
+ * 1. Registers the custom element 'dzs-chip-selector' with the browser
+ * 2. Prevents multiple initializations using a global flag
+ * 3. Sets up a MutationObserver to monitor component removal from DOM
+ * 4. Enables declarative usage of the chip selector as HTML elements
+ * 
+ * @example
+ * ```javascript
+ * // Import and initialize
+ * import { dzsChipSelectorWebComponent_init } from 'chip-selector/web-components';
+ * 
+ * // Initialize the web components
+ * dzsChipSelectorWebComponent_init();
+ * 
+ * // Now you can use in HTML:
+ * // <dzs-chip-selector></dzs-chip-selector>
+ * ```
+ * 
+ * @example
+ * ```html
+ * <!-- After initialization, use as a custom HTML element -->
+ * <dzs-chip-selector 
+ *   data-persistent-options='[{"value":"option1","htmlContent":"Option 1","currentStatus":"unchecked"}]'
+ *   data-view-skin="default"
+ *   data-view-is-wrapping="true">
+ * </dzs-chip-selector>
+ * ```
+ * 
+ * @throws {Error} If the custom element is already defined (in strict environments)
+ * 
+ * @since 1.0.0
+ * @author raduzoom
+ * 
+ * @returns {void} This function does not return a value
+ * 
+ * @see {@link DzsChipSelectorWrapper} The web component class
+ * @see {@link DzsChipSelector} The main chip selector class
+ * @see {@link ChipSelectorOptions} Configuration options interface
+ */
+export function dzsChipSelectorWebComponent_init(): void {
 
   if (!globalThis.dzs_chipSelector_inited) {
     customElements.define(DZS_CHIP_SELECTOR__CLASS_NAME__PRINCIPAL, DzsChipSelectorWrapper);
@@ -112,7 +258,21 @@ export function dzsChipSelectorWebComponent_init() {
 globalThis.dzsChipSelectorWebComponent_init = dzsChipSelectorWebComponent_init;
 
 /**
- * returns the sum
+ * Utility function for testing purposes.
+ * 
+ * This function simply returns the input argument unchanged.
+ * It appears to be a placeholder or testing function.
+ * 
+ * @param {number} arg - The input number to return
+ * @returns {number} The same number that was passed in
+ * 
+ * @example
+ * ```javascript
+ * const result = ceva(42); // Returns 42
+ * ```
+ * 
+ * @since 1.0.0
+ * @deprecated This function appears to be for testing only
  */
 export function ceva(arg: number): number {
 
