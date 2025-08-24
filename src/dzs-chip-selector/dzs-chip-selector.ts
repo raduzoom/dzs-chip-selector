@@ -147,11 +147,7 @@ export class DzsChipSelector implements IDzsChipSelector {
     selfInstance.$autoCompleteList = this.$elem_.querySelector('.dzs-chip-selector--autocompletelist') as HTMLInputElement;
     selfInstance.$form = this.$elem_.querySelector('.dzs-chip-selector--form') as HTMLInputElement;
 
-
-    // Call the onUpdate method to trigger any registered callbacks
-    this.searchForApiUpdateOptions();
     setupHandlers(this);
-
 
     this.reinit();
   }
@@ -210,6 +206,9 @@ export class DzsChipSelector implements IDzsChipSelector {
       domRemoveChildren(selfInstance.$form);
     }
 
+
+    // Call the onUpdate method to trigger any registered callbacks
+    this.searchForApiUpdateOptions();
 
 
     if (this.feedSource === 'form') {
@@ -293,8 +292,9 @@ export class DzsChipSelector implements IDzsChipSelector {
    * This method can be called externally to trigger the onUpdate function
    */
   public searchForApiUpdateOptions(): void {
-    if (this.assignOnUpdateFunction) {
-      this.chipSelectorOptions.onUpdateFunction = this.assignOnUpdateFunction;
+
+    if (this.$elem_.webComponent && this.$elem_.webComponent.assignOnUpdateFunction) {
+      this.chipSelectorOptions.onUpdateFunction = this.$elem_.webComponent.assignOnUpdateFunction;
     }
     if (this.chipSelectorOptions.onUpdateFunction) {
       this.chipSelectorOptions.onUpdateFunction(this.persistentOptions);

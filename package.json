@@ -1,6 +1,6 @@
 {
   "name": "chip-selector",
-  "version": "1.0.53",
+  "version": "1.0.54",
   "description": "an all purpose input multiselect with chips - includes search on the tooltip",
   "module": "dist/index.js",
   "types": "dist/types/src/index.d.ts",
