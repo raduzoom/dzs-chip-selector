@@ -48,6 +48,9 @@ export class DzsChipSelector implements IDzsChipSelector {
 
   inputForm_currentQueryString = '';
 
+  /** Property to assign update function from web component */
+  assignOnUpdateFunction?: (...args: any[]) => any;
+
 
   constructor($elem: HTMLElement, chipSelectorOptions: ChipSelectorOptions, isInitingClass = true) {
 
@@ -289,8 +292,8 @@ export class DzsChipSelector implements IDzsChipSelector {
    * This method can be called externally to trigger the onUpdate function
    */
   public onUpdate(): void {
-    if (this.$elem_.webComponent && this.$elem_.webComponent.onUpdate) {
-      this.chipSelectorOptions.onUpdateFunction = this.$elem_.webComponent.onUpdate;
+    if (this.assignOnUpdateFunction) {
+      this.chipSelectorOptions.onUpdateFunction = this.assignOnUpdateFunction;
     }
     if (this.chipSelectorOptions.onUpdateFunction) {
       this.chipSelectorOptions.onUpdateFunction(this.persistentOptions);
