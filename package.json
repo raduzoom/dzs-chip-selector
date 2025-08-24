@@ -30,6 +30,16 @@
       "import": "./dist/dzsChipSelector.js",
       "require": "./dist/dzsChipSelector.js",
       "types": "./dist/types/src/dzs-chip-selector/dzs-chip-selector.d.ts"
+    },
+    "./dist-webpack/dzsChipSelector": {
+      "import": "./dist-webpack/dzsChipSelector.js",
+      "require": "./dist-webpack/dzsChipSelector.js",
+      "types": "./dist/types/src/dzs-chip-selector/dzs-chip-selector.d.ts"
+    },
+    "./dist-webpack/dzsChipSelectorWebComponents": {
+      "import": "./dist-webpack/dzsChipSelectorWebComponents.js",
+      "require": "./dist-webpack/dzsChipSelectorWebComponents.js",
+      "types": "./dist/types/src/dzs-chip-selector/dzs-chip-selector--web-components.d.ts"
     }
   },
   "sideEffects": false,
