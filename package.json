@@ -20,6 +20,16 @@
       "import": "./dist/dzsChipSelectorWebComponents.js",
       "require": "./dist/dzsChipSelectorWebComponents.js",
       "types": "./dist/types/src/dzs-chip-selector/dzs-chip-selector--web-components.d.ts"
+    },
+    "./dist/dzsChipSelectorWebComponents-dev": {
+      "import": "./dist/dzsChipSelectorWebComponents-dev.js",
+      "require": "./dist/dzsChipSelectorWebComponents-dev.js",
+      "types": "./dist/types/src/dzs-chip-selector/dzs-chip-selector--web-components.d.ts"
+    },
+    "./dist/dzsChipSelector": {
+      "import": "./dist/dzsChipSelector.js",
+      "require": "./dist/dzsChipSelector.js",
+      "types": "./dist/types/src/dzs-chip-selector/dzs-chip-selector.d.ts"
     }
   },
   "sideEffects": false,
