@@ -257,9 +257,9 @@ The class also extends the HTMLElement interface to add a webComponent property 
             </tbody>
           </table>
 
-### Public Methods
+### Public Methods and Properties
 
-The `DzsChipSelector` class now exposes a public `onUpdate()` method that can be called externally to trigger the update callback:
+The `DzsChipSelector` class now exposes a public `onUpdate()` method and `assignOnUpdateFunction` property that can be used externally:
 
 ```typescript
 import { DzsChipSelector, ChipSelectorOptions } from 'chip-selector';
@@ -273,6 +273,11 @@ const options: ChipSelectorOptions = {
 
 const chipSelector = new DzsChipSelector(element, options);
 
+// Assign an update function directly to the instance
+chipSelector.assignOnUpdateFunction = (persistentOptions) => {
+  console.log('Custom update function called:', persistentOptions);
+};
+
 // Manually trigger the onUpdate callback
 chipSelector.onUpdate();
 ```
@@ -285,6 +290,11 @@ For better type safety, you can use the `IDzsChipSelector` interface:
 import { IDzsChipSelector } from 'chip-selector';
 
 function processChipSelector(selector: IDzsChipSelector) {
+  // Assign an update function
+  selector.assignOnUpdateFunction = (persistentOptions) => {
+    console.log('Interface update function called:', persistentOptions);
+  };
+  
   // Call the onUpdate method
   selector.onUpdate();
   
