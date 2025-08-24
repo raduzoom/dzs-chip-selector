@@ -15,6 +15,11 @@
       "import": "./dist/dzsChipSelectorWebComponents.js",
       "require": "./dist/dzsChipSelectorWebComponents.js",
       "types": "./dist/types/src/dzs-chip-selector/dzs-chip-selector--web-components.d.ts"
+    },
+    "./dist/dzsChipSelectorWebComponents": {
+      "import": "./dist/dzsChipSelectorWebComponents.js",
+      "require": "./dist/dzsChipSelectorWebComponents.js",
+      "types": "./dist/types/src/dzs-chip-selector/dzs-chip-selector--web-components.d.ts"
     }
   },
   "sideEffects": false,
