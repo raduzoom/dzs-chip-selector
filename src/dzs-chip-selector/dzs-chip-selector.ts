@@ -205,7 +205,7 @@ export class DzsChipSelector implements IDzsChipSelector {
     }
 
     // Call the onUpdate method to trigger any registered callbacks
-    this.onUpdate();
+    this.initSearchForUpdateFunction();
 
 
     if (this.feedSource === 'form') {
@@ -288,7 +288,7 @@ export class DzsChipSelector implements IDzsChipSelector {
    * Public method to trigger onUpdate callback
    * This method can be called externally to trigger the onUpdate function
    */
-  onUpdate() {
+  initSearchForUpdateFunction() {
     if (this.$elem_.webComponent && this.$elem_.webComponent.onUpdate) {
       this.chipSelectorOptions.onUpdateFunction = this.$elem_.webComponent.onUpdate;
     }
