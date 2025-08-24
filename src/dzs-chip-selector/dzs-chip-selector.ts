@@ -5,7 +5,7 @@ import {
   DZS_CHIP_SELECTOR_CLASS_NAME
 } from "./config/dzs-chip-selector.config";
 import {domRemoveChildren, getComputedProp, insertHtml} from "./js_common/dzs_helpers";
-import {ChipSelectorItem, ChipSelectorOptions, currentStatusType} from "./dzs-chip-selector.type";
+import {ChipSelectorItem, ChipSelectorOptions, currentStatusType, IDzsChipSelector} from "./dzs-chip-selector.type";
 import {DZS_CHIP_SELECTOR__CLASS_NAME__IS_PLACEHOLDER_VISIBLE} from "./dzs-chip-selector.config";
 import {dzsChipSelectorDefaultOptions} from "./config/dzs-chip-selector--defaultOptions";
 import {initChipSelector} from "./jsinc/chipSelectorHelpers";
@@ -25,7 +25,7 @@ declare global {
 }
 
 
-export class DzsChipSelector {
+export class DzsChipSelector implements IDzsChipSelector {
   /** DOM - main element wrapper */
   $elem_!: HTMLElement;
   $inputNewElement_!: HTMLInputElement;
@@ -204,13 +204,8 @@ export class DzsChipSelector {
       domRemoveChildren(selfInstance.$form);
     }
 
-    // todo export web component onUpdate for typescript
-    if (this.$elem_.webComponent && this.$elem_.webComponent.onUpdate) {
-      this.chipSelectorOptions.onUpdateFunction = this.$elem_.webComponent.onUpdate;
-    }
-    if (this.chipSelectorOptions.onUpdateFunction) {
-      this.chipSelectorOptions.onUpdateFunction(this.persistentOptions);
-    }
+    // Call the onUpdate method to trigger any registered callbacks
+    this.onUpdate();
 
 
     if (this.feedSource === 'form') {
@@ -286,6 +281,19 @@ export class DzsChipSelector {
     } else {
 
       selfInstance.$elem_.classList.remove('dzs-chip-selector--is-overflowing');
+    }
+  }
+
+  /**
+   * Public method to trigger onUpdate callback
+   * This method can be called externally to trigger the onUpdate function
+   */
+  onUpdate() {
+    if (this.$elem_.webComponent && this.$elem_.webComponent.onUpdate) {
+      this.chipSelectorOptions.onUpdateFunction = this.$elem_.webComponent.onUpdate;
+    }
+    if (this.chipSelectorOptions.onUpdateFunction) {
+      this.chipSelectorOptions.onUpdateFunction(this.persistentOptions);
     }
   }
 
@@ -369,7 +377,8 @@ export function init_chipSelector($argChip_: HTMLElement, options: ChipSelectorO
 }
 
 // Re-export types for external use
-export type { ChipSelectorOptions, ChipSelectorItem, currentStatusType } from './dzs-chip-selector.type';
+export type { ChipSelectorOptions, ChipSelectorItem, IDzsChipSelector } from './dzs-chip-selector.type';
+export { currentStatusType } from './dzs-chip-selector.type';
 
 getWindow().dzs_initDzsChipSelector = init_chipSelector;
 

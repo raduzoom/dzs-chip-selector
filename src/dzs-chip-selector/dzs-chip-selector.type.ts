@@ -27,3 +27,12 @@ export enum currentStatusType {
   CHECKED = 'checked',
   UNCHECKED = 'unchecked',
 }
+
+export interface IDzsChipSelector {
+  /** Public method to trigger onUpdate callback */
+  onUpdate(): void;
+  /** Get the current persistent options */
+  readonly persistentOptions: ChipSelectorItem[];
+  /** Get the current chip selector options */
+  readonly chipSelectorOptions: ChipSelectorOptions;
+}
