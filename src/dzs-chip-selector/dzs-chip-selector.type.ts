@@ -29,8 +29,6 @@ export enum currentStatusType {
 }
 
 export interface IDzsChipSelector {
-  /** Public method to trigger onUpdate callback */
-  onUpdate(): void;
   /** Property to assign update function from web component */
   assignOnUpdateFunction?: (...args: any[]) => any;
   /** Get the current persistent options */
