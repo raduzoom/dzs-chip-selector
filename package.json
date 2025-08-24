@@ -1,6 +1,6 @@
 {
   "name": "chip-selector",
-  "version": "1.0.49",
+  "version": "1.0.50",
   "description": "an all purpose input multiselect with chips - includes search on the tooltip",
   "module": "dist/index.js",
   "types": "dist/types/src/index.d.ts",
@@ -31,6 +31,7 @@
     "dev": "webpack --watch --config webpack.config.js --mode development --env demo_var=var",
     "dev-webserver": "webpack-dev-server --config webpack.config.js --mode development",
     "pub": "npm version patch && npm run build && npm publish",
+    "pub-only": "npm run build && npm publish",
     "ts-declarations": "tsc -p tsconfig.declarations.json",
     "build": "webpack --config webpack.config.js --mode production && npm run ts-declarations && npm run rollup && git add -A && git commit -m 'chore: add rollup'",
     "build-ci": "webpack --config webpack.config.js --mode production && npm run ts-declarations && npm run rollup",
