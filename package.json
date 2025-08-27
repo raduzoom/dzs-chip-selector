@@ -1,6 +1,6 @@
 {
   "name": "chip-selector",
-  "version": "1.0.54",
+  "version": "1.0.55",
   "description": "an all purpose input multiselect with chips - includes search on the tooltip",
   "module": "dist/index.js",
   "types": "dist/types/src/index.d.ts",
@@ -63,6 +63,7 @@
     "prepublishOnly": "npm run build-ci",
     "clean": "rm -rf dist types",
     "type-check": "tsc --noEmit",
+    "type-check:exports": "tsc -p ./types-tests/tsconfig.json --noEmit",
     "size": "npm run build-ci && npx bundle-size",
     "analyze": "npx webpack --config webpack.analyze.js --profile --json > dist-webpack/stats.json && npx webpack-bundle-analyzer dist-webpack/stats.json",
     "file-sizes": "npm run build-ci && ls -lh dist/*.js dist-webpack/*.js"

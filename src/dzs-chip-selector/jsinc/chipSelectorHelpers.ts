@@ -22,6 +22,6 @@ export function initChipSelector(selfInstance: DzsChipSelector){
   }
 
   if(!selfInstance.styleIsSkinSet){
-    selfInstance.$elem_.classList.add(DZS_CHIP_SELECTOR_CLASS_NAME + `--skin-${selfInstance.chipSelectorOptions.viewSkin}`);
+    selfInstance.$elem_.classList.add(DZS_CHIP_SELECTOR_CLASS_NAME + `--${selfInstance.chipSelectorOptions.viewSkin}`);
   }
 }

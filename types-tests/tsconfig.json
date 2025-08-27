@@ -1,0 +1,15 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "baseUrl": "..",
+    "paths": {
+      "chip-selector": ["./dist/types/src/index.d.ts"],
+      "chip-selector/web-components": ["./dist/types/src/dzs-chip-selector/dzs-chip-selector--web-components.d.ts"]
+    }
+  },
+  "include": [
+    "./exports-usage.ts"
+  ]
+}
+
