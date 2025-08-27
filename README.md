@@ -148,7 +148,7 @@ This component has been made to be versatile, it includes both ES6 and UMD build
 * [Typescript](https://www.typescriptlang.org/)
 * [Next.js](https://nextjs.org/)
 * [React.js](https://reactjs.org/)
-* * example - [Functional](https://stackblitz.com/edit/react-ts-btq4kq?file=App.tsx)
+* * example - [Functional](https://stackblitz.com/~/github.com/raduzoom/react-ts-t4549z6q?file=src/App.tsx)
 * [Angular](https://angular.io/)
 * [Bootstrap](https://getbootstrap.com)
 * [JQuery](https://jquery.com)
@@ -282,27 +282,6 @@ chipSelector.assignOnUpdateFunction = (persistentOptions) => {
 chipSelector.onUpdate();
 ```
 
-#### TypeScript Interface
-
-For better type safety, you can use the `IDzsChipSelector` interface:
-
-```typescript
-import { IDzsChipSelector } from 'chip-selector';
-
-function processChipSelector(selector: IDzsChipSelector) {
-  // Assign an update function
-  selector.assignOnUpdateFunction = (persistentOptions) => {
-    console.log('Interface update function called:', persistentOptions);
-  };
-  
-  // Call the onUpdate method
-  selector.onUpdate();
-  
-  // Access readonly properties
-  const options = selector.persistentOptions;
-  const config = selector.chipSelectorOptions;
-}
-```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -349,7 +328,8 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@ZoomItFlash](https://twitter.com/ZoomItFlash) - email@example.com
+X - [@ZoomItFlash](https://twitter.com/ZoomItFlash) <br>
+Site - [digitalzoomstudio.net](https://digitalzoomstudio.net)
 
 Project Link: [https://github.com/raduzoom/dzs-chip-selector#readme](https://github.com/raduzoom/dzs-chip-selector#readme)
 
