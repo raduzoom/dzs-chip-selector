@@ -146,6 +146,7 @@ This component has been made to be versatile, it includes both ES6 and UMD build
 
 * Vanilla javascript / html via UMD embed
 * [Typescript](https://www.typescriptlang.org/)
+* * example - [Functional](https://stackblitz.com/~/github.com/raduzoom/dzs-chip-selector-import?file=index.html)
 * [Next.js](https://nextjs.org/)
 * [React.js](https://reactjs.org/)
 * * example - [Functional](https://stackblitz.com/~/github.com/raduzoom/react-ts-t4549z6q?file=src/App.tsx)
