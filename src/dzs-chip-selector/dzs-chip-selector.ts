@@ -5,7 +5,13 @@ import {
   DZS_CHIP_SELECTOR_CLASS_NAME
 } from "./config/dzs-chip-selector.config";
 import {domRemoveChildren, getComputedProp, insertHtml} from "./js_common/dzs_helpers";
-import {ChipSelectorItem, ChipSelectorOptions, currentStatusType, IDzsChipSelector} from "./dzs-chip-selector.type";
+import {
+  ChipSelectorItem,
+  ChipSelectorOptions,
+  ChipSelectorWebComponentDomItem,
+  currentStatusType,
+  IDzsChipSelector
+} from "./dzs-chip-selector.type";
 import {DZS_CHIP_SELECTOR__CLASS_NAME__IS_PLACEHOLDER_VISIBLE} from "./dzs-chip-selector.config";
 import {dzsChipSelectorDefaultOptions} from "./config/dzs-chip-selector--defaultOptions";
 import {initChipSelector} from "./jsinc/chipSelectorHelpers";
@@ -20,7 +26,7 @@ declare global {
   }
 
   interface HTMLElement {
-    webComponent?: any;
+    csWebComponent?: any;
   }
 }
 
@@ -48,8 +54,7 @@ export class DzsChipSelector implements IDzsChipSelector {
 
   inputForm_currentQueryString = '';
 
-  /** Property to assign update function from web component */
-  assignOnUpdateFunction?: (...args: any[]) => any;
+
 
 
   constructor($elem: HTMLElement, chipSelectorOptions: ChipSelectorOptions, isInitingClass = true) {
@@ -78,6 +83,11 @@ export class DzsChipSelector implements IDzsChipSelector {
 
     chipSelectorInitStructure(this);
     this.initAfterStructure();
+
+
+    // Call the onUpdate method to trigger any registered callbacks
+    this.searchForApiUpdateOptions();
+
   }
 
   reinit() {
@@ -206,9 +216,9 @@ export class DzsChipSelector implements IDzsChipSelector {
       domRemoveChildren(selfInstance.$form);
     }
 
-
-    // Call the onUpdate method to trigger any registered callbacks
-    this.searchForApiUpdateOptions();
+    if (this.chipSelectorOptions.onUpdateFunction) {
+      this.chipSelectorOptions.onUpdateFunction(this.persistentOptions);
+    }
 
 
     if (this.feedSource === 'form') {
@@ -293,11 +303,13 @@ export class DzsChipSelector implements IDzsChipSelector {
    */
   public searchForApiUpdateOptions(): void {
 
-    if (this.$elem_.webComponent && this.$elem_.webComponent.assignOnUpdateFunction) {
-      this.chipSelectorOptions.onUpdateFunction = this.$elem_.webComponent.assignOnUpdateFunction;
-    }
-    if (this.chipSelectorOptions.onUpdateFunction) {
-      this.chipSelectorOptions.onUpdateFunction(this.persistentOptions);
+
+    const csWebComponent = this.$elem_.csWebComponent as ChipSelectorWebComponentDomItem;
+
+    if (csWebComponent && csWebComponent.assignOnUpdateFunction) {
+      this.chipSelectorOptions.onUpdateFunction = csWebComponent.assignOnUpdateFunction;
+
+      this.updateFormFromOptions();
     }
   }
 

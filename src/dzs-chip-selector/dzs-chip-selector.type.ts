@@ -27,10 +27,12 @@ export enum currentStatusType {
   CHECKED = 'checked',
   UNCHECKED = 'unchecked',
 }
+export interface ChipSelectorWebComponentDomItem extends HTMLElement{
 
-export interface IDzsChipSelector {
   /** Property to assign update function from web component */
   assignOnUpdateFunction?: (...args: any[]) => any;
+}
+export interface IDzsChipSelector {
   /** Get the current persistent options */
   readonly persistentOptions: ChipSelectorItem[];
   /** Get the current chip selector options */

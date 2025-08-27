@@ -42,6 +42,7 @@
       <br>
       <br>
       <dzs-chip-selector
+        id="firstChipSelector"
         data-chip-selector-options='{"inputPlaceholderText":"ceva"}'
         data-persistentOptions='[{"htmlContent":"Apple ","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange ","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span> ","value":"apricot","currentStatus":"unchecked"}]'
         >
@@ -50,29 +51,29 @@
 
       <br>
       <br>
-      <dzs-chip-selector
-        data-chip-selector-options='{"inputPlaceholderText":"Custom placeholder ...", "viewSkin":"default--theme-dark"}'
+<!--      <dzs-chip-selector-->
+<!--        data-chip-selector-options='{"inputPlaceholderText":"Custom placeholder ...", "viewSkin":"default&#45;&#45;theme-dark"}'-->
 
-        data-persistentOptions='[{"htmlContent":"Apple ","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange ","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span> ","value":"apricot","currentStatus":"unchecked"}]'
-        >
-        <link rel="stylesheet" data-lazy-href="dzs-chip-selector/style/skins/skin-default--theme-dark.css"/>
-      </dzs-chip-selector>
-      <br>
-      <br>
-      <dzs-chip-selector
-        data-chip-selector-options='{"inputPlaceholderText":"ceva", "viewSkin":"flat"}'
-        data-persistentOptions='[{"htmlContent":"Apple ","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange ","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span> ","value":"apricot","currentStatus":"unchecked"}]'
-        >
-        <link rel="stylesheet" data-lazy-href="dzs-chip-selector/style/skins/skin-flat.css"/>
-      </dzs-chip-selector>
-      <br>
-      <br>
-      <dzs-chip-selector
-        data-chip-selector-options='{"inputPlaceholderText":"ceva", "viewSkin":"flat--theme-dark"}'
-        data-persistentOptions='[{"htmlContent":"Apple ","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange ","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span> ","value":"apricot","currentStatus":"unchecked"}]'
-        >
-        <link rel="stylesheet" data-lazy-href="dzs-chip-selector/style/skins/skin-flat--theme-dark.css"/>
-      </dzs-chip-selector>
+<!--        data-persistentOptions='[{"htmlContent":"Apple ","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange ","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span> ","value":"apricot","currentStatus":"unchecked"}]'-->
+<!--        >-->
+<!--        <link rel="stylesheet" data-lazy-href="dzs-chip-selector/style/skins/skin-default&#45;&#45;theme-dark.css"/>-->
+<!--      </dzs-chip-selector>-->
+<!--      <br>-->
+<!--      <br>-->
+<!--      <dzs-chip-selector-->
+<!--        data-chip-selector-options='{"inputPlaceholderText":"ceva", "viewSkin":"flat"}'-->
+<!--        data-persistentOptions='[{"htmlContent":"Apple ","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange ","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span> ","value":"apricot","currentStatus":"unchecked"}]'-->
+<!--        >-->
+<!--        <link rel="stylesheet" data-lazy-href="dzs-chip-selector/style/skins/skin-flat.css"/>-->
+<!--      </dzs-chip-selector>-->
+<!--      <br>-->
+<!--      <br>-->
+<!--      <dzs-chip-selector-->
+<!--        data-chip-selector-options='{"inputPlaceholderText":"ceva", "viewSkin":"flat&#45;&#45;theme-dark"}'-->
+<!--        data-persistentOptions='[{"htmlContent":"Apple ","value":"apple","currentStatus":"unchecked"},{"htmlContent":"Orange ","value":"orange","currentStatus":"checked"},{"htmlContent":"<span>Apricot</span> ","value":"apricot","currentStatus":"unchecked"}]'-->
+<!--        >-->
+<!--        <link rel="stylesheet" data-lazy-href="dzs-chip-selector/style/skins/skin-flat&#45;&#45;theme-dark.css"/>-->
+<!--      </dzs-chip-selector>-->
 
 
       <!--
@@ -94,6 +95,40 @@
     </div>
   </div>
 </div>
+<script>
+
+  // -- helper functions
+  function getOptionFromValue(options, dataValue) {
+    const foundItems = options.filter((item) => item.value === dataValue)
+
+    return foundItems[0]
+  }
+
+  function documentReady(callback) {
+    new Promise((resolutionFunc, rejectionFunc) => {
+      if (document.readyState === 'interactive' || document.readyState === 'complete') {
+        resolutionFunc('interactive')
+      }
+      document.addEventListener('DOMContentLoaded', () => {
+        resolutionFunc('DOMContentLoaded')
+      }, false)
+      setTimeout(() => {
+        resolutionFunc('timeout')
+      }, 5000)
+    }).then(resolution => {
+      callback(resolution)
+    }).catch(err => {
+      callback(err)
+    })
+  }
+
+  // -- helper functions end
+</script>
+<script>
+  documentReady(() => {
+    console.log('doc ready')
+  })
+</script>
 
 <script>
   document.getElementById('remove-third-component').addEventListener('click', () => {
@@ -122,6 +157,15 @@ var require = () => {
   // -- helper functions end
 </script>
 <script>
+
+
+  /** @type {ChipSelectorWebComponentDomItem} */
+  const firstChipSelector = document.getElementById('firstChipSelector');
+  console.log('firstChioSelector - ', firstChipSelector);
+
+  firstChipSelector.assignOnUpdateFunction = (data) => {
+    console.log('data - ', data);
+  }
 
   globalThis.dzsChipSelectorWebComponent_init();
   // import {DzsChipSelector} from '../dist/bundle.js';
