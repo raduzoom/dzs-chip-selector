@@ -134,6 +134,8 @@ export class DzsChipSelectorWrapper extends HTMLElement {
    */
   renderComponent(): void {
 
+    console.log('renderComponent');
+
 
     const $chipSelector = this.wrapper.querySelector(`.${DZS_CHIP_SELECTOR__CLASS_NAME__PRINCIPAL}`);
     ($chipSelector as any).csWebComponent = this;
@@ -156,7 +158,7 @@ export class DzsChipSelectorWrapper extends HTMLElement {
       //   }) ;
       // },1000);
 
-      new DzsChipSelector(this.wrapper.querySelector(`.${DZS_CHIP_SELECTOR__CLASS_NAME__PRINCIPAL}`) as HTMLElement, chipSelectorOptions);
+      ($chipSelector as any).csWebComponent.chipSelectorMain = new DzsChipSelector(this.wrapper.querySelector(`.${DZS_CHIP_SELECTOR__CLASS_NAME__PRINCIPAL}`) as HTMLElement, chipSelectorOptions);
     }
   }
 

@@ -26,7 +26,7 @@ declare global {
   }
 
   interface HTMLElement {
-    csWebComponent?: any;
+    csWebComponent?: ChipSelectorWebComponentDomItem;
   }
 }
 
@@ -55,6 +55,7 @@ export class DzsChipSelector implements IDzsChipSelector {
   inputForm_currentQueryString = '';
 
 
+  apiReinit!: () => void;
 
 
   constructor($elem: HTMLElement, chipSelectorOptions: ChipSelectorOptions, isInitingClass = true) {
@@ -85,8 +86,8 @@ export class DzsChipSelector implements IDzsChipSelector {
     this.initAfterStructure();
 
 
-    // Call the onUpdate method to trigger any registered callbacks
-    this.searchForApiUpdateOptions();
+    this.apiReinit = this.reinit.bind(this);
+
 
   }
 
@@ -113,6 +114,10 @@ export class DzsChipSelector implements IDzsChipSelector {
     }
     this.createListFromOptions();
     selfInstance.updateChipsFromOptions();
+    console.log('reinit');
+
+    // Call the onUpdate method to trigger any registered callbacks
+    this.searchForApiUpdateOptions();
   }
 
   readAttrForPersistentOptions() {

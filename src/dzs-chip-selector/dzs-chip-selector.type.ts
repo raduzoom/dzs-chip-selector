@@ -1,3 +1,4 @@
+import {DzsChipSelector} from "./dzs-chip-selector";
 
 export type ChipSelectorOptions = {
   /** text for no items found */
@@ -31,6 +32,7 @@ export interface ChipSelectorWebComponentDomItem extends HTMLElement{
 
   /** Property to assign update function from web component */
   assignOnUpdateFunction?: (...args: any[]) => any;
+  chipSelectorMain?: DzsChipSelector;
 }
 export interface IDzsChipSelector {
   /** Get the current persistent options */
