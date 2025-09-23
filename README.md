@@ -260,8 +260,7 @@ The class also extends the HTMLElement interface to add a webComponent property 
 
 ### Public Methods and Properties
 
-The `DzsChipSelector` class now exposes a public `onUpdate()` method and `assignOnUpdateFunction` property that can be used externally:
-
+Very easy to init from typescript.
 ```typescript
 import { DzsChipSelector, ChipSelectorOptions } from 'chip-selector';
 
@@ -273,14 +272,6 @@ const options: ChipSelectorOptions = {
 };
 
 const chipSelector = new DzsChipSelector(element, options);
-
-// Assign an update function directly to the instance
-chipSelector.assignOnUpdateFunction = (persistentOptions) => {
-  console.log('Custom update function called:', persistentOptions);
-};
-
-// Manually trigger the onUpdate callback
-chipSelector.onUpdate();
 ```
 
 
